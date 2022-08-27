@@ -16,4 +16,6 @@ return [
     'important'                     => 'Important',
     'warning'                       => 'Warning',
     'information'                   => 'Information',
+    /* New */
+    'user_management'               => 'USER MANAGEMENT'
 ];
