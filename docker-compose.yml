@@ -37,9 +37,9 @@ services:
       args:
         user: ${USER}
         uid: 1000
+        env: dev
       context: .
       dockerfile: ./api/Dockerfile
-      target: api
     command: sh -c "./wait-for-it.sh mysql:3306 -t 30 && ./wait-for-it.sh redis:6379 -t 30 && composer install && php-fpm"
     restart: unless-stopped
     volumes:
@@ -63,6 +63,7 @@ services:
       args:
         user: ${USER}
         uid: 1000
+        env: dev
       context: .
       dockerfile: ./api/Dockerfile
       target: scheduler
@@ -87,6 +88,7 @@ services:
       args:
         user: ${USER}
         uid: 1000
+        env: dev
       context: .
       dockerfile: ./api/Dockerfile
       target: worker
@@ -144,6 +146,7 @@ services:
       args:
         user: ${USER}
         uid: 1000
+        env: dev
       context: .
       dockerfile: ./api/Dockerfile
     command: sh -c "./wait-for-it.sh mysql:3306 -t 30 && ./update.sh"
