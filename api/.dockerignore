@@ -1,2 +1,8 @@
 .DS_Store
 vendor
+README.md
+Dockerfile
+.editorconfig
+.env.example
+.gitignore
+.gitattributes
