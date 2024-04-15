@@ -20,7 +20,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::GET('/', function(){
     return response()->json([
-        'Laravel' => app()->version(),
+        'Laravel' => "v".Illuminate\Foundation\Application::VERSION. "(PHP ".PHP_VERSION.")",
         'Request' => request()->header()
     ]);
 });
