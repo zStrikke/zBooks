@@ -36,7 +36,7 @@ COPY ./deployment/config/php-fpm/php-prod.ini /usr/local/etc/php/conf.d/php.ini
 COPY ./deployment/config/php-fpm/www.conf /usr/local/etc/php-fpm.d/www.conf
 COPY ./deployment/bin/update.sh /usr/src/update.sh
 
-RUN if [ "$env" == "dev" ]; then \
+RUN if [ "$env" = "dev" ]; then \
         composer install --no-scripts; \
     else \
         composer install --prefer-dist --no-scripts --no-dev --no-autoloader && rm -rf /root/.composer; \
@@ -50,7 +50,7 @@ RUN php artisan storage:link && \
     chown -R $user:$user /usr/src && \
     chmod -R 775 ./storage ./bootstrap/cache
 
-RUN rm ./README.md Dockerfile php.tar.xz php.tar.xz.asc .editorconfig .env.example .gitignore .gitattributes 
+RUN rm php.tar.xz php.tar.xz.asc 
 
 RUN rm -rf ./laravel
 
