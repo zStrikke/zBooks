@@ -6,7 +6,6 @@ ARG user
 ARG uid
 
 RUN apt update && apt install -y \
-    git \
     curl \
     libpng-dev \
     libonig-dev \

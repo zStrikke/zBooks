@@ -1,6 +1,8 @@
 FROM node:lts-alpine3.18 AS base
 
-RUN npm install -g @angular/cli@17
+RUN --mount=type=cache,target=/usr/src/app/.npm \
+  npm set cache /usr/src/app/.npm && \
+  npm install -g @angular/cli@17
 
 USER node
 
