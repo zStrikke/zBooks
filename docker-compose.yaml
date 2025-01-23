@@ -7,8 +7,6 @@ services:
     ports:
       - "80:80"
       - "443:443"
-    extra_hosts:
-        - 'host.docker.internal:host-gateway'
     volumes:
       - ./deployment/config/proxy.conf:/etc/nginx/nginx.conf
       - ./deployment/ssl/local/zbooks.test.crt:/etc/letsencrypt/live/api.books.test/nginx-selfsigned.crt
@@ -23,8 +21,6 @@ services:
       dockerfile: ./frontend/Dockerfile
       target: dev
     restart: unless-stopped
-    ports:
-      - "5173:5173"
     volumes:
       - ./frontend:/usr/src
       - /usr/src/node_modules
