@@ -9,8 +9,10 @@ Diagramas como código en [Mermaid](https://mermaid.js.org/). GitHub los renderi
 | 03 | [Estados del ejemplar](03-estados-ejemplar.md) | UML (estados) | Transiciones válidas de un libro |
 | 04 | [Secuencia: capturar un libro](04-secuencia-captura.md) | UML (secuencia) | Flujo del caso de uso principal |
 | 05 | [Secuencia: otorgar puntos](05-secuencia-puntos.md) | UML (secuencia) | Flujo de la gamificación |
-| 06 | [Entidad-relación](06-er.md) | ER | Tablas, claves y relaciones de MySQL |
+| 06 | [Entidad-relación](06-er.md) | ER | Tablas, claves y relaciones de PostgreSQL + PostGIS |
 | 07 | [Despliegue](07-despliegue.md) | UML (despliegue) | Contenedores Docker |
+| 08 | [Arquitectura web + API](08-arquitectura-web-api.md) | Capas | Web y API v1 sobre el mismo dominio; convenciones de la API |
+| 09 | [Secuencia: autenticación](09-secuencia-autenticacion.md) | UML (secuencia) | Registro, verificación por email, sesión web y tokens Sanctum |
 
 ## Convenciones
 

@@ -17,8 +17,7 @@ classDiagram
 
     class UserZone {
         +string label
-        +float lat
-        +float lng
+        +Point location
         +int radiusKm
         +ZoneType type
         +date endsAt
@@ -40,12 +39,13 @@ classDiagram
         +release(ReleaseData) Release
         +catchBy(User?) JournalEntry
         +journey() Collection~JournalEntry~
+        +journeyLine() LineString
+        +distanceTravelledKm() float
     }
 
     class Release {
         +ReleaseType type
-        +float lat
-        +float lng
+        +Point location
         +string hint
         +datetime releasedAt
     }
@@ -64,6 +64,7 @@ classDiagram
     class Zone {
         +string name
         +string address
+        +Point location
         +bool approved
     }
 
@@ -191,4 +192,5 @@ classDiagram
 
 - **Obra vs ejemplar:** `Work` es el título (ISBN) y `Book` cada copia física con su BCID. Las reseñas cuelgan de `Work`; el diario, de `Book`.
 - **Puntos como libro de cuentas:** `PointTransaction` es inmutable y `User.pointsTotal` es un total cacheado que siempre se puede recalcular (ADR-0004).
+- **Geometrías:** `Point` y `LineString` son objetos de valor de PostGIS (paquete `clickbar/laravel-magellan`), no pares de floats.
 - **Lógica en el dominio:** métodos como `Book::release()` o `Event::join()` delegarán en clases *Action* para mantener los modelos delgados.

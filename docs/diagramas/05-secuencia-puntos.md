@@ -9,7 +9,7 @@ sequenceDiagram
     participant Q as Worker (Horizon)
     participant AP as AwardPoints<br/>(Listener)
     participant R as PointRules<br/>(config)
-    participant DB as MySQL
+    participant DB as PostgreSQL
     participant CB as CheckBadges<br/>(Listener)
     participant N as Notificaciones
 

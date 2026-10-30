@@ -10,7 +10,7 @@ sequenceDiagram
     participant RL as RateLimiter
     participant P as BookPolicy
     participant A as CatchBook<br/>(Action)
-    participant DB as MySQL
+    participant DB as PostgreSQL
     participant EV as Event bus
     participant Q as Cola (Redis)
 
@@ -41,6 +41,10 @@ sequenceDiagram
         LW-->>U: "¡Capturado!" + redirección al diario
     end
 ```
+
+## Variante: API móvil
+
+`POST /api/v1/books/{bcid}/catches` sigue el mismo camino desde el paso de autorización: el *FormRequest* sustituye al formulario Livewire, el controlador llama a la **misma** `CatchBook` y responde `201` con la entrada de diario como *API Resource*.
 
 ## Variante: visitante anónimo
 

@@ -139,3 +139,45 @@ Diagramas UML y ER del sistema en Mermaid, entregados mediante el primer pull re
 
 ### Siguiente paso
 Revisión del PR por el PO → ADRs 0001–0005.
+
+---
+
+## [2026-10-30] #005 — PostGIS, API v1 y autenticación
+**Iteración:** Fase D (diseño)  ·  **Duración:** ~1 h
+
+### Objetivo de la sesión
+Preparar el diseño para una futura app móvil y aprovechar la experiencia previa del PO con datos geoespaciales.
+
+### Hecho
+- Rama por defecto en GitHub cambiada a `master` (PO).
+- Diagramas actualizados en el PR #1:
+  - ER con `geography(Point, 4326)`, índices GiST/GIN y tabla de tokens.
+  - Despliegue con `postgis/postgis` y sin Meilisearch.
+  - Nuevos: **08 arquitectura web + API** y **09 secuencia de autenticación**.
+- Análisis funcional **v1.3**: RF-47 a RF-51 (API), RNF-10/11, planificación de ~22 semanas.
+
+### Decisiones (→ ADR)
+- **ADR-0006:** PostgreSQL 16 + PostGIS en lugar de MySQL.
+  - Cercanía con `ST_DWithin`.
+  - Rutas con `ST_MakeLine`.
+  - Km con `ST_Length`.
+  - Salida en GeoJSON.
+- **ADR-0007:** API REST `/api/v1`, construida **junto a cada funcionalidad** (opción A).
+  - Web y API comparten Actions.
+  - Errores RFC 9457.
+  - Documentación OpenAPI con Scramble.
+- **ADR-0008:** autenticación.
+  - Sesión en la web (Breeze).
+  - Tokens Sanctum por dispositivo en la API.
+  - Verificación de email obligatoria para escribir.
+- La búsqueda usa el full-text de PostgreSQL; Meilisearch pasa al backlog.
+
+### Aprendido
+- Sanctum no hace falta para una web Livewire en el mismo dominio: basta la sesión. Sanctum aporta los tokens para clientes externos.
+
+### Retro rápida
+- ✅ Cambiar la base de datos antes de escribir código ha salido gratis.
+- 🔧 La API añade ~3 semanas: vigilar que la lógica viva solo en Actions para no duplicar trabajo.
+
+### Siguiente paso
+Revisión y merge del PR #1 → PR con ADRs 0001–0008.

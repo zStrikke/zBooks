@@ -10,13 +10,13 @@ Proyecto personal, no comercial y de aprendizaje, desarrollado por iteraciones s
 
 ## Stack
 
-Laravel 12 · MySQL 8 · Docker · Livewire 3 + Alpine.js · Tailwind CSS · Filament · Redis · Meilisearch · Leaflet
+Laravel 12 · PostgreSQL 16 + PostGIS · Docker · Livewire 3 + Alpine.js · Tailwind CSS · Filament · Redis · Leaflet · API REST v1 (Sanctum)
 
 ## Documentación
 
 | Documento | Descripción |
 |---|---|
-| [Análisis funcional v1.2](docs/analisis/zBooks_Analisis_Funcional_v1.2.pdf) | Requisitos, modelo de datos, stack y planificación |
+| [Análisis funcional v1.3](docs/analisis/zBooks_Analisis_Funcional_v1.3.pdf) | Requisitos, modelo de datos, stack y planificación |
 | [Diario de desarrollo](docs/DIARIO.md) | Una entrada por sesión de trabajo |
 | [ADRs](docs/adr/) | Decisiones de arquitectura |
 | [Diagramas](docs/diagramas/) | UML y ER en Mermaid |
@@ -27,12 +27,16 @@ Laravel 12 · MySQL 8 · Docker · Livewire 3 + Alpine.js · Tailwind CSS · Fil
 | Versión | Contenido |
 |---|---|
 | 0.1.0 | Entorno Docker + CI |
-| 0.2.0 | Usuarios y zona de referencia |
+| 0.2.0 | Usuarios, autenticación (web + API) y zona de referencia |
 | 0.3.0 | Libros, BCID y etiquetas |
 | 0.4.0 | Liberar, capturar y diario |
-| **0.5.0** | **MVP:** recorrido, búsqueda, zonas, notificaciones |
+| **0.5.0** | **MVP:** recorrido con PostGIS, búsqueda, zonas, notificaciones, API documentada |
 | 0.6.0 – 0.10.0 | Admin, reseñas, gamificación, blog, canales, eventos, importación Goodreads |
 | **1.0.0** | Producción |
+
+## API
+
+Cada funcionalidad se expone también en una API REST versionada (`/api/v1`), pensada para una futura app móvil. Documentación OpenAPI en `/docs/api` (disponible desde la v0.1.0).
 
 ## Cómo trabajamos
 
