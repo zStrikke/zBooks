@@ -7,3 +7,4 @@ Formato basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/) y 
 ### Added
 - Análisis funcional y planificación v1.2.
 - Diario de desarrollo, README y estructura de documentación.
+- Diagramas UML y ER en Mermaid (`docs/diagramas/`).

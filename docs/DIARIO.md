@@ -112,3 +112,30 @@ Crear el repositorio y dejar la documentación versionada.
 
 ### Siguiente paso
 Fase D: diagramas UML/ER en Mermaid + ADRs 0001–0005 + backlog de historias como issues.
+
+---
+
+## [2026-10-30] #004 — Fase D: diagramas
+**Iteración:** Fase D (diseño)  ·  **Duración:** ~1 h
+
+### Objetivo de la sesión
+Diagramas UML y ER del sistema en Mermaid, entregados mediante el primer pull request.
+
+### Hecho
+- Rama principal renombrada a `master` (falta cambiar la rama por defecto en GitHub).
+- 7 diagramas en `docs/diagramas/`: casos de uso, dominio, estados del ejemplar, secuencia de captura, secuencia de puntos, ER y despliegue.
+- Sintaxis validada con el parser oficial de Mermaid.
+
+### Decisiones
+- Estados del ejemplar: `ON_SHELF`, `RELEASED`, `CAUGHT` (solo captura anónima), `LOST`, `ARCHIVED`. Una captura de un miembro devuelve el libro a `ON_SHELF` con nuevo poseedor.
+- Puntos idempotentes mediante `idempotency_key` única.
+- Mensajes directos = canal `direct` de dos miembros.
+
+### Problemas / bloqueos
+- El cambio de la rama por defecto en GitHub no se puede hacer desde la sesión de Claude; lo hace el PO.
+
+### Aprendido
+- Mermaid no tiene diagrama de casos de uso nativo; se simula con `flowchart`.
+
+### Siguiente paso
+Revisión del PR por el PO → ADRs 0001–0005.
