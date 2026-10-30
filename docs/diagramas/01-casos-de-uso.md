@@ -16,7 +16,7 @@ flowchart LR
         direction TB
         subgraph Publico["Acceso público"]
             UC1([Ver libro, diario y recorrido])
-            UC2([Capturar libro con BCID / QR])
+            UC2([Capturar libro con ZBID / QR])
             UC3([Buscar libros y libros cerca])
             UC4([Leer blogs y eventos públicos])
             UC5([Registrarse])
@@ -34,13 +34,13 @@ flowchart LR
             UC13([Escribir en su blog])
             UC14([Crear canal privado / mensaje directo])
             UC15([Crear evento y gestionar asistentes])
-            UC16([Proponer zona OBCZ])
+            UC16([Proponer zona ZBZ])
             UC17([Denunciar contenido])
         end
         subgraph Gestion["Gestión"]
             UC18([Crear canal público])
             UC19([Moderar contenido y denuncias])
-            UC20([Aprobar zonas OBCZ])
+            UC20([Aprobar zonas ZBZ])
             UC21([Gestionar usuarios y roles])
             UC22([Configurar puntos e insignias])
         end

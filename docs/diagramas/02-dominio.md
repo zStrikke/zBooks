@@ -33,7 +33,7 @@ classDiagram
     }
 
     class Book {
-        +string bcid
+        +string zbid
         +BookStatus status
         +string condition
         +release(ReleaseData) Release
@@ -111,7 +111,7 @@ classDiagram
     }
 
     User "1" --> "*" UserZone : tiene
-    UserZone "*" --> "0..1" Zone : OBCZ favorita
+    UserZone "*" --> "0..1" Zone : ZBZ favorita
     Work "1" --> "*" Book : ejemplares
     Work "1" --> "*" Review
     User "1" --> "*" Review : escribe
@@ -190,7 +190,7 @@ classDiagram
 
 ## Decisiones reflejadas
 
-- **Obra vs ejemplar:** `Work` es el título (ISBN) y `Book` cada copia física con su BCID. Las reseñas cuelgan de `Work`; el diario, de `Book`.
+- **Obra vs ejemplar:** `Work` es el título (ISBN) y `Book` cada copia física con su ZBID. Las reseñas cuelgan de `Work`; el diario, de `Book`.
 - **Puntos como libro de cuentas:** `PointTransaction` es inmutable y `User.pointsTotal` es un total cacheado que siempre se puede recalcular (ADR-0004).
 - **Geometrías:** `Point` y `LineString` son objetos de valor de PostGIS (paquete `clickbar/laravel-magellan`), no pares de floats.
 - **Lógica en el dominio:** métodos como `Book::release()` o `Event::join()` delegarán en clases *Action* para mantener los modelos delgados.

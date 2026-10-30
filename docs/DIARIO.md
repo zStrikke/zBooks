@@ -70,7 +70,7 @@ Ampliar el alcance con nuevas funcionalidades y simular un proceso de proyecto r
   - Los públicos solo los crean moderadores/admin.
   - Los mensajes directos son canales privados de dos personas.
 - [x] **Blog:** espacio propio, sin «me gusta» ni comentarios por ahora (a estudiar en el futuro).
-- [x] **Eventos:** con límite de plazas y lista de espera; se pueden vincular a una zona OBCZ.
+- [x] **Eventos:** con límite de plazas y lista de espera; se pueden vincular a una zona ZBZ.
 - [x] **Nuevo — zona de referencia del usuario:** se puede cambiar de forma permanente (mudanza) o temporal con fecha de vuelta (viaje).
 - [x] **Diagramas:** Mermaid, en una fase de diseño previa a programar.
 - [x] **Proceso:**
@@ -172,6 +172,7 @@ Preparar el diseño para una futura app móvil y aprovechar la experiencia previ
   - Verificación de email obligatoria para escribir.
 - La búsqueda usa el full-text de PostgreSQL; Meilisearch pasa al backlog.
 - Relatos de casos típicos en los diagramas 03, 04 y 05 (petición del PO en la revisión).
+- **Nomenclatura propia:** los términos heredados de BookCrossing pasan a ser de zBooks: `BCID` → **`ZBID`** (zBooks ID) y `OBCZ` → **`ZBZ`** (Zona zBooks). Las menciones a BookCrossing solo quedan donde se habla de la web original como inspiración.
 - **Timestamps y soft deletes** definidos por tabla en el ER. Los usuarios no se borran lógicamente: se anonimizan (RGPD).
 - **Estado «perdido»:** el registrador original puede marcar su libro como perdido tras 12 meses sin actividad. Desde la estantería, el poseedor puede hacerlo en cualquier momento.
 
