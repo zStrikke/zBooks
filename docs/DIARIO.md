@@ -70,7 +70,7 @@ Ampliar el alcance con nuevas funcionalidades y simular un proceso de proyecto r
   - Los públicos solo los crean moderadores/admin.
   - Los mensajes directos son canales privados de dos personas.
 - [x] **Blog:** espacio propio, sin «me gusta» ni comentarios por ahora (a estudiar en el futuro).
-- [x] **Eventos:** con límite de plazas y lista de espera; se pueden vincular a una zona OBCZ.
+- [x] **Eventos:** con límite de plazas y lista de espera; se pueden vincular a una zona ZBZ.
 - [x] **Nuevo — zona de referencia del usuario:** se puede cambiar de forma permanente (mudanza) o temporal con fecha de vuelta (viaje).
 - [x] **Diagramas:** Mermaid, en una fase de diseño previa a programar.
 - [x] **Proceso:**
@@ -112,3 +112,76 @@ Crear el repositorio y dejar la documentación versionada.
 
 ### Siguiente paso
 Fase D: diagramas UML/ER en Mermaid + ADRs 0001–0005 + backlog de historias como issues.
+
+---
+
+## [2026-10-30] #004 — Fase D: diagramas
+**Iteración:** Fase D (diseño)  ·  **Duración:** ~1 h
+
+### Objetivo de la sesión
+Diagramas UML y ER del sistema en Mermaid, entregados mediante el primer pull request.
+
+### Hecho
+- Rama principal renombrada a `master` (falta cambiar la rama por defecto en GitHub).
+- 7 diagramas en `docs/diagramas/`: casos de uso, dominio, estados del ejemplar, secuencia de captura, secuencia de puntos, ER y despliegue.
+- Sintaxis validada con el parser oficial de Mermaid.
+
+### Decisiones
+- Estados del ejemplar: `ON_SHELF`, `RELEASED`, `CAUGHT` (solo captura anónima), `LOST`, `ARCHIVED`. Una captura de un miembro devuelve el libro a `ON_SHELF` con nuevo poseedor.
+- Puntos idempotentes mediante `idempotency_key` única.
+- Mensajes directos = canal `direct` de dos miembros.
+
+### Problemas / bloqueos
+- El cambio de la rama por defecto en GitHub no se puede hacer desde la sesión de Claude; lo hace el PO.
+
+### Aprendido
+- Mermaid no tiene diagrama de casos de uso nativo; se simula con `flowchart`.
+
+### Siguiente paso
+Revisión del PR por el PO → ADRs 0001–0005.
+
+---
+
+## [2026-10-30] #005 — PostGIS, API v1 y autenticación
+**Iteración:** Fase D (diseño)  ·  **Duración:** ~1 h
+
+### Objetivo de la sesión
+Preparar el diseño para una futura app móvil y aprovechar la experiencia previa del PO con datos geoespaciales.
+
+### Hecho
+- Rama por defecto en GitHub cambiada a `master` (PO).
+- Diagramas actualizados en el PR #1:
+  - ER con `geography(Point, 4326)`, índices GiST/GIN y tabla de tokens.
+  - Despliegue con `postgis/postgis` y sin Meilisearch.
+  - Nuevos: **08 arquitectura web + API** y **09 secuencia de autenticación**.
+- Análisis funcional **v1.3**: RF-47 a RF-51 (API), RNF-10/11, planificación de ~22 semanas.
+
+### Decisiones (→ ADR)
+- **ADR-0006:** PostgreSQL 16 + PostGIS en lugar de MySQL.
+  - Cercanía con `ST_DWithin`.
+  - Rutas con `ST_MakeLine`.
+  - Km con `ST_Length`.
+  - Salida en GeoJSON.
+- **ADR-0007:** API REST `/api/v1`, construida **junto a cada funcionalidad** (opción A).
+  - Web y API comparten Actions.
+  - Errores RFC 9457.
+  - Documentación OpenAPI con Scramble.
+- **ADR-0008:** autenticación.
+  - Sesión en la web (Breeze).
+  - Tokens Sanctum por dispositivo en la API.
+  - Verificación de email obligatoria para escribir.
+- La búsqueda usa el full-text de PostgreSQL; Meilisearch pasa al backlog.
+- Relatos de casos típicos en los diagramas 03, 04 y 05 (petición del PO en la revisión).
+- **Nomenclatura propia:** los términos heredados de BookCrossing pasan a ser de zBooks: `BCID` → **`ZBID`** (zBooks ID) y `OBCZ` → **`ZBZ`** (Zona zBooks). Las menciones a BookCrossing solo quedan donde se habla de la web original como inspiración.
+- **Timestamps y soft deletes** definidos por tabla en el ER. Los usuarios no se borran lógicamente: se anonimizan (RGPD).
+- **Estado «perdido»:** el registrador original puede marcar su libro como perdido tras 12 meses sin actividad. Desde la estantería, el poseedor puede hacerlo en cualquier momento.
+
+### Aprendido
+- Sanctum no hace falta para una web Livewire en el mismo dominio: basta la sesión. Sanctum aporta los tokens para clientes externos.
+
+### Retro rápida
+- ✅ Cambiar la base de datos antes de escribir código ha salido gratis.
+- 🔧 La API añade ~3 semanas: vigilar que la lógica viva solo en Actions para no duplicar trabajo.
+
+### Siguiente paso
+Revisión y merge del PR #1 → PR con ADRs 0001–0008.

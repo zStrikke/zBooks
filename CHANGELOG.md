@@ -5,5 +5,6 @@ Formato basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/) y 
 ## [Unreleased]
 
 ### Added
-- Análisis funcional y planificación v1.2.
+- Análisis funcional y planificación v1.4 (nomenclatura propia ZBID/ZBZ, PostgreSQL + PostGIS, API REST v1, autenticación web + Sanctum).
 - Diario de desarrollo, README y estructura de documentación.
+- Diagramas UML y ER en Mermaid (`docs/diagramas/`), incluida la arquitectura web + API y la secuencia de autenticación.
