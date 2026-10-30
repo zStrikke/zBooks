@@ -171,6 +171,7 @@ Preparar el diseño para una futura app móvil y aprovechar la experiencia previ
   - Tokens Sanctum por dispositivo en la API.
   - Verificación de email obligatoria para escribir.
 - La búsqueda usa el full-text de PostgreSQL; Meilisearch pasa al backlog.
+- **Estado «perdido»:** el registrador original puede marcar su libro como perdido tras 12 meses sin actividad. Desde la estantería, el poseedor puede hacerlo en cualquier momento.
 
 ### Aprendido
 - Sanctum no hace falta para una web Livewire en el mismo dominio: basta la sesión. Sanctum aporta los tokens para clientes externos.

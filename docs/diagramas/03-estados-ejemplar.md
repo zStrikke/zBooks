@@ -11,11 +11,11 @@ stateDiagram-v2
 
     RELEASED --> ON_SHELF : capturado por un miembro<br/>(pasa a su estantería)
     RELEASED --> CAUGHT : capturado por un visitante anónimo
-    RELEASED --> LOST : marcar perdido<br/>(sin capturas en X meses)
+    RELEASED --> LOST : registrador lo marca perdido<br/>(12 meses sin actividad)
 
     CAUGHT --> ON_SHELF : el visitante se registra<br/>y lo reclama
     CAUGHT --> RELEASED : se libera de nuevo
-    CAUGHT --> LOST : marcar perdido
+    CAUGHT --> LOST : registrador lo marca perdido<br/>(12 meses sin actividad)
 
     LOST --> ON_SHELF : capturado por un miembro
     LOST --> CAUGHT : capturado anónimamente
@@ -36,11 +36,15 @@ stateDiagram-v2
 
 ## Reglas
 
-- Solo el **poseedor actual** puede liberar, archivar o marcar como perdido (Policy).
+- Solo el **poseedor actual** puede liberar o archivar (Policy).
+- **Marcar como perdido:**
+  - Desde `ON_SHELF`: el poseedor actual, en cualquier momento.
+  - Desde `RELEASED` o `CAUGHT`: el **registrador original**, cuando han pasado **12 meses** sin entradas de diario.
+  - Una tarea programada avisa al registrador cuando su libro cumple esos 12 meses.
 - Una liberación **controlada** (a un destinatario) sigue siendo `RELEASED` hasta que el destinatario confirma la captura.
 - Cada transición genera una `JournalEntry`. El estado actual es una caché de la última entrada relevante.
 
-## Pendiente de validar (PO)
+## Decisiones del PO
 
-- [ ] ¿Pasados cuántos meses sin capturas se ofrece marcar un libro liberado como perdido?
-- [ ] ¿Puede el **registrador original** (no poseedor) marcarlo como perdido?
+- [x] Un libro liberado se puede marcar como perdido tras **12 meses** sin actividad.
+- [x] Lo puede marcar el **registrador original**, aunque ya no sea el poseedor.
