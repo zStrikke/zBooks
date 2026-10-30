@@ -24,6 +24,17 @@ stateDiagram-v2
     ARCHIVED --> [*]
 ```
 
+## Casos típicos relatados
+
+### 1. El viaje habitual
+Lucía registra *La sombra del viento* y le pega la etiqueta: el libro nace en `ON_SHELF`, en su estantería. Un sábado lo deja en un banco de la estación de Sants y lo marca como liberado: pasa a `RELEASED` y deja de tener poseedor. Esa misma tarde Marcos, que tiene cuenta, lo encuentra e introduce el BCID: el libro vuelve a `ON_SHELF`, ahora en la estantería de Marcos. Cuando lo termina, lo deja en la cafetería de su barrio, que es una zona OBCZ, y el ciclo empieza de nuevo (`RELEASED`).
+
+### 2. El hallazgo anónimo
+Ana no tiene cuenta. Encuentra el libro en el tren, escanea el QR y escribe «¡Lo encontré camino a Girona!». El libro pasa a `CAUGHT`: sabemos que alguien lo tiene, pero no quién. Dos semanas después Ana se registra y, desde la ficha del libro, lo reclama: pasa a `ON_SHELF` en su estantería y ya puede liberarlo ella.
+
+### 3. Perdido… y recuperado
+Lucía libera otro libro en el parque de la Ciutadella. Pasan 12 meses sin ninguna entrada en el diario. El sistema avisa a Lucía, que lo marca como perdido (`LOST`). Dos años más tarde, Jordi lo compra en un mercadillo, ve la etiqueta e introduce el BCID: el libro vuelve a `ON_SHELF` en la estantería de Jordi y Lucía recibe una notificación de que su libro ha reaparecido.
+
 ## Significado de cada estado
 
 | Estado | Significado | Poseedor (`current_holder_id`) |

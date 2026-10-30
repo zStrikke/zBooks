@@ -171,6 +171,7 @@ Preparar el diseño para una futura app móvil y aprovechar la experiencia previ
   - Tokens Sanctum por dispositivo en la API.
   - Verificación de email obligatoria para escribir.
 - La búsqueda usa el full-text de PostgreSQL; Meilisearch pasa al backlog.
+- Relatos de casos típicos en los diagramas 03, 04 y 05 (petición del PO en la revisión).
 - **Timestamps y soft deletes** definidos por tabla en el ER. Los usuarios no se borran lógicamente: se anonimizan (RGPD).
 - **Estado «perdido»:** el registrador original puede marcar su libro como perdido tras 12 meses sin actividad. Desde la estantería, el poseedor puede hacerlo en cualquier momento.
 
