@@ -298,3 +298,40 @@ Todos son del entorno de Claude, no del proyecto; en la máquina del PO no ocurr
 
 ### Siguiente paso
 Revisión del PR → #5 (Tailwind, Livewire y layout).
+
+---
+
+## [2026-10-31] #009 — Iteración 0: Laravel base, Tailwind, Livewire y layout (#5)
+**Iteración:** 0 (v0.1.0)  ·  **Duración:** ~45 min
+
+### Objetivo de la sesión
+Tener el esqueleto web con identidad visual propia y una portada que explique zBooks.
+
+### Hecho
+- **Livewire 4** instalado; Alpine.js llega incluido con él.
+- **Tailwind 4** con tokens de diseño propios en `resources/css/app.css`.
+- **Fuentes alojadas en el proyecto** con `@fontsource`, sin CDN externo (mejor para el RGPD).
+- **Layout base** (`resources/views/layouts/app.blade.php`):
+  - Cabecera con buscador de ZBID y menú móvil.
+  - Pie de página y enlace «Saltar al contenido».
+- **Portada:** presentación, la etiqueta del libro como elemento protagonista y «Cómo funciona» en tres pasos.
+- **Ruta `/zbid`:** de momento informa de que la búsqueda llega en la v0.4.0.
+- Logotipo SVG propio y favicon.
+- Capturas en `docs/capturas/v0.1.0/`.
+
+### Decisiones
+- **Identidad visual:**
+  - Inspirada en los objetos reales de zBooks: la etiqueta amarilla del libro, el sello violeta de las fichas de biblioteca y la ruta verde del mapa.
+  - Tipografías: Bricolage Grotesque (interfaz), Source Serif 4 (lectura) e IBM Plex Mono (solo para los códigos ZBID).
+- **Botones de funciones futuras** visibles pero desactivados, indicando la versión en que llegan.
+- **Zona horaria:** las fechas se guardan en **UTC** y se muestran en `Europe/Madrid` (`app.display_timezone`). Se aparta de la issue, que pedía `Europe/Madrid` como zona de la app: guardar en hora local da problemas con el cambio de hora.
+- Versión de la app en `config/app.php` (`0.1.0-dev`).
+
+### Problemas / bloqueos
+- En las primeras capturas el menú móvil salía abierto con los dos iconos. Livewire 4 solo inyecta Alpine en páginas con componentes Livewire. Se añadieron `@livewireStyles`/`@livewireScripts` al layout y la regla `[x-cloak]`.
+
+### Aprendido
+- Revisar capturas antes de dar algo por terminado detecta fallos que los tests no ven.
+
+### Siguiente paso
+Revisión del PR → #6 (Pest, Pint y Larastan).

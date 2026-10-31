@@ -1,9 +1,72 @@
 @import 'tailwindcss';
 
+/* Fuentes alojadas en el propio proyecto (sin CDN externo) */
+@import '@fontsource-variable/bricolage-grotesque';
+@import '@fontsource-variable/source-serif-4';
+@import '@fontsource/ibm-plex-mono/500.css';
+
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
 
+/*
+ * Tokens de diseño de zBooks
+ * - papel:    fondo, papel frío ligeramente verdoso
+ * - tinta:    texto principal
+ * - sello:    violeta de los sellos de fecha de biblioteca (acción principal)
+ * - etiqueta: amarillo de la etiqueta pegada en el libro
+ * - ruta:     verde del recorrido en el mapa
+ * - linea:    bordes y separadores
+ */
 @theme {
-    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-        'Segoe UI Symbol', 'Noto Color Emoji';
+    --color-papel: #f4f6f1;
+    --color-papel-hondo: #e9ede4;
+    --color-tinta: #17202b;
+    --color-tinta-suave: #4a5563;
+    --color-sello: #4c3ba0;
+    --color-sello-oscuro: #3a2c80;
+    --color-etiqueta: #f5c842;
+    --color-ruta: #1e7a6e;
+    --color-linea: #d3d9cf;
+
+    --font-display: 'Bricolage Grotesque Variable', ui-sans-serif, system-ui, sans-serif;
+    --font-serif: 'Source Serif 4 Variable', ui-serif, Georgia, serif;
+    --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
+    --font-sans: var(--font-display);
+}
+
+@layer base {
+    html {
+        @apply bg-papel text-tinta antialiased;
+    }
+
+    body {
+        @apply font-serif text-[1.0625rem] leading-[1.65];
+    }
+
+    h1, h2, h3, h4, nav, button, label, input {
+        @apply font-display;
+    }
+
+    [x-cloak] {
+        display: none !important;
+    }
+
+    :focus-visible {
+        @apply outline-2 outline-offset-2 outline-sello;
+    }
+}
+
+/* Borde troquelado de la etiqueta del libro */
+.etiqueta {
+    --perforacion: radial-gradient(circle at 8px 0, transparent 5px, var(--color-etiqueta) 5.5px);
+    background:
+        var(--perforacion) top left / 16px 10px repeat-x,
+        linear-gradient(var(--color-etiqueta), var(--color-etiqueta)) 0 10px / 100% calc(100% - 10px) no-repeat;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        transition: none !important;
+        animation: none !important;
+    }
 }

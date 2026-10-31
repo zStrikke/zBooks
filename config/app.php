@@ -13,7 +13,10 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Laravel'),
+    'name' => env('APP_NAME', 'zBooks'),
+
+    // Versión de la aplicación (SemVer). Se actualiza al cerrar cada iteración.
+    'version' => '0.1.0-dev',
 
     /*
     |--------------------------------------------------------------------------
@@ -65,7 +68,11 @@ return [
     |
     */
 
+    // Las fechas se guardan siempre en UTC. Para mostrarlas se usa
+    // 'display_timezone' (y más adelante, la zona de cada usuario).
     'timezone' => 'UTC',
+
+    'display_timezone' => env('APP_DISPLAY_TIMEZONE', 'Europe/Madrid'),
 
     /*
     |--------------------------------------------------------------------------
@@ -78,11 +85,11 @@ return [
     |
     */
 
-    'locale' => env('APP_LOCALE', 'en'),
+    'locale' => env('APP_LOCALE', 'es'),
 
     'fallback_locale' => env('APP_FALLBACK_LOCALE', 'en'),
 
-    'faker_locale' => env('APP_FAKER_LOCALE', 'en_US'),
+    'faker_locale' => env('APP_FAKER_LOCALE', 'es_ES'),
 
     /*
     |--------------------------------------------------------------------------

@@ -5,6 +5,7 @@ Formato basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/) y 
 ## [Unreleased]
 
 ### Added
+- Livewire 4, Tailwind 4 con identidad visual propia, layout base y portada con buscador de ZBID (#5).
 - Entorno Docker: PHP 8.4, nginx, PostgreSQL 16 + PostGIS 3.4, Redis, Mailpit y Vite; `Makefile` con atajos (#4).
 - Esqueleto de Laravel 13 configurado para PostgreSQL, Redis y Mailpit (#4).
 - ADR-0009: Laravel 13 y PHP 8.4.
