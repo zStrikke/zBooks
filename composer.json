@@ -22,6 +22,7 @@
         "laravel/pint": "^1.27",
         "mockery/mockery": "^1.6",
         "nunomaduro/collision": "^8.6",
+        "nunomaduro/phpinsights": "^2.15",
         "pestphp/pest": "^5.3",
         "pestphp/pest-plugin-laravel": "^5.0"
     },
@@ -63,9 +64,13 @@
         "analyse": [
             "phpstan analyse --memory-limit=1G"
         ],
+        "insights": [
+            "@php artisan insights --no-interaction"
+        ],
         "check": [
             "@lint",
             "@analyse",
+            "@insights",
             "@test"
         ],
         "post-autoload-dump": [
@@ -98,7 +103,8 @@
         "sort-packages": true,
         "allow-plugins": {
             "pestphp/pest-plugin": true,
-            "php-http/discovery": true
+            "php-http/discovery": true,
+            "dealerdirect/phpcodesniffer-composer-installer": true
         }
     },
     "minimum-stability": "stable",
@@ -108,6 +114,7 @@
         "lint": "Comprueba el estilo con Pint sin cambiar nada",
         "format": "Corrige el estilo con Pint",
         "analyse": "Análisis estático con Larastan (nivel 6)",
-        "check": "Estilo, análisis estático y tests: lo mismo que la CI"
+        "check": "Estilo, análisis estático, PHP Insights y tests: lo mismo que la CI",
+        "insights": "Puntúa el código con PHP Insights (mínimo 90 en cada categoría)"
     }
 }

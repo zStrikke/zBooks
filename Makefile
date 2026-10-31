@@ -3,7 +3,7 @@ DC = docker compose
 EXEC = $(DC) exec app
 
 .DEFAULT_GOAL := help
-.PHONY: help up down restart build logs shell artisan composer test lint format analyse check migrate fresh front psql
+.PHONY: help up down restart build logs shell artisan composer test lint format analyse insights check migrate fresh front psql
 
 help: ## Muestra esta ayuda
 	@grep -E '^[a-zA-Z_-]+:.*?## ' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "  \033[36m%-10s\033[0m %s\n", $$1, $$2}'
@@ -43,7 +43,10 @@ format: ## Corrige el estilo con Pint
 analyse: ## Análisis estático con Larastan
 	$(EXEC) composer analyse
 
-check: ## Estilo, análisis y tests (lo mismo que la CI)
+insights: ## Puntúa el código con PHP Insights
+	$(EXEC) composer insights
+
+check: ## Estilo, análisis, PHP Insights y tests (lo mismo que la CI)
 	$(EXEC) composer check
 
 migrate: ## Ejecuta las migraciones
