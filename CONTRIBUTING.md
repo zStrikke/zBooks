@@ -7,10 +7,10 @@ Equipo: **zStrikke** (product owner y desarrollador) y **Claude** (desarrollador
 ```mermaid
 flowchart LR
     A[Épica] -->|refinamiento| B[Historias / tareas]
-    B --> C[Por hacer]
-    C --> D[En curso<br/>rama + commits]
-    D --> E[En revisión<br/>pull request + CI]
-    E -->|aprobado y fusionado| F[Hecho]
+    B --> C[Todo]
+    C --> D[In Progress<br/>rama + commits]
+    D --> E[In Review<br/>pull request + CI]
+    E -->|aprobado y fusionado| F[Done]
 ```
 
 - **Épicas:** agrupan el trabajo de una iteración futura. Llevan la etiqueta `necesita refinamiento`.
@@ -19,15 +19,15 @@ flowchart LR
 
 ## 2. Tablero (GitHub Projects)
 
-Columnas: **Backlog → Por hacer → En curso → En revisión → Hecho**.
+Columnas: **Backlog → Todo → In Progress → In Review → Done**.
 
 | Columna | Qué hay |
 |---|---|
 | Backlog | Todo lo que no es de la iteración actual |
-| Por hacer | Issues de la iteración actual, listas para empezar |
-| En curso | Alguien está trabajando en ella (tiene rama) |
-| En revisión | Tiene un PR abierto |
-| Hecho | PR fusionado e issue cerrada |
+| Todo | Issues de la iteración actual, listas para empezar |
+| In Progress | Alguien está trabajando en ella (tiene rama) |
+| In Review | Tiene un PR abierto |
+| Done | PR fusionado e issue cerrada |
 
 ## 3. Ramas
 

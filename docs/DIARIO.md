@@ -234,6 +234,7 @@ Convertir el análisis en un backlog real en GitHub y fijar el flujo de trabajo.
 ### Decisiones
 - **Refinamiento progresivo:** solo se detallan las dos próximas iteraciones. Las demás son épicas que se dividen en historias justo antes de empezarlas.
 - Ramas con el número de issue: `feature/18-zona-habitual`.
+- Columnas del tablero en inglés: **Backlog, Todo, In Progress, In Review, Done**.
 
 ### Problemas / bloqueos
 - GitHub Projects solo se gestiona con la API GraphQL, que no está disponible desde la sesión de Claude: el PO crea el tablero.
