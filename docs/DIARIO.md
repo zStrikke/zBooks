@@ -348,20 +348,26 @@ Repasar qué le faltaba a la planificación vista por un PM y convertir lo útil
 - Nota completa de la conversación en [`docs/notas/2026-10-31-revision-planificacion.md`](notas/2026-10-31-revision-planificacion.md), para retomarla más adelante.
 - Issues nuevas, enlazadas en sus épicas:
   - #32: código QR en la etiqueta y la ficha (v0.3.0).
-  - #33: horas de liberación y captura en franjas (v0.4.0).
+  - #33: privacidad del ciclo: autores anónimos y horas en franjas (v0.4.0).
   - #34: seeders de demostración en Barcelona (v0.5.0).
   - #35: eventos oficiales desde el panel de administración (v0.9.0).
-- ADR-0010 (Propuesto): hora exacta guardada, mostrada solo en franjas.
+  - #37: amigos (v0.10.0).
+- ADR-0010 (Propuesto): privacidad en el ciclo del libro.
 
 ### Decisiones
 - **Sembrar el mapa** con datos de demo en Barcelona, una vez existan las funciones geoespaciales.
 - **Eventos como motor de captación:** moderadores y admins podrán crearlos desde Filament.
 - **QR** a la vez que el ZBID, generado como SVG con `chillerlan/php-qrcode`.
-- **Privacidad:** la ubicación se muestra casi exacta; la hora se guarda exacta y se muestra en franjas.
+- **Privacidad:**
+  - La ubicación se muestra casi exacta y el libro aparece al momento.
+  - La hora se guarda exacta, pero en público solo se ve la franja.
+  - Quién libera y quién captura es anónimo, salvo entre amigos. El admin lo ve todo.
+- **Publicar en lotes, descartado:** dejaría el libro horas invisible. El anonimato resuelve el problema de raíz.
 - Aparcados: métrica principal, proveedor de mapas para producción, piezas legales, observabilidad y proceso.
 
 ### Aprendido
 - En un producto de red, el problema del arranque en frío pesa más que cualquier funcionalidad.
+- En privacidad conviene preguntarse qué dato permite identificar a alguien. Aquí era el autor, no la hora.
 
 ### Siguiente paso
 Revisión del PR → #6 (Pest, Pint y Larastan).

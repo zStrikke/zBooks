@@ -40,8 +40,16 @@ Demo al final de cada iteración (*sprint review*), *Definition of Ready* para l
 | 1. Sembrar el mapa | Seeders de demo en Barcelona, después de las funciones geoespaciales | #34 (v0.5.0) |
 | 1. Eventos como captación | Moderadores y admins crean eventos oficiales desde Filament | #35 (v0.9.0) |
 | 3. QR | QR en la etiqueta y la ficha, a la vez que el ZBID | #32 (v0.3.0) |
-| 4. Privacidad | Ubicación aproximadamente exacta; la hora se guarda exacta pero se muestra en franjas | #33 (v0.4.0), ADR-0010 |
+| 4. Privacidad | Autores anónimos por defecto; la hora se guarda exacta, el libro aparece al momento y la hora se muestra en franjas | #33 (v0.4.0), ADR-0010 |
+| 4. Privacidad | Amigos: ven el nombre del otro en el diario de los libros (préstamos e historial) | #37 (v0.10.0) |
 | 2, 5, 6, 7 y parte legal del 4 | Aparcados por ahora | Retomar desde esta nota |
+
+## Debate posterior: ¿retrasar la publicación?
+
+- Se valoró publicar las liberaciones en lotes al cerrar cada franja, para que verlas aparecer no revelase la hora.
+- Se descartó: el libro quedaría horas invisible y quien lo libera no lo vería aparecer en el mapa.
+- La clave fue otra: **no mostrar públicamente quién libera ni quién captura**. Sin autor, la hora no permite seguir a nadie.
+- De ahí salen los amigos: el nombre solo se ve entre amigos, para poder prestarse libros y ver el historial.
 
 ## Pendiente de retomar
 
