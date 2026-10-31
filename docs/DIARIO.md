@@ -396,6 +396,8 @@ Tener tests, estilo y análisis estático funcionando antes de escribir funciona
 - **Nivel 6 de Larastan:** obliga a tipar parámetros y retornos (incluido el contenido de los arrays con PHPDoc) sin llegar a la rigidez de los niveles 8–10. Se puede subir más adelante.
 - **Pint sin reglas extra:** el preset `laravel` tal cual, para no discutir de estilo.
 - **PHP Insights con mínimo 90** en cada categoría, el mismo umbral que propone el libro. Se configura en `config/insights.php`, así que el local y la CI usan el mismo.
+- **Entornos de base de datos:** `zbooks_testing` solo para tests automáticos; `zbooks` para desarrollo, demos y seeders.
+- **Se añade preproducción (*staging*)** a la épica de producción (#28), con una copia de producción con datos anonimizados. Sustituye al «sin staging» del análisis.
 - **Pint manda en el estilo:** en PHP Insights se desactivan tres reglas de llaves que chocan con Pint, y el límite de línea sube de 80 a 120 caracteres.
 
 ### Problemas / bloqueos
