@@ -335,3 +335,33 @@ Tener el esqueleto web con identidad visual propia y una portada que explique zB
 
 ### Siguiente paso
 Revisión del PR → #6 (Pest, Pint y Larastan).
+
+---
+
+## [2026-10-31] #010 — Revisión de la planificación con mirada de producto
+**Iteración:** 0 (v0.1.0)  ·  **Duración:** ~20 min
+
+### Objetivo de la sesión
+Repasar qué le faltaba a la planificación vista por un PM y convertir lo útil en backlog.
+
+### Hecho
+- Nota completa de la conversación en [`docs/notas/2026-10-31-revision-planificacion.md`](notas/2026-10-31-revision-planificacion.md), para retomarla más adelante.
+- Issues nuevas, enlazadas en sus épicas:
+  - #32: código QR en la etiqueta y la ficha (v0.3.0).
+  - #33: horas de liberación y captura en franjas (v0.4.0).
+  - #34: seeders de demostración en Barcelona (v0.5.0).
+  - #35: eventos oficiales desde el panel de administración (v0.9.0).
+- ADR-0010 (Propuesto): hora exacta guardada, mostrada solo en franjas.
+
+### Decisiones
+- **Sembrar el mapa** con datos de demo en Barcelona, una vez existan las funciones geoespaciales.
+- **Eventos como motor de captación:** moderadores y admins podrán crearlos desde Filament.
+- **QR** a la vez que el ZBID, generado como SVG con `chillerlan/php-qrcode`.
+- **Privacidad:** la ubicación se muestra casi exacta; la hora se guarda exacta y se muestra en franjas.
+- Aparcados: métrica principal, proveedor de mapas para producción, piezas legales, observabilidad y proceso.
+
+### Aprendido
+- En un producto de red, el problema del arranque en frío pesa más que cualquier funcionalidad.
+
+### Siguiente paso
+Revisión del PR → #6 (Pest, Pint y Larastan).
