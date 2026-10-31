@@ -21,6 +21,7 @@ Laravel 12 · PostgreSQL 16 + PostGIS · Docker · Livewire 3 + Alpine.js · Tai
 | [ADRs](docs/adr/) | Decisiones de arquitectura |
 | [Diagramas](docs/diagramas/) | UML y ER en Mermaid |
 | [CHANGELOG](CHANGELOG.md) | Cambios por versión |
+| [Backlog](https://github.com/zStrikke/zBooks/issues) | Historias, tareas y épicas por hito |
 
 ## Hoja de ruta
 
@@ -39,6 +40,9 @@ Laravel 12 · PostgreSQL 16 + PostGIS · Docker · Livewire 3 + Alpine.js · Tai
 Cada funcionalidad se expone también en una API REST versionada (`/api/v1`), pensada para una futura app móvil. Documentación OpenAPI en `/docs/api` (disponible desde la v0.1.0).
 
 ## Cómo trabajamos
+
+Guía completa en [CONTRIBUTING.md](CONTRIBUTING.md). Resumen:
+
 
 - Historias de usuario como issues y tablero en GitHub Projects.
 - Una rama por issue (`feature/…`, `fix/…`) y fusión mediante pull request.

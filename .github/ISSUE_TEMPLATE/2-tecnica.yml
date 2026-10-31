@@ -1,0 +1,25 @@
+name: 🔧 Tarea técnica
+description: Trabajo necesario sin valor directo para el usuario (infraestructura, refactor, configuración).
+labels: ["tipo: técnica"]
+body:
+  - type: textarea
+    id: objetivo
+    attributes: { label: Objetivo, description: "¿Qué se consigue y por qué hace falta?" }
+    validations: { required: true }
+  - type: textarea
+    id: tareas
+    attributes:
+      label: Tareas
+      value: |
+        - [ ] 
+    validations: { required: true }
+  - type: textarea
+    id: hecho
+    attributes:
+      label: Hecho cuando
+      value: |
+        - [ ] 
+    validations: { required: true }
+  - type: input
+    id: refs
+    attributes: { label: Referencias }
