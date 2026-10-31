@@ -237,6 +237,7 @@ Convertir el análisis en un backlog real en GitHub y fijar el flujo de trabajo.
 
 ### Problemas / bloqueos
 - GitHub Projects solo se gestiona con la API GraphQL, que no está disponible desde la sesión de Claude: el PO crea el tablero.
+- La validación del YAML de las plantillas falló (signos `¿?` sin comillas dentro de `{ }`) y el commit se subió igualmente, sin `CONTRIBUTING.md`. Se corrigió en un segundo commit. Lección: que un fallo en un paso detenga los siguientes.
 
 ### Aprendido
 - Detallar todo el backlog de golpe es desperdicio: lo lejano cambiará (ya pasó con MySQL → PostGIS).
