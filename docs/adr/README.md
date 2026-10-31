@@ -26,3 +26,4 @@ Un ADR documenta **una** decisión de arquitectura importante: el contexto, la d
 | [0007](0007-api-rest-versionada.md) | API REST versionada junto a cada funcionalidad | Aceptado | 2026-10-30 |
 | [0008](0008-autenticacion-sesion-y-sanctum.md) | Autenticación: sesión web + tokens Sanctum | Aceptado | 2026-10-30 |
 | [0009](0009-laravel-13-php-84.md) | Laravel 13 y PHP 8.4 | Aceptado | 2026-10-31 |
+| [0010](0010-privacidad-ciclo-del-libro.md) | Privacidad en el ciclo del libro: anonimato y franjas | Propuesto | 2026-10-31 |
