@@ -411,3 +411,27 @@ Tener tests, estilo y análisis estático funcionando antes de escribir funciona
 
 ### Siguiente paso
 Revisión del PR → #7 (integración continua con GitHub Actions).
+
+---
+
+## [2026-11-01] #012 — Iteración 0: integración continua con GitHub Actions (#7)
+**Iteración:** 0 (v0.1.0)  ·  **Duración:** ~20 min
+
+### Objetivo de la sesión
+Que cada PR ejecute solo las mismas comprobaciones que `make check`.
+
+### Hecho
+- Workflow `.github/workflows/ci.yml`, validado con `actionlint` antes de subirlo.
+- **Job «Calidad»:** Pint, Larastan y PHP Insights. Los errores salen como anotaciones en las líneas del PR (`--error-format=github`, `--format=github-action`).
+- **Job «Tests»:** Pest contra PostGIS y Redis como servicios de GitHub.
+- Badge de CI en el README.
+
+### Decisiones
+- **Dos jobs en paralelo:** el de calidad no necesita base de datos y avisa antes.
+- **El mismo script SQL que en local** (`docker/postgres/init/`) prepara la base en la CI. Si cambia, cambia en los dos sitios a la vez.
+- **Assets compilados en la CI:** las vistas usan `@vite` y sin el manifest los tests de la portada fallan. De paso se comprueba que el front compila.
+- **Sin Docker en la CI por ahora:** `setup-php` es más rápido que construir nuestra imagen. Se valorará cuando haya imágenes de producción (épica #28), como propone *DevOps with Laravel*.
+- **Las ejecuciones antiguas de un PR se cancelan** al subir un commit nuevo.
+
+### Siguiente paso
+Regla de `master` con los checks obligatorios (PO) → #8 (esqueleto de la API v1).
