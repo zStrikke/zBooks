@@ -1,6 +1,6 @@
 # ADR-0010: Privacidad en el ciclo del libro: anonimato por defecto y horas en franjas
 
-- **Estado:** Propuesto
+- **Estado:** Aceptado
 - **Fecha:** 2026-10-31
 - **Decisores:** PO, Claude
 
@@ -33,7 +33,7 @@ Combinamos la **2** y la **3**.
 - `released_at` y `caught_at` se guardan exactos, en UTC.
 - El libro aparece en el mapa **al momento**.
 - En la parte pública (web y API) solo se muestran la **fecha y la franja**:
-  - madrugada (0–6 h), mañana (6–12 h), tarde (12–18 h) y noche (18–24 h);
+  - madrugada (0–7 h), mañana (7–14 h), tarde (14–21 h) y noche (21–24 h), los cortes que se usan al hablar en España;
   - en `app.display_timezone`;
   - pasados 30 días, solo la fecha.
 - La API nunca devuelve la marca de tiempo: expone `released_on` y `released_period`.
