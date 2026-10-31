@@ -207,3 +207,50 @@ Documentar como ADRs las decisiones de arquitectura tomadas hasta ahora.
 
 ### Siguiente paso
 Revisión del PR de ADRs → backlog de historias de usuario como issues en GitHub.
+
+---
+
+## [2026-10-31] #007 — Fase D: backlog y forma de trabajar
+**Iteración:** Fase D (diseño)  ·  **Duración:** ~45 min
+
+### Objetivo de la sesión
+Convertir el análisis en un backlog real en GitHub y fijar el flujo de trabajo.
+
+### Hecho
+- PR #2 (ADRs) aprobado y fusionado.
+- **Etiquetas:**
+  - Tipo: historia, épica, técnica, docs.
+  - Prioridad MoSCoW.
+  - 11 áreas.
+  - `necesita refinamiento`.
+- **12 hitos**, uno por versión: de Fase D a v1.0.0.
+- **26 issues:**
+  - #3: plantillas y guía de contribución.
+  - #4–#9: v0.1.0, tareas técnicas.
+  - #10–#19: v0.2.0, historias con criterios de aceptación.
+  - #20–#28: épicas de v0.3.0 a v1.0.0, pendientes de refinar.
+- Plantillas de issue (historia, técnica, bug), plantilla de PR con la DoD y `CONTRIBUTING.md`.
+- **Tablero creado por el PO** en GitHub Projects:
+  - Columnas Backlog, Todo, In Progress, In Review, Done.
+  - Workflows activos: *Auto-add* (`is:issue is:open`), *Item closed → Done*, *Pull request merged → Done* y *Pull request linked to issue → In Review*.
+  - En el tablero solo se siguen issues; los PR se quitan.
+
+### Decisiones
+- **Refinamiento progresivo:** solo se detallan las dos próximas iteraciones. Las demás son épicas que se dividen en historias justo antes de empezarlas.
+- Ramas con el número de issue: `feature/18-zona-habitual`.
+- Columnas del tablero en inglés: **Backlog, Todo, In Progress, In Review, Done**.
+
+### Problemas / bloqueos
+- GitHub Projects solo se gestiona con la API GraphQL, que no está disponible desde la sesión de Claude: el PO crea el tablero.
+- La validación del YAML de las plantillas falló (signos `¿?` sin comillas dentro de `{ }`) y el commit se subió igualmente, sin `CONTRIBUTING.md`. Se corrigió en un segundo commit. Lección: que un fallo en un paso detenga los siguientes.
+
+### Aprendido
+- Detallar todo el backlog de golpe es desperdicio: lo lejano cambiará (ya pasó con MySQL → PostGIS).
+
+### Retro de la Fase D
+- ✅ Diseñar antes de programar ha permitido cambiar la base de datos y añadir la API sin coste.
+- ✅ Los PR con revisión del PO funcionan bien (relatos de casos, nomenclatura ZBID/ZBZ).
+- 🔧 Las revisiones de GitHub quedan «pendientes» hasta que se envían: enviar siempre con *Finish your review*.
+
+### Siguiente paso
+Fusionar este PR → arrancar la **iteración 0** con la issue #4 (Docker + PostGIS).
