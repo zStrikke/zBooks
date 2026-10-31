@@ -39,7 +39,11 @@ Laravel 12 · PostgreSQL 16 + PostGIS · Docker · Livewire 3 + Alpine.js · Tai
 
 ## API
 
-Cada funcionalidad se expone también en una API REST versionada (`/api/v1`), pensada para una futura app móvil. Documentación OpenAPI en `/docs/api` (disponible desde la v0.1.0).
+Cada funcionalidad se expone también en una API REST versionada (`/api/v1`), pensada para una futura app móvil. Documentación OpenAPI en `/docs/api`, generada con Scramble a partir del código (de momento solo en local).
+
+- Errores en formato *Problem Details* (RFC 9457): `application/problem+json`.
+- Límite de 60 peticiones por minuto por usuario o IP.
+- `GET /api/v1/health` comprueba la base de datos y Redis.
 
 ## Cómo trabajamos
 
