@@ -185,3 +185,25 @@ Preparar el diseño para una futura app móvil y aprovechar la experiencia previ
 
 ### Siguiente paso
 Revisión y merge del PR #1 → PR con ADRs 0001–0008.
+
+---
+
+## [2026-10-31] #006 — Fase D: ADRs
+**Iteración:** Fase D (diseño)  ·  **Duración:** ~45 min
+
+### Objetivo de la sesión
+Documentar como ADRs las decisiones de arquitectura tomadas hasta ahora.
+
+### Hecho
+- PR #1 (diagramas) aprobado y fusionado por el PO.
+- `docs/adr/`: índice con reglas y estados, plantilla y **ADRs 0001–0008**.
+
+### Decisiones
+- Formato propio inspirado en MADR: estado, contexto, opciones, decisión, consecuencias, seguimiento y referencias.
+- Los ADRs aceptados no se editan; un cambio de decisión crea un ADR nuevo que sustituye al anterior.
+
+### Aprendido
+- Un ADR también recoge las **opciones descartadas**: explica tanto por qué sí como por qué no.
+
+### Siguiente paso
+Revisión del PR de ADRs → backlog de historias de usuario como issues en GitHub.
