@@ -371,3 +371,36 @@ Repasar qué le faltaba a la planificación vista por un PM y convertir lo útil
 
 ### Siguiente paso
 Revisión del PR → #6 (Pest, Pint y Larastan).
+
+---
+
+## [2026-11-01] #011 — Iteración 0: Pest, Pint y Larastan (#6)
+**Iteración:** 0 (v0.1.0)  ·  **Duración:** ~40 min
+
+### Objetivo de la sesión
+Tener tests, estilo y análisis estático funcionando antes de escribir funcionalidades.
+
+### Hecho
+- **Pest 5.3** sustituye a PHPUnit como forma de escribir tests (por debajo sigue usando PHPUnit 12).
+- **Tests contra PostgreSQL + PostGIS** (`zbooks_testing`), no SQLite. Un test comprueba que la base es la correcta y otro calcula una distancia real en Barcelona con `ST_Distance`.
+- **Tests de la portada y del buscador de ZBID:** mayúsculas, recorte a 20 caracteres y escapado del HTML.
+- **Tests de arquitectura** (`tests/Arch`): sin funciones de depuración, `env()` fuera de la app, modelos que extienden de Eloquent y los *presets* `php` y `security` de Pest.
+- **Pint** con el preset `laravel` y **Larastan 3.13** (PHPStan 2.3) a nivel 6.
+- Comandos `composer test|lint|format|analyse|check` y sus equivalentes en el `Makefile`.
+- `CONTRIBUTING.md`: tabla de comandos y qué va en cada carpeta de tests.
+
+### Decisiones
+- **`LazilyRefreshDatabase`** en los tests de Feature: migra una vez y cada test corre dentro de una transacción que se deshace. Es rápido, y los tests que no tocan la base no pagan nada.
+- **`tests/` fuera de Larastan:** PHPStan no entiende el `$this` de los closures de Pest y da falsos positivos. Los tests ya se verifican al ejecutarlos.
+- **Nivel 6 de Larastan:** obliga a tipar parámetros y retornos (incluido el contenido de los arrays con PHPDoc) sin llegar a la rigidez de los niveles 8–10. Se puede subir más adelante.
+- **Pint sin reglas extra:** el preset `laravel` tal cual, para no discutir de estilo.
+
+### Problemas / bloqueos
+- En el entorno de Claude, `phpstan/phpstan` solo se distribuye como zip de GitHub, y esas descargas están bloqueadas. Se preparó el zip desde un clon git en la caché de Composer. No afecta al repositorio.
+- Primera versión del test de arquitectura de `env()`: incluía `routes/`, pero esos ficheros no tienen clases y Pest no los analiza. Se comprobó metiendo un `dd()` a propósito en `User` y viendo que el test fallaba.
+
+### Aprendido
+- Un test que nunca has visto fallar no demuestra nada: conviene romper el código a propósito una vez.
+
+### Siguiente paso
+Revisión del PR → #7 (integración continua con GitHub Actions).
