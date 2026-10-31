@@ -230,6 +230,10 @@ Convertir el análisis en un backlog real en GitHub y fijar el flujo de trabajo.
   - #10–#19: v0.2.0, historias con criterios de aceptación.
   - #20–#28: épicas de v0.3.0 a v1.0.0, pendientes de refinar.
 - Plantillas de issue (historia, técnica, bug), plantilla de PR con la DoD y `CONTRIBUTING.md`.
+- **Tablero creado por el PO** en GitHub Projects:
+  - Columnas Backlog, Todo, In Progress, In Review, Done.
+  - Workflows activos: *Auto-add* (`is:issue is:open`), *Item closed → Done*, *Pull request merged → Done* y *Pull request linked to issue → In Review*.
+  - En el tablero solo se siguen issues; los PR se quitan.
 
 ### Decisiones
 - **Refinamiento progresivo:** solo se detallan las dos próximas iteraciones. Las demás son épicas que se dividen en historias justo antes de empezarlas.
