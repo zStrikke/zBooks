@@ -58,6 +58,19 @@ Ejemplos: `feat(auth): verificación de email en el registro` · `fix(geo): radi
 
 ## 5. Pull requests
 
+**Antes de abrir un PR**, `make check` tiene que pasar. Hace lo mismo que la CI:
+
+| Comando | Qué hace | Herramienta |
+|---|---|---|
+| `make lint` | Comprueba el estilo sin cambiar nada | Pint (preset `laravel`) |
+| `make format` | Corrige el estilo | Pint |
+| `make analyse` | Análisis estático: tipos, métodos inexistentes, errores de Eloquent | Larastan, nivel 6 |
+| `make insights` | Puntúa el código de 0 a 100 en calidad, complejidad, arquitectura y estilo; falla por debajo de 90 | PHP Insights |
+| `make test` | Tests contra PostgreSQL + PostGIS (`zbooks_testing`), nunca SQLite | Pest |
+| `make check` | Todos los anteriores salvo `format`, en ese orden | |
+
+Los tests viven en `tests/Feature` (peticiones HTTP y base de datos), `tests/Unit` (clases sueltas, sin framework) y `tests/Arch` (reglas sobre el código: nada de `dd()`, `env()` solo en `config/`…).
+
 - Título con formato de commit convencional.
 - Cuerpo con la plantilla: qué cambia, `Closes #nº`, cómo probarlo y la checklist de la DoD.
 - El PO revisa y comenta en las líneas concretas. Claude responde en el mismo hilo y sube los cambios a la misma rama.
