@@ -4,7 +4,7 @@ labels: ["tipo: técnica"]
 body:
   - type: textarea
     id: objetivo
-    attributes: { label: Objetivo, description: "¿Qué se consigue y por qué hace falta?" }
+    attributes: { label: "Objetivo", description: "¿Qué se consigue y por qué hace falta?" }
     validations: { required: true }
   - type: textarea
     id: tareas
@@ -22,4 +22,4 @@ body:
     validations: { required: true }
   - type: input
     id: refs
-    attributes: { label: Referencias }
+    attributes: { label: "Referencias" }

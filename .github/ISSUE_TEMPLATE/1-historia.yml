@@ -7,15 +7,15 @@ body:
       value: "Recuerda: cada historia incluye su parte **web** y su parte **API v1** (ADR-0007)."
   - type: input
     id: como
-    attributes: { label: Como…, placeholder: "miembro" }
+    attributes: { label: "Como…", placeholder: "miembro" }
     validations: { required: true }
   - type: input
     id: quiero
-    attributes: { label: quiero…, placeholder: "liberar un libro indicando dónde lo dejo" }
+    attributes: { label: "quiero…", placeholder: "liberar un libro indicando dónde lo dejo" }
     validations: { required: true }
   - type: input
     id: para
-    attributes: { label: para…, placeholder: "que otra persona pueda encontrarlo" }
+    attributes: { label: "para…", placeholder: "que otra persona pueda encontrarlo" }
     validations: { required: true }
   - type: textarea
     id: criterios
@@ -27,13 +27,13 @@ body:
     validations: { required: true }
   - type: textarea
     id: web
-    attributes: { label: Web, description: "Pantallas o componentes Livewire afectados." }
+    attributes: { label: "Web", description: "Pantallas o componentes Livewire afectados." }
   - type: textarea
     id: api
-    attributes: { label: API v1, description: "Endpoints, códigos de estado, formato (JSON / GeoJSON)." }
+    attributes: { label: "API v1", description: "Endpoints, códigos de estado, formato (JSON / GeoJSON)." }
   - type: textarea
     id: notas
-    attributes: { label: Notas técnicas }
+    attributes: { label: "Notas técnicas" }
   - type: input
     id: refs
-    attributes: { label: Referencias, placeholder: "RF-11 · ADR-0006 · Diagrama 03" }
+    attributes: { label: "Referencias", placeholder: "RF-11 · ADR-0006 · Diagrama 03" }

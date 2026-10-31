@@ -4,7 +4,7 @@ labels: ["bug"]
 body:
   - type: textarea
     id: que
-    attributes: { label: ¿Qué ocurre?, description: "Describe el problema." }
+    attributes: { label: "¿Qué ocurre?", description: "Describe el problema." }
     validations: { required: true }
   - type: textarea
     id: pasos
@@ -16,12 +16,12 @@ body:
     validations: { required: true }
   - type: textarea
     id: esperado
-    attributes: { label: ¿Qué esperabas que pasara? }
+    attributes: { label: "¿Qué esperabas que pasara?" }
     validations: { required: true }
   - type: dropdown
     id: donde
-    attributes: { label: ¿Dónde?, options: ["Web", "API v1", "Panel de administración", "Otro"] }
+    attributes: { label: "¿Dónde?", options: ["Web", "API v1", "Panel de administración", "Otro"] }
     validations: { required: true }
   - type: input
     id: version
-    attributes: { label: Versión o commit, placeholder: "v0.2.0" }
+    attributes: { label: "Versión o commit", placeholder: "v0.2.0" }
