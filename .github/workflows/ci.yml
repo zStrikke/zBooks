@@ -1,0 +1,144 @@
+name: CI
+
+# Se ejecuta en cada PR contra master y en cada push a master (al fusionar).
+on:
+  pull_request:
+    branches: [master]
+  push:
+    branches: [master]
+
+# Si subes otro commit al mismo PR, se cancela la ejecución anterior.
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+permissions:
+  contents: read
+
+env:
+  PHP_VERSION: '8.4'
+  PHP_EXTENSIONS: pdo_pgsql, pgsql, redis, intl, gd, zip, bcmath, pcntl, exif
+
+jobs:
+  # ---------------------------------------------------------------------------
+  # Estilo, análisis estático y puntuación: no necesitan base de datos
+  # ---------------------------------------------------------------------------
+  calidad:
+    name: Calidad (Pint, Larastan, PHP Insights)
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ env.PHP_VERSION }}
+          extensions: ${{ env.PHP_EXTENSIONS }}
+          coverage: none
+          tools: composer:v2
+
+      - name: Caché de Composer
+        uses: actions/cache@v4
+        with:
+          path: ~/.composer/cache/files
+          key: composer-${{ runner.os }}-${{ hashFiles('composer.lock') }}
+          restore-keys: composer-${{ runner.os }}-
+
+      - name: Instalar dependencias
+        run: composer install --no-interaction --no-progress --prefer-dist
+
+      - name: Preparar .env
+        run: |
+          cp .env.example .env
+          php artisan key:generate
+
+      - name: Pint (estilo)
+        run: vendor/bin/pint --test
+
+      - name: Larastan (análisis estático)
+        run: vendor/bin/phpstan analyse --memory-limit=1G --error-format=github --no-progress
+
+      - name: PHP Insights (mínimo 90 por categoría)
+        run: php artisan insights --no-interaction --format=github-action
+
+  # ---------------------------------------------------------------------------
+  # Tests contra PostgreSQL + PostGIS reales, como en local
+  # ---------------------------------------------------------------------------
+  tests:
+    name: Tests (Pest + PostGIS)
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    services:
+      db:
+        image: postgis/postgis:16-3.4
+        env:
+          POSTGRES_DB: zbooks
+          POSTGRES_USER: zbooks
+          POSTGRES_PASSWORD: secret
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U zbooks"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+
+      redis:
+        image: redis:7-alpine
+        ports:
+          - 6379:6379
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+
+    env:
+      DB_HOST: 127.0.0.1
+      REDIS_HOST: 127.0.0.1
+      PGPASSWORD: secret
+
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ env.PHP_VERSION }}
+          extensions: ${{ env.PHP_EXTENSIONS }}
+          coverage: none
+          tools: composer:v2
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Caché de Composer
+        uses: actions/cache@v4
+        with:
+          path: ~/.composer/cache/files
+          key: composer-${{ runner.os }}-${{ hashFiles('composer.lock') }}
+          restore-keys: composer-${{ runner.os }}-
+
+      - name: Instalar dependencias
+        run: |
+          composer install --no-interaction --no-progress --prefer-dist
+          npm ci
+
+      # Las vistas usan @vite: sin el manifest compilado, la portada da error
+      - name: Compilar assets
+        run: npm run build
+
+      # El mismo script que usa Docker en local: extensiones y base zbooks_testing
+      - name: Preparar PostgreSQL
+        run: psql -h 127.0.0.1 -U zbooks -d zbooks -v ON_ERROR_STOP=1 -f docker/postgres/init/01-extensiones-y-bd-tests.sql
+
+      - name: Preparar .env
+        run: |
+          cp .env.example .env
+          php artisan key:generate
+
+      - name: Pest
+        run: php artisan test --compact
