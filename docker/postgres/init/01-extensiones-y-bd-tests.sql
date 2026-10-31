@@ -4,7 +4,7 @@ CREATE EXTENSION IF NOT EXISTS postgis;
 CREATE EXTENSION IF NOT EXISTS unaccent;
 
 -- Base de datos para los tests (ADR-0006: los tests usan PostGIS, no SQLite)
-CREATE DATABASE zbooks_testing OWNER CURRENT_USER;
+CREATE DATABASE zbooks_testing;
 \connect zbooks_testing
 CREATE EXTENSION IF NOT EXISTS postgis;
 CREATE EXTENSION IF NOT EXISTS unaccent;

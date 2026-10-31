@@ -254,3 +254,47 @@ Convertir el análisis en un backlog real en GitHub y fijar el flujo de trabajo.
 
 ### Siguiente paso
 Fusionar este PR → arrancar la **iteración 0** con la issue #4 (Docker + PostGIS).
+
+---
+
+## [2026-10-31] #008 — Iteración 0: entorno Docker con PostGIS (#4)
+**Iteración:** 0 (v0.1.0)  ·  **Duración:** ~1 h 15 min
+
+### Objetivo de la sesión
+Arrancar todo el entorno de desarrollo con un solo comando.
+
+### Hecho
+- **Revisión de los libros del proyecto** y mapa de lecturas por iteración (en el proyecto de claude.ai).
+- **Imagen `app`:** PHP 8.4-fpm con `pdo_pgsql`, `redis`, `intl`, `gd`, `zip`, `bcmath`, `pcntl` y `opcache`, más Composer. Usuario sin privilegios con el UID del host.
+- **`docker-compose.yml`:**
+  - Servicios `app`, `web` (nginx), `db` (postgis/postgis:16-3.4), `redis`, `mailpit` y `node` (perfil `front`).
+  - *Healthchecks*, y la app espera a que la base de datos y Redis estén sanos.
+- **Script de inicio de PostgreSQL:** extensiones `postgis` y `unaccent`, y base de datos `zbooks_testing`.
+- **Esqueleto de Laravel 13** con `.env.example` configurado para PostgreSQL, Redis (caché, sesiones y colas) y Mailpit.
+- **`Makefile`** con atajos (`make up`, `make shell`, `make test`, `make psql`…).
+
+### Verificación
+- `http://localhost` → 200
+- `SELECT postgis_version()` → 3.4
+- Mailpit en `http://localhost:8025` → 200
+- Redis responde y las migraciones se ejecutan contra PostGIS.
+
+### Decisiones (→ ADR)
+- **ADR-0009:** Laravel 13 + PHP 8.4. Laravel 13 es la versión estable actual y Pest 5 exige PHP 8.4.
+- Del esqueleto **no** se incluyen sus workflows de `.github` ni sus `AGENTS.md`/`CLAUDE.md` genéricos.
+- PostgreSQL 16 en lugar de 17 de momento, por coincidir con la imagen documentada.
+
+### Problemas / bloqueos
+Todos son del entorno de Claude, no del proyecto; en la máquina del PO no ocurren:
+- Faltaban dominios permitidos (Packagist, Docker Hub, PECL, Debian). El PO los añadió.
+- Docker Hub limitaba las descargas anónimas (*429*). Se resolvió con un token de solo lectura del PO; **revocarlo al terminar**.
+- El proxy del sandbox solo admite HTTPS y GitHub solo permite descargas de los repos de la sesión. Se usó una imagen base local con la CA del proxy y Composer con `--prefer-source`, sin tocar nada del repo.
+- El PO paró sin querer una tarea larga. Desde entonces, las tareas largas se lanzan en segundo plano.
+- `CREATE DATABASE … OWNER CURRENT_USER` no es válido en PostgreSQL: se eliminó el `OWNER`.
+
+### Aprendido
+- Montar un volumen sobre `/docker-entrypoint-initdb.d` sustituye los scripts de la imagen: hay que crear las extensiones uno mismo.
+- Los scripts de inicio solo se ejecutan con el volumen de datos vacío (`docker compose down -v` para repetirlos).
+
+### Siguiente paso
+Revisión del PR → #5 (Tailwind, Livewire y layout).
