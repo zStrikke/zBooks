@@ -2,6 +2,8 @@
 
 Equipo: **zStrikke** (product owner y desarrollador) y **Claude** (desarrollador y arquitecto).
 
+> Para el día a día (comandos, flujo resumido y qué hacer en cada situación), ver la [guía del desarrollador](docs/GUIA-DESARROLLADOR.md).
+
 ## 1. Del backlog al código
 
 ```mermaid
@@ -85,6 +87,7 @@ Los tests viven en `tests/Feature` (peticiones HTTP y base de datos), `tests/Uni
 
 | Qué | Dónde | Cuándo |
 |---|---|---|
+| Guía del desarrollador | [`docs/GUIA-DESARROLLADOR.md`](docs/GUIA-DESARROLLADOR.md) | Al cambiar comandos o procesos, o al resolver un caso nuevo que pueda repetirse |
 | Diario de desarrollo | [`docs/DIARIO.md`](docs/DIARIO.md) | Una entrada por sesión |
 | Decisiones de arquitectura | [`docs/adr/`](docs/adr/) | Al tomar una decisión importante |
 | Diagramas | [`docs/diagramas/`](docs/diagramas/) | En el mismo PR que cambia el diseño |
