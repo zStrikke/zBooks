@@ -25,11 +25,12 @@ jobs:
   # ---------------------------------------------------------------------------
   calidad:
     name: Calidad (Pint, Larastan, PHP Insights)
-    runs-on: ubuntu-latest
+    # Versión fija: ubuntu-latest cambia de sistema sin avisar. Dependabot no la actualiza.
+    runs-on: ubuntu-24.04
     timeout-minutes: 10
 
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7
 
       - uses: shivammathur/setup-php@v2
         with:
@@ -39,7 +40,7 @@ jobs:
           tools: composer:v2
 
       - name: Caché de Composer
-        uses: actions/cache@v4
+        uses: actions/cache@v6
         with:
           path: ~/.composer/cache/files
           key: composer-${{ runner.os }}-${{ hashFiles('composer.lock') }}
@@ -67,7 +68,7 @@ jobs:
   # ---------------------------------------------------------------------------
   tests:
     name: Tests (Pest + PostGIS)
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 15
 
     services:
@@ -101,7 +102,7 @@ jobs:
       PGPASSWORD: secret
 
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7
 
       - uses: shivammathur/setup-php@v2
         with:
@@ -110,13 +111,13 @@ jobs:
           coverage: none
           tools: composer:v2
 
-      - uses: actions/setup-node@v5
+      - uses: actions/setup-node@v7
         with:
           node-version: 22
           cache: npm
 
       - name: Caché de Composer
-        uses: actions/cache@v4
+        uses: actions/cache@v6
         with:
           path: ~/.composer/cache/files
           key: composer-${{ runner.os }}-${{ hashFiles('composer.lock') }}
