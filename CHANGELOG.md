@@ -9,6 +9,7 @@ Formato basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/) y 
 Primera versión: entorno de desarrollo, calidad, CI y esqueleto de la API. Todavía sin funcionalidades para usuarios.
 
 ### Added
+- Análisis funcional v1.5, con su fuente en Markdown, `make analisis` para generar el PDF y lista de cambios pendientes.
 - CI fijada en Ubuntu 24.04, con acciones en Node 24 y Dependabot para mantenerlas al día (#46).
 - README con cómo arrancar el proyecto: requisitos, `make setup`, comandos habituales, tests y problemas frecuentes. Nuevos atajos `make setup` y `make assets` (#9).
 - La API responde siempre en inglés (errores, validación y documentación), sin depender del idioma de la web (#42).

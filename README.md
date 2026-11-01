@@ -80,8 +80,7 @@ Los tests usan su propia base, `zbooks_testing`: nunca tocan los datos de desarr
 
 | Documento | Descripción |
 |---|---|
-| [Análisis funcional v1.4](docs/analisis/zBooks_Analisis_Funcional_v1.4.pdf) | Requisitos, modelo de datos, stack y planificación |
-| [Cambios desde el análisis v1.4](docs/analisis/cambios-desde-v1.4.md) | Lo que ha cambiado del análisis, con enlace a cada decisión |
+| [Análisis funcional v1.5](docs/analisis/zBooks_Analisis_Funcional_v1.5.pdf) | Requisitos, modelo de datos, stack y planificación ([fuente](docs/analisis/analisis-funcional.md), [versiones](docs/analisis/)) |
 | [Notas](docs/notas/) | Revisiones de la planificación y cierres de iteración |
 | [Diario de desarrollo](docs/DIARIO.md) | Una entrada por sesión de trabajo |
 | [ADRs](docs/adr/) | Decisiones de arquitectura |

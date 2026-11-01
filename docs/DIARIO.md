@@ -536,13 +536,13 @@ Cerrar la v0.1.0 y revisar el estado del proyecto antes de la iteración 1.
 ### Hecho
 - **#46:** la CI pasa a `ubuntu-24.04` fijo y a acciones con Node 24, y Dependabot vigila sus versiones.
 - **[Análisis del cierre](notas/2026-11-01-cierre-iteracion-0.md)** de issues, diario y estado.
-- **[Cambios desde el análisis v1.4](analisis/cambios-desde-v1.4.md)**, con notas al pie hacia cada decisión.
+- **[Análisis funcional v1.5](analisis/zBooks_Analisis_Funcional_v1.5.pdf)**, con la página «Cambios en la versión 1.5». La fuente pasa a Markdown (`analisis-funcional.md`) y `make analisis` genera el PDF.
 - Backlog al día: títulos de #5 y #6, cambio de alcance en la épica #27 y issues nuevas #48 (RGPD mínimo, v0.2.0) y #49 (logs y errores a Slack, v1.0.0).
 - Diario #002 cerrado.
 - Versión `0.1.0` en `config/app.php`, CHANGELOG con su sección, etiqueta `v0.1.0` y release en GitHub.
 
 ### Decisiones
-- **El PDF del análisis no se reescribe:** queda como foto del diseño inicial y los cambios se recogen en una página aparte.
+- **Histórico de versiones del análisis:** versión nueva al cerrar una iteración con cambios relevantes, con los cambios en su primera página. Las versiones anteriores se conservan, y entre versiones los cambios se apuntan en `cambios-pendientes.md`. La fuente de la v1.4 (ReportLab) no estaba en el repo, así que la v1.5 se rehízo en Markdown.
 - **RGPD:** lo habitual del sector, adelantado a la v0.2.0, antes del registro.
 - **Observabilidad por escalones:** primero logs diarios y Slack; después seguimiento de errores; por último métricas.
 - **Mapas en desarrollo:** OpenStreetMap y Nominatim, como ya decía la #18. El proveedor de producción, antes de la #28.

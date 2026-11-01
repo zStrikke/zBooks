@@ -35,7 +35,7 @@
 |---|---|
 | Títulos desfasados: #5 decía «Laravel 12» y #6 no mencionaba PHP Insights | Títulos corregidos, con un comentario en cada issue que explica el cambio |
 | La épica #27 seguía incluyendo la traducción, que ahora es la #43 (v0.2.0) | Tachada en la épica y comentario de cambio de alcance en #27 y #43 |
-| El análisis v1.4 ya no refleja varias decisiones | Página [Cambios desde el análisis v1.4](../analisis/cambios-desde-v1.4.md), con notas al pie hacia cada decisión. El PDF queda como foto del diseño inicial |
+| El análisis v1.4 ya no refleja varias decisiones | [Análisis funcional v1.5](../analisis/zBooks_Analisis_Funcional_v1.5.pdf), con una primera página de cambios y referencias a cada decisión. La v1.4 se conserva |
 | El diario #002 seguía «abierto» y con una tarea ya hecha sin marcar | Cerrado, con una nota que explica la corrección |
 | Workflow del tablero que manda las issues nuevas a Todo | Pendiente del PO (ver abajo) |
 | Token de Docker Hub compartido en el chat | Pendiente del PO: revocarlo |

@@ -3,7 +3,7 @@ DC = docker compose
 EXEC = $(DC) exec app
 
 .DEFAULT_GOAL := help
-.PHONY: help setup assets up down restart build logs shell artisan composer test lint format analyse insights check migrate fresh front psql
+.PHONY: help setup assets up down restart build logs shell artisan composer test lint format analyse insights check migrate fresh front psql analisis
 
 help: ## Muestra esta ayuda
 	@grep -E '^[a-zA-Z_-]+:.*?## ' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "  \033[36m%-10s\033[0m %s\n", $$1, $$2}'
@@ -73,3 +73,6 @@ front: ## Arranca Vite en modo desarrollo
 
 psql: ## Abre psql en la base de datos
 	$(DC) exec db psql -U $${DB_USERNAME:-zbooks} -d $${DB_DATABASE:-zbooks}
+
+analisis: ## Genera el PDF del análisis funcional (necesita pandoc y Playwright)
+	NODE_PATH=$$(npm root -g) node docs/analisis/herramientas/generar-pdf.mjs
