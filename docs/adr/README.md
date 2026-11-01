@@ -28,3 +28,5 @@ Un ADR documenta **una** decisión de arquitectura importante: el contexto, la d
 | [0009](0009-laravel-13-php-84.md) | Laravel 13 y PHP 8.4 | Aceptado | 2026-10-31 |
 | [0010](0010-privacidad-ciclo-del-libro.md) | Privacidad en el ciclo del libro: anonimato y franjas | Aceptado | 2026-10-31 |
 | [0011](0011-idiomas-web-y-api.md) | Idiomas: código y API en inglés, web en el idioma del usuario | Aceptado | 2026-11-01 |
+| [0012](0012-paquetes-autenticacion-permisos-geo.md) | Paquetes de la v0.2.0: Fortify, laravel-permission y laravel-magellan | Aceptado | 2026-11-01 |
+| [0013](0013-zonas-de-usuario.md) | Zonas de usuario: radio o área, con la precisión que elija cada persona | Aceptado | 2026-11-01 |
