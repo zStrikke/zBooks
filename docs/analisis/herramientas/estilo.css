@@ -1,0 +1,40 @@
+/* Estilo del PDF del análisis funcional (A4). Lo usa generar-pdf.mjs. */
+@page { size: A4; margin: 18mm 16mm 20mm; }
+:root { --tinta: #1f2a33; --suave: #5b6770; --acento: #2f6f5e; --linea: #d5dbd8; --fondo: #f3f6f4; }
+body { font-family: "DejaVu Sans", "Helvetica", sans-serif; font-size: 10pt; line-height: 1.45; color: var(--tinta); }
+h1 { font-size: 15pt; color: var(--acento); margin: 14pt 0 6pt; border-bottom: 1.5pt solid var(--acento); padding-bottom: 2pt; }
+h2 { font-size: 12pt; margin: 12pt 0 4pt; }
+p, li { orphans: 3; widows: 3; }
+table { border-collapse: collapse; width: 100%; margin: 4pt 0 10pt; font-size: 8.8pt; page-break-inside: auto; }
+tr { page-break-inside: avoid; }
+th { background: var(--acento); color: #fff; text-align: left; font-weight: 600; }
+th, td { border: 0.6pt solid var(--linea); padding: 3pt 5pt; vertical-align: top; }
+tbody tr:nth-child(even) td { background: var(--fondo); }
+code { font-family: "DejaVu Sans Mono", monospace; font-size: 8.5pt; }
+a { color: var(--acento); text-decoration: none; }
+
+/* Portada */
+section.portada > h1 { font-size: 34pt; border: 0; margin-top: 60pt; }
+section.portada > h1 + p { font-size: 14pt; color: var(--suave); margin-top: 0; }
+section.portada > p:nth-of-type(2) { font-size: 13pt; margin-bottom: 30pt; }
+section.portada table:first-of-type th { display: none; }
+section.portada table:first-of-type td:first-child { width: 28%; font-weight: 600; }
+
+/* Cada bloque principal empieza en página nueva */
+section.cambios, section.indice, section.level1:not(.portada):not(.cambios):not(.indice):first-of-type { break-before: page; }
+section.indice + section.level1 { break-before: page; }
+section.cambios p, section.cambios li { font-size: 9.3pt; }
+
+/* Notas al pie al final de la sección de cambios */
+section.footnotes, aside.footnotes { font-size: 8pt; color: var(--suave); border-top: 0.6pt solid var(--linea); margin-top: 10pt; }
+a.footnote-ref sup { font-size: 7pt; }
+.footnote-back { display: none; }
+
+/* Ajustes: sin bloque de título de pandoc y anchos de columna automáticos */
+header#title-block-header { display: none; }
+col { width: auto !important; }
+table { table-layout: auto; }
+section.portada > h1 { margin-top: 30pt; }
+section.portada table:last-of-type td:first-child, section.portada table:last-of-type td:nth-child(2) { white-space: nowrap; }
+section.cambios ol { font-size: 8.5pt; color: var(--suave); }
+sup { font-size: 7pt; line-height: 0; }

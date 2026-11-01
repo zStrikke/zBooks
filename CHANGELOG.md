@@ -4,7 +4,12 @@ Formato basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/) y 
 
 ## [Unreleased]
 
+## [0.1.0] - 2026-11-01
+
+Primera versión: entorno de desarrollo, calidad, CI y esqueleto de la API. Todavía sin funcionalidades para usuarios.
+
 ### Added
+- Análisis funcional v1.5, con su fuente en Markdown, `make analisis` para generar el PDF y lista de cambios pendientes.
 - CI fijada en Ubuntu 24.04, con acciones en Node 24 y Dependabot para mantenerlas al día (#46).
 - README con cómo arrancar el proyecto: requisitos, `make setup`, comandos habituales, tests y problemas frecuentes. Nuevos atajos `make setup` y `make assets` (#9).
 - La API responde siempre en inglés (errores, validación y documentación), sin depender del idioma de la web (#42).
@@ -21,3 +26,6 @@ Formato basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/) y 
 - Análisis funcional y planificación v1.4 (nomenclatura propia ZBID/ZBZ, PostgreSQL + PostGIS, API REST v1, autenticación web + Sanctum).
 - Diario de desarrollo, README y estructura de documentación.
 - Diagramas UML y ER en Mermaid (`docs/diagramas/`), incluida la arquitectura web + API y la secuencia de autenticación.
+
+[Unreleased]: https://github.com/zStrikke/zBooks/compare/v0.1.0...HEAD
+[0.1.0]: https://github.com/zStrikke/zBooks/releases/tag/v0.1.0
