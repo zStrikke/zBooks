@@ -9,6 +9,8 @@
         <ul class="flex flex-wrap gap-x-6 gap-y-2 font-display text-tinta-suave">
             <li><a href="{{ route('home') }}#como-funciona" class="hover:text-tinta">Cómo funciona</a></li>
             <li><a href="https://github.com/zStrikke/zBooks" class="hover:text-tinta">Código fuente</a></li>
+            <li><a href="{{ route('legal.privacy') }}" class="hover:text-tinta">Privacidad</a></li>
+            <li><a href="{{ route('legal.notice') }}" class="hover:text-tinta">Aviso legal</a></li>
         </ul>
     </div>
 </footer>

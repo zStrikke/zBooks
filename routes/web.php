@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\LegalController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -11,3 +12,7 @@ Route::get('/zbid', function (Request $request) {
 
     return view('zbid.buscar', ['codigo' => mb_substr($codigo, 0, 20)]);
 })->name('zbid.buscar');
+
+// Textos legales (RGPD y LSSI, issue #48)
+Route::get('/legal-notice', [LegalController::class, 'notice'])->name('legal.notice');
+Route::get('/privacy', [LegalController::class, 'privacy'])->name('legal.privacy');

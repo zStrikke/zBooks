@@ -636,3 +636,27 @@ Diseñar las pantallas de acceso y perfil antes de programarlas, y aclarar cómo
 ### Siguiente paso
 #48 (RGPD mínimo) → #15 (PO) en paralelo.
 
+---
+
+## [2026-11-01] #020 — RGPD mínimo: textos legales y consentimiento (#48)
+**Iteración:** 1 (v0.2.0)  ·  **Duración:** ~45 min
+
+### Objetivo de la sesión
+Tener listos los textos legales y el consentimiento antes de guardar el primer dato personal (#10).
+
+### Hecho
+- **Aviso legal** (`/legal-notice`) y **política de privacidad** (`/privacy`), enlazados desde el pie de página.
+- **`config/legal.php`:** versión vigente de la política y datos del responsable, con huecos `[nombre]`, `[email de contacto]` y `[país]` hasta que se rellenen en el `.env`.
+- **Consentimiento:** columnas `privacy_accepted_at` y `privacy_version` en `users`, y `App\Legal\PrivacyPolicy` con la regla de validación, cómo se guarda la aceptación y si sigue vigente.
+- 10 tests nuevos (38 en total). Se comprobó que el de cambio de versión falla si no se compara la versión.
+
+### Decisiones
+- **Una vista por idioma** (`legal/es/…`), no textos traducidos frase a frase: un texto legal se redacta entero en cada idioma. Si falta el idioma activo, se muestra el español.
+- **La política tiene versión** (su fecha). Si cambia de forma relevante, se sube y se pedirá aceptarla de nuevo.
+- **Rutas en inglés** (`/privacy`, `/legal-notice`), como dice el ADR-0011.
+- **Edad mínima de 14 años**, la habitual en España para consentir el tratamiento de datos. Pendiente de confirmar con el PO.
+- La casilla del formulario la pone la #10 con `PrivacyPolicy::rules()` y `PrivacyPolicy::recordAcceptance()`.
+
+### Siguiente paso
+Revisión del PR → #10 (registro web), cuando la #15 del PO esté fusionada.
+
