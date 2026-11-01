@@ -3,10 +3,23 @@ DC = docker compose
 EXEC = $(DC) exec app
 
 .DEFAULT_GOAL := help
-.PHONY: help up down restart build logs shell artisan composer test lint format analyse insights check migrate fresh front psql
+.PHONY: help setup assets up down restart build logs shell artisan composer test lint format analyse insights check migrate fresh front psql
 
 help: ## Muestra esta ayuda
 	@grep -E '^[a-zA-Z_-]+:.*?## ' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "  \033[36m%-10s\033[0m %s\n", $$1, $$2}'
+
+setup: ## Primera instalación: .env, imagen, dependencias, base de datos y front
+	@test -f .env || cp .env.example .env
+	$(DC) build app
+	$(DC) up -d
+	$(EXEC) composer install
+	@grep -q '^APP_KEY=base64:' .env || $(EXEC) php artisan key:generate
+	$(EXEC) php artisan migrate
+	$(MAKE) assets
+	@echo "Listo: http://localhost"
+
+assets: ## Compila el CSS y el JS (sin Vite en marcha)
+	$(DC) run --rm --no-deps node sh -c "npm ci && npm run build"
 
 up: ## Arranca el entorno
 	$(DC) up -d

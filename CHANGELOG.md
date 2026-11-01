@@ -5,6 +5,7 @@ Formato basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/) y 
 ## [Unreleased]
 
 ### Added
+- README con cómo arrancar el proyecto: requisitos, `make setup`, comandos habituales, tests y problemas frecuentes. Nuevos atajos `make setup` y `make assets` (#9).
 - La API responde siempre en inglés (errores, validación y documentación), sin depender del idioma de la web (#42).
 - ADR-0011: código y API en inglés (`APP_LOCALE=en`); web en español, inglés o catalán según el usuario, con una sola URL por recurso.
 - Esqueleto de la API v1: rutas por versión, errores en Problem Details (RFC 9457), límite de 60 peticiones/min, `GET /api/v1/health` y documentación OpenAPI con Scramble en `/docs/api` (#8).

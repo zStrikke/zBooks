@@ -496,3 +496,29 @@ Decidir los idiomas antes de cerrar la v0.1.0 y dejar el contrato de la API en i
 
 ### Siguiente paso
 Revisión del PR → #9 (README: cómo arrancar el proyecto) y cierre de la iteración 0.
+
+---
+
+## [2026-11-01] #015 — Iteración 0: README para arrancar el proyecto (#9)
+**Iteración:** 0 (v0.1.0)  ·  **Duración:** ~30 min
+
+### Objetivo de la sesión
+Que cualquiera pueda clonar y arrancar zBooks siguiendo solo el README.
+
+### Hecho
+- Sección «Cómo arrancarlo» en el README: requisitos, instalación, URLs, comandos habituales, tests y problemas frecuentes.
+- **`make setup`:** crea el `.env`, construye la imagen, instala dependencias, genera la clave, migra y compila el front. Se puede repetir: no regenera la clave.
+- **`make assets`:** compila el front sin Vite en marcha.
+- Stack del README actualizado (Laravel 13, PHP 8.4, Livewire 4, Tailwind 4).
+
+### Comprobación
+- Clon limpio en otra carpeta y con otro nombre de proyecto de Compose (bases vacías): `make setup` → portada, `/api/v1/health`, `/docs/api` y buscador de ZBID en 200; 25 tests en verde.
+- Repetir `make setup` deja la misma `APP_KEY`.
+- `make setup UID=… GID=…` llega a los argumentos de la imagen.
+
+### Decisiones
+- **Un solo comando de instalación** en lugar de una lista de pasos: menos sitios donde equivocarse.
+- **Sin PHP, Composer ni Node en el equipo:** todo corre en contenedores.
+
+### Siguiente paso
+Revisión del PR → cierre de la iteración 0: etiqueta v0.1.0, release, CHANGELOG y retrospectiva.
