@@ -27,4 +27,4 @@ Un ADR documenta **una** decisión de arquitectura importante: el contexto, la d
 | [0008](0008-autenticacion-sesion-y-sanctum.md) | Autenticación: sesión web + tokens Sanctum | Aceptado | 2026-10-30 |
 | [0009](0009-laravel-13-php-84.md) | Laravel 13 y PHP 8.4 | Aceptado | 2026-10-31 |
 | [0010](0010-privacidad-ciclo-del-libro.md) | Privacidad en el ciclo del libro: anonimato y franjas | Aceptado | 2026-10-31 |
-| [0011](0011-idiomas-web-y-api.md) | Idiomas: web en es/en/ca, API en inglés | Aceptado | 2026-11-01 |
+| [0011](0011-idiomas-web-y-api.md) | Idiomas: código y API en inglés, web en el idioma del usuario | Aceptado | 2026-11-01 |

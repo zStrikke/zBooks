@@ -63,10 +63,10 @@ it('responde 401, 403 y 405 con su código y título estándar', function (strin
     '405 método no permitido' => ['DELETE', '/api/v1/health', 405, 'Method Not Allowed'],
 ]);
 
-it('responde en inglés aunque la web esté en español', function () {
-    // Simula la traducción española que llegará con la web multiidioma (#43)
+it('responde en inglés aunque el cliente pida español', function () {
+    // Simula la traducción española que llegará con la web multiidioma (#43).
+    // Falla si APP_LOCALE deja de ser «en» o si la API empieza a mirar Accept-Language.
     app('translator')->addLines(['validation.required' => 'El campo :attribute es obligatorio.'], 'es');
-    app()->setLocale('es');
 
     $this->withHeader('Accept-Language', 'es')
         ->postJson('/api/v1/_test/validation', ['isbn' => '1234567890123'])

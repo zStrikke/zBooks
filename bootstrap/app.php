@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Middleware\UseEnglishLocale;
 use App\Http\ProblemDetails\ProblemDetailsRenderer;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
@@ -17,9 +16,6 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware): void {
         // Aplica el limitador «api» (AppServiceProvider) a todas las rutas de la API
         $middleware->throttleApi();
-
-        // La API habla siempre en inglés; la web, en el idioma del usuario (ADR-0011)
-        $middleware->prependToGroup('api', UseEnglishLocale::class);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         $exceptions->shouldRenderJsonWhen(

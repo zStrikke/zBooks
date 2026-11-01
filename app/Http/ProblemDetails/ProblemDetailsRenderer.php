@@ -32,7 +32,7 @@ class ProblemDetailsRenderer
             return null;
         }
 
-        // Textos fijos en inglés: un 404 sin ruta no pasa por el middleware de la API (ADR-0011)
+        // Textos fijos en inglés: el contrato de la API no depende del idioma activo (ADR-0011)
         return match (true) {
             $e instanceof ValidationException => $this->validation($e, $request),
             $e instanceof AuthenticationException => $this->unauthenticated($request),

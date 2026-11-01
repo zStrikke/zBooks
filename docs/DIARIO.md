@@ -475,22 +475,23 @@ Revisión del PR → #9 (README: cómo arrancar el proyecto) y cierre de la iter
 ---
 
 ## [2026-11-01] #014 — Iteración 0: idiomas y API en inglés (#42)
-**Iteración:** 0 (v0.1.0)  ·  **Duración:** ~25 min
+**Iteración:** 0 (v0.1.0)  ·  **Duración:** ~40 min
 
 ### Objetivo de la sesión
 Decidir los idiomas antes de cerrar la v0.1.0 y dejar el contrato de la API en inglés.
 
 ### Hecho
-- **ADR-0011:** web en español (por defecto), inglés y catalán con prefijo en la URL; API siempre en inglés.
+- **ADR-0011:** código y API en inglés; web en español, inglés o catalán según cada usuario.
 - Issues **#42** (API en inglés, v0.1.0) y **#43** (web multiidioma, v0.2.0).
-- Middleware `UseEnglishLocale` en el grupo `api` y textos de Problem Details en inglés.
+- `APP_LOCALE=en` y textos de Problem Details en inglés.
 - Descripción de `/docs/api` y PHPDoc del endpoint de salud en inglés.
-- Test nuevo: la API responde en inglés aunque la web esté en español. Se comprobó que falla sin el middleware.
+- Test nuevo: la API responde en inglés aunque exista la traducción española y el cliente la pida. Se comprobó que falla con `APP_LOCALE=es`.
 
 ### Decisiones
-- **Prefijo en la URL** y no solo cookie: las fichas compartidas mantienen el idioma y Google indexa cada uno.
-- **El QR (`/c/{ZBID}`) no lleva prefijo:** un QR impreso no puede cambiar.
-- **Textos de error fijos en inglés**, no con `__()`: un 404 sin ruta no pasa por el middleware.
+- **Primera versión descartada:** prefijo en la URL (`/es/...`) y un middleware que forzaba el inglés en la API. El PO señaló que daba varias URL al mismo recurso y que el middleware sobraba si el idioma base es el inglés.
+- **Una URL por recurso** y el idioma como preferencia: perfil → cookie → navegador → español. Lo que se busca en Google es el contenido de los libros, que no se traduce, así que el prefijo aportaba poco.
+- **Español como idioma de reserva:** el público inicial está en España y el rastreador de Google indexará la web en ese idioma.
+- **Sin `mcamara/laravel-localization`:** está pensado para prefijos; un middleware propio basta.
 - **Catalán** por las demos en Barcelona.
 
 ### Siguiente paso
