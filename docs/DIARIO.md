@@ -600,7 +600,7 @@ Ajustar el alcance, el orden y los detalles de la v0.2.0 antes de programar.
 ### Decisiones
 - **Orden:** #48 (RGPD) → #15 (roles) → #10 (registro web) → #11 (login) → #12 y #13 (API) → #16 (perfil público) → #18 (zona) → #43 (base de idiomas).
 - **Fortify en lugar de Breeze:** motor de autenticación sin pantallas; las vistas llevan el diseño de zBooks y la API usa las mismas acciones.
-- **Username:** en minúsculas, único sin distinguir mayúsculas, sin nombres reservados y no editable de momento (va en la URL del perfil).
+- **Username:** se muestra tal como lo escribe la persona (`zStrikke`), pero es único sin distinguir mayúsculas; sin nombres reservados y no editable de momento (va en la URL del perfil).
 - **Contraseña:** regla estándar de Laravel; se endurecerá si hace falta.
 - **Duración de los tokens:** se afinará cuando se defina la app móvil.
 - **Verificación del email:** un único flujo para la web y la API; la app consulta `/api/v1/me` para saber si ya está verificado.
