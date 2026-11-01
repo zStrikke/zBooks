@@ -1,12 +1,14 @@
 # zBooks
 
+[![CI](https://github.com/zStrikke/zBooks/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/zStrikke/zBooks/actions/workflows/ci.yml)
+
 Plataforma web inspirada en BookCrossing: registra tus libros, obtén un código único (ZBID), libéralos en lugares públicos y sigue su viaje por el mundo.
 
 Proyecto personal, no comercial y de aprendizaje, desarrollado por iteraciones simulando un proyecto real.
 
 ## Estado
 
-🟡 **Fase de diseño** (pre-0.1.0). Todavía no hay código.
+🟡 **Iteración 0** (camino de la v0.1.0): entorno Docker, layout base, herramientas de calidad e integración continua.
 
 ## Stack
 

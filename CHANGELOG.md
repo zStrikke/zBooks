@@ -5,6 +5,7 @@ Formato basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/) y 
 ## [Unreleased]
 
 ### Added
+- Integración continua con GitHub Actions: Pint, Larastan y PHP Insights en un job; Pest contra PostGIS y Redis en otro. Badge en el README (#7).
 - Calidad desde el primer día: Pest 5 con tests de Feature contra PostGIS y tests de arquitectura, Pint, Larastan nivel 6 y PHP Insights (mínimo 90 por categoría); `composer check` y `make check` (#6).
 - Livewire 4, Tailwind 4 con identidad visual propia, layout base y portada con buscador de ZBID (#5).
 - Entorno Docker: PHP 8.4, nginx, PostgreSQL 16 + PostGIS 3.4, Redis, Mailpit y Vite; `Makefile` con atajos (#4).
