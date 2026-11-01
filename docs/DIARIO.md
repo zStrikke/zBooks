@@ -435,3 +435,39 @@ Que cada PR ejecute solo las mismas comprobaciones que `make check`.
 
 ### Siguiente paso
 Regla de `master` con los checks obligatorios (PO) → #8 (esqueleto de la API v1).
+
+---
+
+## [2026-11-01] #013 — Iteración 0: esqueleto de la API v1 (#8)
+**Iteración:** 0 (v0.1.0)  ·  **Duración:** ~40 min
+
+### Objetivo de la sesión
+Dejar fijadas las convenciones de la API antes de la primera funcionalidad (ADR-0007).
+
+### Hecho
+- **Rutas por versión:** `routes/api.php` monta `routes/api/v1.php` con el prefijo `/api/v1` y los nombres `api.v1.*`.
+- **Errores en Problem Details** (RFC 9457) con `ProblemDetailsRenderer`:
+  - Cubre 401, 403, 404, 405, 422, 429 y 500, siempre con `application/problem+json`.
+  - Los errores de validación añaden `errors` por campo.
+  - Un 429 conserva la cabecera `Retry-After`.
+  - Un 500 no muestra el mensaje real fuera de local.
+- **Limitador `api`:** 60 peticiones por minuto, por usuario o, si no hay sesión, por IP.
+- **`GET /api/v1/health`:** comprueba la base de datos y Redis; responde 200 o 503.
+- **Scramble:** documentación OpenAPI 3.1 en `/docs/api` (solo en local, de momento).
+- **15 tests de contrato** (24 en total). Se comprobó que fallan con el renderer desactivado.
+
+### Decisiones
+- **`type: about:blank`** para los errores HTTP genéricos: el título es la frase estándar del código («Not Found»), como pide el RFC. Los textos en español van en `detail` y son traducibles con `__()`.
+- **Tipo propio solo para la validación** (`/problems/validation-error`), porque añade el campo `errors`. Cada error de dominio futuro (p. ej. un ZBID inexistente) tendrá su propio `type`.
+- **El renderer solo actúa en `/api/*`:** la web conserva sus páginas de error.
+- **Sanctum todavía no se instala:** llega con la autenticación en la v0.2.0 (#13). Por eso no se usó `php artisan install:api`, que lo instala.
+- **Nombres de clases en inglés** (`HealthController`, `ProblemDetailsRenderer`), como los recursos de la API. Las vistas, los tests y los comentarios siguen en español.
+- **`/docs/api` solo en local:** se decidirá en la épica de producción (#28) si se publica.
+
+### Problemas / bloqueos
+- Scramble documentaba la respuesta de salud como `string` porque el código de estado es una variable. Se resolvió con un `@response` en PHPDoc.
+- PHP Insights tomó «si todo funciona» por un `TODO`. Se reescribió la frase.
+- Pint y PHP Insights volvieron a chocar, esta vez por las líneas en blanco del PHPDoc. Manda Pint.
+
+### Siguiente paso
+Revisión del PR → #9 (README: cómo arrancar el proyecto) y cierre de la iteración 0.
