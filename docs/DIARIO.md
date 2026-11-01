@@ -580,3 +580,34 @@ Presentar el avance de la v0.1.0 y preparar al PO para desarrollar y revisar PRs
 ### Siguiente paso
 Revisión del PR → sesión de refinamiento de la v0.2.0.
 
+---
+
+## [2026-11-01] #018 — Refinamiento de la v0.2.0
+**Iteración:** 1 (v0.2.0)  ·  **Duración:** ~1 h
+
+### Objetivo de la sesión
+Ajustar el alcance, el orden y los detalles de la v0.2.0 antes de programar.
+
+### Hecho
+- **Alcance:** #14 (dispositivos), #17 (editar perfil) y #19 (zona temporal) pasan a la v0.3.0.
+- **#43 dividida:** la base (textos fuente en inglés y español por defecto) se queda; inglés, catalán y selector pasan a la #53 (v0.3.0).
+- **#18 replanteada:** la zona se fija por geolocalización o con un punto en el mapa, redondeado a ~500 m. La zona por barrio o ciudad pasa a la #54 (v0.3.0).
+- **Criterios concretados:** username y contraseña (#10), reenvío del email de verificación por API (#12), objetivo de #16 corregido (contradecía el ADR-0010).
+- **ADR-0012** (paquetes) y **ADR-0013** (zonas); diagrama ER actualizado.
+- **#15 asignada al PO**: su primera tarea de desarrollo.
+- Versión `0.2.0-dev`. Cambios del análisis anotados en `cambios-pendientes.md`.
+
+### Decisiones
+- **Orden:** #48 (RGPD) → #15 (roles) → #10 (registro web) → #11 (login) → #12 y #13 (API) → #16 (perfil público) → #18 (zona) → #43 (base de idiomas).
+- **Fortify en lugar de Breeze:** motor de autenticación sin pantallas; las vistas llevan el diseño de zBooks y la API usa las mismas acciones.
+- **Username:** se muestra tal como lo escribe la persona (`zStrikke`), pero es único sin distinguir mayúsculas; sin nombres reservados y no editable de momento (va en la URL del perfil).
+- **Contraseña:** regla estándar de Laravel; se endurecerá si hace falta.
+- **Duración de los tokens:** se afinará cuando se defina la app móvil.
+- **Verificación del email:** un único flujo para la web y la API; la app consulta `/api/v1/me` para saber si ya está verificado.
+- **Zonas:** dos modos (radio o área), con la precisión que elija cada persona. Barcelona desde Open Data BCN y el resto desde OpenStreetMap, bajo demanda.
+- **Métrica principal:** libros capturados al mes.
+- **Diseño:** pantallas de registro, login y perfil antes de programarlas.
+
+### Siguiente paso
+Diseño de las pantallas de registro, login y perfil → #48 (Claude) y #15 (PO) en paralelo.
+
