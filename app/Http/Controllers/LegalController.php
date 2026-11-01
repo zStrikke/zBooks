@@ -2,31 +2,29 @@
 
 namespace App\Http\Controllers;
 
+use App\Legal\LegalDocument;
 use Illuminate\Contracts\View\View;
 
 /**
  * Aviso legal y política de privacidad.
  *
- * Cada texto es una vista por idioma (`legal/{locale}/…`), porque un texto
- * legal no se traduce frase a frase. Si falta el idioma activo, se usa el español.
+ * El texto de cada página está en Markdown, un fichero por idioma
+ * (`resources/markdown/legal/{locale}/`); si falta el idioma activo, se usa el español.
  */
 class LegalController extends Controller
 {
     public function notice(): View
     {
-        return $this->localized('notice');
+        return $this->show('notice');
     }
 
     public function privacy(): View
     {
-        return $this->localized('privacy');
+        return $this->show('privacy');
     }
 
-    private function localized(string $page): View
+    private function show(string $page): View
     {
-        return view()->first([
-            'legal.'.app()->getLocale().'.'.$page,
-            'legal.es.'.$page,
-        ]);
+        return view('legal.page', ['document' => LegalDocument::load($page, app()->getLocale())]);
     }
 }

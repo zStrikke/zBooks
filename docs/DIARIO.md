@@ -648,10 +648,11 @@ Tener listos los textos legales y el consentimiento antes de guardar el primer d
 - **Aviso legal** (`/legal-notice`) y **política de privacidad** (`/privacy`), enlazados desde el pie de página.
 - **`config/legal.php`:** versión vigente de la política y datos del responsable, con huecos `[nombre]`, `[email de contacto]` y `[país]` hasta que se rellenen en el `.env`.
 - **Consentimiento:** columnas `privacy_accepted_at` y `privacy_version` en `users`, y `App\Legal\PrivacyPolicy` con la regla de validación, cómo se guarda la aceptación y si sigue vigente.
-- 10 tests nuevos (38 en total). Se comprobó que el de cambio de versión falla si no se compara la versión.
+- 13 tests nuevos (41 en total), incluido uno que comprueba que los datos de la configuración no se interpretan como HTML. Se comprobó que el de cambio de versión falla si no se compara la versión.
 
 ### Decisiones
-- **Una vista por idioma** (`legal/es/…`), no textos traducidos frase a frase: un texto legal se redacta entero en cada idioma. Si falta el idioma activo, se muestra el español.
+- **Contenido en Markdown, un fichero por idioma** (`resources/markdown/legal/es/…`), y una sola vista Blade para la presentación. Primera versión en Blade por idioma; el PO preguntó en la revisión por qué no `__()` y se comparó con una tabla. `__()` trocearía el documento en decenas de claves; Markdown separa el texto de los estilos y se reutilizará en otras páginas de texto. Si falta el idioma activo, se muestra el español.
+- **`legal/es/` es el idioma, no el país:** la ley aplicable es una (España, RGPD). Un catalanoparlante leerá ese mismo texto en catalán cuando exista `legal/ca/` (#53).
 - **La política tiene versión** (su fecha). Si cambia de forma relevante, se sube y se pedirá aceptarla de nuevo.
 - **Rutas en inglés** (`/privacy`, `/legal-notice`), como dice el ADR-0011.
 - **Edad mínima de 14 años**, la habitual en España para consentir el tratamiento de datos. Confirmada por el PO.

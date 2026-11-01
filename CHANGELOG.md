@@ -5,7 +5,7 @@ Formato basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/) y 
 ## [Unreleased]
 
 ### Added
-- Aviso legal y política de privacidad (`/legal-notice`, `/privacy`), enlazados desde el pie, con los datos del responsable en `config/legal.php`; consentimiento versionado en `users` y `App\Legal\PrivacyPolicy` para el registro (#48).
+- Aviso legal y política de privacidad (`/legal-notice`, `/privacy`), escritos en Markdown por idioma y enlazados desde el pie, con los datos del responsable en `config/legal.php`; consentimiento versionado en `users` y `App\Legal\PrivacyPolicy` para el registro (#48).
 - Maquetas de la v0.2.0 (registro, login, verificación de email y perfil público, en móvil y escritorio) en `docs/diseno/`.
 - Ayuda sobre issues, tablero, etiquetas y flujos (#56).
 - ADR-0012 (Fortify, laravel-permission y laravel-magellan) y ADR-0013 (zonas de usuario por radio o por área).
