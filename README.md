@@ -82,6 +82,7 @@ Los tests usan su propia base, `zbooks_testing`: nunca tocan los datos de desarr
 |---|---|
 | [Análisis funcional v1.5](docs/analisis/zBooks_Analisis_Funcional_v1.5.pdf) | Requisitos, modelo de datos, stack y planificación ([fuente](docs/analisis/analisis-funcional.md), [versiones](docs/analisis/)) |
 | [Notas](docs/notas/) | Revisiones de la planificación y cierres de iteración |
+| [Ayuda: issues y tablero](docs/AYUDA-ISSUES-Y-TABLERO.md) | Issues, tarjetas, etiquetas y flujos, con lo automático y lo manual |
 | [Diario de desarrollo](docs/DIARIO.md) | Una entrada por sesión de trabajo |
 | [ADRs](docs/adr/) | Decisiones de arquitectura |
 | [Diagramas](docs/diagramas/) | UML y ER en Mermaid |
