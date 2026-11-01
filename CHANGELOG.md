@@ -5,7 +5,11 @@ Formato basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/) y 
 ## [Unreleased]
 
 ### Added
+- ADR-0012 (Fortify, laravel-permission y laravel-magellan) y ADR-0013 (zonas de usuario por radio o por área).
 - Guía del desarrollador: comandos, flujo de issue a PR, archivos de referencia y casos frecuentes (#51).
+
+### Changed
+- Diagrama ER: `user_zones` con modo radio o área y nueva tabla `areas`.
 
 ## [0.1.0] - 2026-11-01
 
