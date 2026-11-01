@@ -611,3 +611,28 @@ Ajustar el alcance, el orden y los detalles de la v0.2.0 antes de programar.
 ### Siguiente paso
 Diseño de las pantallas de registro, login y perfil → #48 (Claude) y #15 (PO) en paralelo.
 
+---
+
+## [2026-11-01] #019 — Diseño de pantallas de la v0.2.0 y ayuda del tablero (#56)
+**Iteración:** 1 (v0.2.0)  ·  **Duración:** ~1 h
+
+### Objetivo de la sesión
+Diseñar las pantallas de acceso y perfil antes de programarlas, y aclarar cómo encajan issues y tablero.
+
+### Hecho
+- **Lienzo de diseño** con registro, login, verificación de email y perfil público, en móvil y escritorio.
+- **`docs/diseno/`:** capturas PNG y HTML estático de cada pantalla, con un README de cómo se trabaja el diseño.
+- **[Ayuda: issues y tablero](AYUDA-ISSUES-Y-TABLERO.md)** (#56): piezas, etiquetas, convenciones, flujos automáticos y ejemplos.
+- El username conserva sus mayúsculas al mostrarse (#10).
+
+### Decisiones
+- **Mobile-first:** el móvil se diseña primero; el escritorio reordena en columnas lo mismo.
+- **Un objeto del mundo del libro por pantalla en escritorio:** tarjeta de viaje con sellos, etiqueta troquelada, matasellos y carné de socio. Explican el producto sin texto de más.
+- **El diseño vive en el lienzo y se archiva en el repo** al aprobarse; la issue que construye la pantalla lo enlaza.
+
+### Aprendido
+- «#N» confundía: un número es siempre una issue o un PR; la tarjeta es la misma issue vista en el tablero.
+
+### Siguiente paso
+#48 (RGPD mínimo) → #15 (PO) en paralelo.
+

@@ -91,4 +91,5 @@ Los tests viven en `tests/Feature` (peticiones HTTP y base de datos), `tests/Uni
 | Diario de desarrollo | [`docs/DIARIO.md`](docs/DIARIO.md) | Una entrada por sesión |
 | Decisiones de arquitectura | [`docs/adr/`](docs/adr/) | Al tomar una decisión importante |
 | Diagramas | [`docs/diagramas/`](docs/diagramas/) | En el mismo PR que cambia el diseño |
+| Maquetas de pantallas | [`docs/diseno/`](docs/diseno/) | Antes de programar una pantalla nueva; se enlazan desde su issue |
 | Retrospectiva | En el diario | Al cerrar cada iteración |

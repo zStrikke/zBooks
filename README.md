@@ -86,6 +86,7 @@ Los tests usan su propia base, `zbooks_testing`: nunca tocan los datos de desarr
 | [Diario de desarrollo](docs/DIARIO.md) | Una entrada por sesión de trabajo |
 | [ADRs](docs/adr/) | Decisiones de arquitectura |
 | [Diagramas](docs/diagramas/) | UML y ER en Mermaid |
+| [Diseño](docs/diseno/) | Maquetas de las pantallas por versión |
 | [CHANGELOG](CHANGELOG.md) | Cambios por versión |
 | [Backlog](https://github.com/zStrikke/zBooks/issues) | Historias, tareas y épicas por hito |
 
