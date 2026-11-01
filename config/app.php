@@ -16,7 +16,7 @@ return [
     'name' => env('APP_NAME', 'zBooks'),
 
     // Versión de la aplicación (SemVer). Se actualiza al cerrar cada iteración.
-    'version' => '0.1.0-dev',
+    'version' => '0.1.0',
 
     /*
     |--------------------------------------------------------------------------

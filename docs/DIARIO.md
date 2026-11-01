@@ -41,8 +41,10 @@ Debatir y afinar funcionalidades antes de empezar a programar.
 
 ---
 
-## [2026-10-30] #002 — Debate de funcionalidades (abierto)
-**Iteración:** Pre-0 (análisis)  ·  **Duración:** en curso
+## [2026-10-30] #002 — Debate de funcionalidades
+**Iteración:** Pre-0 (análisis)  ·  **Duración:** varias conversaciones el mismo día
+
+> Corregido en el cierre de la iteración 0: la entrada se escribió mientras el debate seguía abierto y no se cerró al terminar.
 
 ### Objetivo de la sesión
 Ampliar el alcance con nuevas funcionalidades y simular un proceso de proyecto real.
@@ -83,7 +85,7 @@ Ampliar el alcance con nuevas funcionalidades y simular un proceso de proyecto r
 - Documento **Análisis funcional v1.1** (PDF, 14 págs.): 46 RF, gamificación, comunidad, diagramas, proceso, backlog futuro.
 
 ### Pendiente
-- [ ] Confirmar cuenta de GitHub para crear repo y tablero.
+- [x] Confirmar cuenta de GitHub para crear repo y tablero (hecho en #003).
 
 ### Retro rápida
 - ✅ Debatir antes de programar ha evitado rehacer el plan.
@@ -522,3 +524,38 @@ Que cualquiera pueda clonar y arrancar zBooks siguiendo solo el README.
 
 ### Siguiente paso
 Revisión del PR → cierre de la iteración 0: etiqueta v0.1.0, release, CHANGELOG y retrospectiva.
+
+---
+
+## [2026-11-01] #016 — Cierre de la iteración 0 y v0.1.0
+**Iteración:** 0 (v0.1.0)  ·  **Duración:** ~1 h
+
+### Objetivo de la sesión
+Cerrar la v0.1.0 y revisar el estado del proyecto antes de la iteración 1.
+
+### Hecho
+- **#46:** la CI pasa a `ubuntu-24.04` fijo y a acciones con Node 24, y Dependabot vigila sus versiones.
+- **[Análisis del cierre](notas/2026-11-01-cierre-iteracion-0.md)** de issues, diario y estado.
+- **[Cambios desde el análisis v1.4](analisis/cambios-desde-v1.4.md)**, con notas al pie hacia cada decisión.
+- Backlog al día: títulos de #5 y #6, cambio de alcance en la épica #27 y issues nuevas #48 (RGPD mínimo, v0.2.0) y #49 (logs y errores a Slack, v1.0.0).
+- Diario #002 cerrado.
+- Versión `0.1.0` en `config/app.php`, CHANGELOG con su sección, etiqueta `v0.1.0` y release en GitHub.
+
+### Decisiones
+- **El PDF del análisis no se reescribe:** queda como foto del diseño inicial y los cambios se recogen en una página aparte.
+- **RGPD:** lo habitual del sector, adelantado a la v0.2.0, antes del registro.
+- **Observabilidad por escalones:** primero logs diarios y Slack; después seguimiento de errores; por último métricas.
+- **Mapas en desarrollo:** OpenStreetMap y Nominatim, como ya decía la #18. El proveedor de producción, antes de la #28.
+
+### Retro de la iteración 0
+- ✅ Ninguna issue planificada cambió de alcance: la fase D compensó.
+- ✅ Los checks son los mismos en local y en la CI, y `master` los exige.
+- ✅ La revisión del PO cambió decisiones de verdad (privacidad, idiomas, preproducción).
+- ✅ Validar los tests rompiendo el código a propósito.
+- 🔧 Las entradas del diario y los títulos de las issues se quedaron desfasados sin que nadie lo viera. Revisarlos en cada cierre.
+- 🔧 La primera versión de la ADR-0011 se escribió antes de entender del todo lo que quería el PO. En decisiones de producto, preguntar antes de escribir.
+- 🔧 La rama de la #8 se creó antes de fusionar la CI (#40) y hubo que rebasarla. Empezar cada rama desde el `master` ya actualizado.
+
+### Siguiente paso
+Sesión de refinamiento de la v0.2.0 (alcance, orden, paquetes y métrica principal) → iteración 1.
+

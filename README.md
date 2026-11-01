@@ -8,7 +8,7 @@ Proyecto personal, no comercial y de aprendizaje, desarrollado por iteraciones s
 
 ## Estado
 
-🟡 **Iteración 0** (camino de la v0.1.0): entorno Docker, layout base, herramientas de calidad e integración continua.
+🟢 **[v0.1.0](https://github.com/zStrikke/zBooks/releases/tag/v0.1.0)** publicada: entorno Docker, calidad, CI y esqueleto de la API. Siguiente: **iteración 1** (v0.2.0, usuarios y autenticación).
 
 ## Stack
 
@@ -81,6 +81,8 @@ Los tests usan su propia base, `zbooks_testing`: nunca tocan los datos de desarr
 | Documento | Descripción |
 |---|---|
 | [Análisis funcional v1.4](docs/analisis/zBooks_Analisis_Funcional_v1.4.pdf) | Requisitos, modelo de datos, stack y planificación |
+| [Cambios desde el análisis v1.4](docs/analisis/cambios-desde-v1.4.md) | Lo que ha cambiado del análisis, con enlace a cada decisión |
+| [Notas](docs/notas/) | Revisiones de la planificación y cierres de iteración |
 | [Diario de desarrollo](docs/DIARIO.md) | Una entrada por sesión de trabajo |
 | [ADRs](docs/adr/) | Decisiones de arquitectura |
 | [Diagramas](docs/diagramas/) | UML y ER en Mermaid |
