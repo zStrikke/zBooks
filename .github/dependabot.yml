@@ -1,0 +1,13 @@
+# Abre un PR cuando sale una versión nueva de una acción de la CI.
+# Composer y npm se añadirán más adelante, para no llenar el tablero de PRs.
+version: 2
+updates:
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: monthly
+    commit-message:
+      prefix: chore(ci)
+    labels:
+      - "tipo: técnica"
+      - "área: infra"
