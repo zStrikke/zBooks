@@ -9,17 +9,16 @@ use Illuminate\Support\Facades\Redis;
 use Throwable;
 
 /**
- * Estado del servicio
+ * Health
  *
- * Comprueba que la API responde y que llega a la base de datos y a Redis.
- * Lo usan la monitorización y la app móvil antes de empezar a trabajar.
+ * Checks that the API is up and can reach the database and Redis.
  */
 class HealthController extends Controller
 {
     /**
-     * Comprobar el estado de la API
+     * Check API health
      *
-     * Devuelve 200 si las dependencias responden y 503 si falla alguna.
+     * Returns 200 when every dependency responds and 503 when any of them fails.
      *
      * @unauthenticated
      *

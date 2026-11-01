@@ -57,11 +57,12 @@ return [
          * Description rendered on the home page of the API documentation (`/docs/api`).
          */
         'description' => <<<'MD'
-            API REST de zBooks para la futura app móvil y otros clientes.
+            zBooks REST API for the upcoming mobile app and other clients.
 
-            - **Versionado en la URL:** `/api/v1`.
-            - **Errores** en formato *Problem Details* (RFC 9457), con `Content-Type: application/problem+json`.
-            - **Límite:** 60 peticiones por minuto por usuario o IP. Al superarlo, 429 con la cabecera `Retry-After`.
+            - **Versioning in the URL:** `/api/v1`.
+            - **Errors** as *Problem Details* (RFC 9457), with `Content-Type: application/problem+json`.
+            - **Rate limit:** 60 requests per minute per user or IP. Above it, 429 with a `Retry-After` header.
+            - **Language:** every response is in English.
             MD,
     ],
 
