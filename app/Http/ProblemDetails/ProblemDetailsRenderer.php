@@ -32,6 +32,7 @@ class ProblemDetailsRenderer
             return null;
         }
 
+        // Textos fijos en inglés: un 404 sin ruta no pasa por el middleware de la API (ADR-0011)
         return match (true) {
             $e instanceof ValidationException => $this->validation($e, $request),
             $e instanceof AuthenticationException => $this->unauthenticated($request),
@@ -45,16 +46,16 @@ class ProblemDetailsRenderer
         return $this->problem(
             $request,
             status: $e->status,
-            detail: __('Revisa los campos marcados en «errors».'),
+            detail: 'Check the fields listed in "errors".',
             type: url('/problems/validation-error'),
-            title: __('Los datos enviados no son válidos.'),
+            title: 'The given data was invalid.',
             extensions: ['errors' => $e->errors()],
         );
     }
 
     private function unauthenticated(Request $request): JsonResponse
     {
-        return $this->problem($request, 401, __('Necesitas iniciar sesión para acceder a este recurso.'));
+        return $this->problem($request, 401, 'You must be authenticated to access this resource.');
     }
 
     private function http(HttpExceptionInterface $e, Request $request): JsonResponse
@@ -62,10 +63,10 @@ class ProblemDetailsRenderer
         $status = $e->getStatusCode();
 
         $detail = match ($status) {
-            403 => __('No tienes permiso para realizar esta acción.'),
-            404 => __('El recurso solicitado no existe.'),
-            405 => __('El método HTTP no está permitido en esta ruta.'),
-            429 => __('Has hecho demasiadas peticiones. Espera antes de volver a intentarlo.'),
+            403 => 'You are not allowed to perform this action.',
+            404 => 'The requested resource does not exist.',
+            405 => 'This HTTP method is not allowed on this route.',
+            429 => 'Too many requests. Wait before trying again.',
             default => $e->getMessage() !== '' ? $e->getMessage() : null,
         };
 
@@ -76,7 +77,7 @@ class ProblemDetailsRenderer
     private function serverError(Throwable $e, Request $request): JsonResponse
     {
         // El mensaje real solo se muestra en local; en producción podría filtrar datos internos
-        $detail = config('app.debug') ? $e->getMessage() : __('Se ha producido un error inesperado.');
+        $detail = config('app.debug') ? $e->getMessage() : 'An unexpected error occurred.';
 
         return $this->problem($request, 500, $detail);
     }

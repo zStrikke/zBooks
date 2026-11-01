@@ -471,3 +471,27 @@ Dejar fijadas las convenciones de la API antes de la primera funcionalidad (ADR-
 
 ### Siguiente paso
 Revisión del PR → #9 (README: cómo arrancar el proyecto) y cierre de la iteración 0.
+
+---
+
+## [2026-11-01] #014 — Iteración 0: idiomas y API en inglés (#42)
+**Iteración:** 0 (v0.1.0)  ·  **Duración:** ~25 min
+
+### Objetivo de la sesión
+Decidir los idiomas antes de cerrar la v0.1.0 y dejar el contrato de la API en inglés.
+
+### Hecho
+- **ADR-0011:** web en español (por defecto), inglés y catalán con prefijo en la URL; API siempre en inglés.
+- Issues **#42** (API en inglés, v0.1.0) y **#43** (web multiidioma, v0.2.0).
+- Middleware `UseEnglishLocale` en el grupo `api` y textos de Problem Details en inglés.
+- Descripción de `/docs/api` y PHPDoc del endpoint de salud en inglés.
+- Test nuevo: la API responde en inglés aunque la web esté en español. Se comprobó que falla sin el middleware.
+
+### Decisiones
+- **Prefijo en la URL** y no solo cookie: las fichas compartidas mantienen el idioma y Google indexa cada uno.
+- **El QR (`/c/{ZBID}`) no lleva prefijo:** un QR impreso no puede cambiar.
+- **Textos de error fijos en inglés**, no con `__()`: un 404 sin ruta no pasa por el middleware.
+- **Catalán** por las demos en Barcelona.
+
+### Siguiente paso
+Revisión del PR → #9 (README: cómo arrancar el proyecto) y cierre de la iteración 0.
