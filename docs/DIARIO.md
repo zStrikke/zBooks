@@ -559,3 +559,24 @@ Cerrar la v0.1.0 y revisar el estado del proyecto antes de la iteración 1.
 ### Siguiente paso
 Sesión de refinamiento de la v0.2.0 (alcance, orden, paquetes y métrica principal) → iteración 1.
 
+---
+
+## [2026-11-01] #017 — Presentación del avance y guía del desarrollador (#51)
+**Iteración:** 1 (v0.2.0), preparación  ·  **Duración:** ~45 min
+
+### Objetivo de la sesión
+Presentar el avance de la v0.1.0 y preparar al PO para desarrollar y revisar PRs.
+
+### Hecho
+- **Presentación para dirección** (artefacto de Slides): idea, método, hoja de ruta, entregas, cambios por iteración, privacidad, riesgos y dos decisiones pedidas (métrica principal y prioridades de la v0.2.0). Discurso en las notas.
+- **Release v0.1.0:** la crea el PO desde GitHub con las notas del CHANGELOG, porque la sesión de Claude no tiene permiso para crear etiquetas ni releases.
+- **[Guía del desarrollador](GUIA-DESARROLLADOR.md):** comandos, flujo de issue a PR, archivos de referencia y casos frecuentes.
+
+### Decisiones
+- **Notas de la release desde el CHANGELOG**, no las autogeneradas por GitHub: explican qué trae la versión, no qué PRs se fusionaron.
+- **Guía aparte de `CONTRIBUTING.md`:** CONTRIBUTING fija las normas; la guía es el manual práctico y crece con cada caso que se repita.
+- **Cambiar de tarea:** se recomienda un commit temporal en la rama en lugar de `stash`, porque queda a salvo en GitHub.
+
+### Siguiente paso
+Revisión del PR → sesión de refinamiento de la v0.2.0.
+

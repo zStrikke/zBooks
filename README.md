@@ -110,7 +110,7 @@ Cada funcionalidad se expone también en una API REST versionada (`/api/v1`), pe
 
 ## Cómo trabajamos
 
-Guía completa en [CONTRIBUTING.md](CONTRIBUTING.md). Resumen:
+Guía completa en [CONTRIBUTING.md](CONTRIBUTING.md) y día a día en la [guía del desarrollador](docs/GUIA-DESARROLLADOR.md) (comandos, flujo y casos frecuentes). Resumen:
 
 - Historias de usuario como issues y tablero en GitHub Projects.
 - Una rama por issue (`feature/…`, `fix/…`) y fusión mediante pull request.

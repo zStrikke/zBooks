@@ -4,6 +4,9 @@ Formato basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/) y 
 
 ## [Unreleased]
 
+### Added
+- Guía del desarrollador: comandos, flujo de issue a PR, archivos de referencia y casos frecuentes (#51).
+
 ## [0.1.0] - 2026-11-01
 
 Primera versión: entorno de desarrollo, calidad, CI y esqueleto de la API. Todavía sin funcionalidades para usuarios.
