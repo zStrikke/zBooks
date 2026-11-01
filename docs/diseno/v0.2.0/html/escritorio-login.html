@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Iniciar sesión (escritorio) · diseño v0.2.0</title>
+<!-- Exportado del lienzo de diseño. Es una maqueta estática: la referencia visual, no el código final. -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400..800&amp;family=Source+Serif+4:wght@400;600&amp;family=IBM+Plex+Mono:wght@500;600&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#4c3ba0}a:hover{color:#3a2c80}
+input::placeholder{color:#8a7a3a}
+</style>
+</head>
+<body>
+<div style="min-height: 900px; background: #f4f6f1; color: #17202b; font-family: 'Source Serif 4', Georgia, serif; display: flex; flex-direction: column">
+<header style="border-bottom: 1px solid #d3d9cf">
+<div style="max-width: 1240px; margin: 0 auto; padding: 18px 32px; display: flex; flex-wrap: wrap; gap: 16px 32px; align-items: center">
+<a href="#" style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 24px; color: #17202b; text-decoration: none">zBooks</a>
+<nav aria-label="Principal" style="display: flex; flex-wrap: wrap; gap: 28px; font-family: 'Bricolage Grotesque', sans-serif; font-size: 16px; font-weight: 600">
+<a href="#" style="color: #17202b; text-decoration: none">Cómo funciona</a>
+<a href="#" style="color: #17202b; text-decoration: none">Buscar un libro</a>
+</nav>
+<div style="flex: 1"></div>
+<a href="escritorio-registro.html" style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 16px; font-weight: 700; padding: 10px 18px; border-radius: 8px; background: #4c3ba0; color: #ffffff; text-decoration: none">Crear cuenta</a>
+</div>
+</header>
+<main style="flex: 1; display: flex">
+<div style="flex: 1; max-width: 1240px; margin: 0 auto; padding: 64px 32px; display: flex; flex-wrap: wrap; gap: 72px; align-items: center">
+<section style="flex: 1 1 400px; max-width: 440px; display: flex; flex-direction: column; gap: 26px">
+<div style="display: flex; flex-direction: column; gap: 10px">
+<h1 style="margin: 0; font-family: 'Bricolage Grotesque', sans-serif; font-size: 48px; font-weight: 800; line-height: 1.02; letter-spacing: -1px">Hola de nuevo</h1>
+<p style="margin: 0; font-size: 18px; line-height: 1.55; color: #4a5563">Entra para ver dónde están tus libros.</p>
+</div>
+<form style="display: flex; flex-direction: column; gap: 18px">
+<div style="display: flex; flex-direction: column; gap: 6px">
+<label for="dl-email" style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 15px; font-weight: 600">Email</label>
+<input id="dl-email" type="email" value="tu@email.com" autocomplete="email" style="height: 50px; box-sizing: border-box; padding: 0 14px; border: 2px solid #17202b; border-radius: 8px; background: #ffffff; font-family: 'Bricolage Grotesque', sans-serif; font-size: 17px; color: #17202b">
+</div>
+<div style="display: flex; flex-direction: column; gap: 6px">
+<div style="display: flex; justify-content: space-between; align-items: baseline">
+<label for="dl-password" style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 15px; font-weight: 600">Contraseña</label>
+<a href="#" style="font-size: 14px">¿La has olvidado?</a>
+</div>
+<input id="dl-password" type="password" value="••••••••" autocomplete="current-password" style="height: 50px; box-sizing: border-box; padding: 0 14px; border: 2px solid #b9c1b4; border-radius: 8px; background: #ffffff; font-size: 17px; color: #17202b">
+</div>
+<label for="dl-recordar" style="display: flex; gap: 12px; align-items: center; font-size: 15px">
+<input id="dl-recordar" type="checkbox" checked style="width: 22px; height: 22px; margin: 0; accent-color: #4c3ba0">
+<span>Mantener la sesión iniciada</span>
+</label>
+<div style="display: flex; flex-wrap: wrap; gap: 16px 24px; align-items: center">
+<button type="submit" style="height: 52px; padding: 0 28px; border: 0; border-radius: 8px; background: #4c3ba0; color: #ffffff; font-family: 'Bricolage Grotesque', sans-serif; font-size: 17px; font-weight: 700">Iniciar sesión</button>
+<p style="margin: 0; font-size: 15px">¿Primera vez? <a href="escritorio-registro.html" style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700">Crea tu cuenta</a></p>
+</div>
+</form>
+</section>
+<section aria-label="Buscar un libro encontrado" style="flex: 1 1 420px; display: flex; justify-content: center">
+<div style="width: 100%; max-width: 480px; box-sizing: border-box; padding: 44px 40px 40px; border-radius: 0 0 10px 10px; background: radial-gradient(circle at 8px 0, transparent 5px, #f5c842 5.5px) top left / 16px 10px repeat-x, linear-gradient(#f5c842, #f5c842) 0 10px / 100% calc(100% - 10px) no-repeat; box-shadow: 0 30px 60px -32px rgba(23,32,43,0.5); transform: rotate(2deg); display: flex; flex-direction: column; gap: 16px">
+<p style="margin: 0; font-family: 'Bricolage Grotesque', sans-serif; font-size: 15px; font-weight: 700; color: #3d3416">¿No tienes cuenta y has encontrado un libro?</p>
+<h2 style="margin: 0; font-family: 'Bricolage Grotesque', sans-serif; font-size: 34px; font-weight: 800; line-height: 1.05">No necesitas registrarte para ver su viaje.</h2>
+<p style="margin: 0; font-size: 16px; line-height: 1.5; color: #3d3416">Escribe el código de la etiqueta que lleva dentro.</p>
+<form style="display: flex; flex-wrap: wrap; gap: 12px">
+<label for="dl-zbid" style="width: 100%; font-family: 'Bricolage Grotesque', sans-serif; font-size: 15px; font-weight: 600">Código del libro</label>
+<input id="dl-zbid" type="text" placeholder="ZB-4K7Q-92XM" style="flex: 1 1 220px; height: 50px; box-sizing: border-box; padding: 0 14px; border: 2px solid #17202b; border-radius: 8px; background: rgba(255,255,255,0.9); font-family: 'IBM Plex Mono', monospace; font-size: 18px; letter-spacing: 1px; color: #17202b">
+<button type="submit" style="height: 50px; padding: 0 22px; border: 0; border-radius: 8px; background: #17202b; color: #f4f6f1; font-family: 'Bricolage Grotesque', sans-serif; font-size: 16px; font-weight: 700">Buscar libro</button>
+</form>
+</div>
+</section>
+</div>
+</main>
+</div>
+</body>
+</html>

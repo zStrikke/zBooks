@@ -5,6 +5,8 @@ Formato basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/) y 
 ## [Unreleased]
 
 ### Added
+- Maquetas de la v0.2.0 (registro, login, verificación de email y perfil público, en móvil y escritorio) en `docs/diseno/`.
+- Ayuda sobre issues, tablero, etiquetas y flujos (#56).
 - ADR-0012 (Fortify, laravel-permission y laravel-magellan) y ADR-0013 (zonas de usuario por radio o por área).
 - Guía del desarrollador: comandos, flujo de issue a PR, archivos de referencia y casos frecuentes (#51).
 

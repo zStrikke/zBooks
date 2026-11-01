@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Registro (escritorio) · diseño v0.2.0</title>
+<!-- Exportado del lienzo de diseño. Es una maqueta estática: la referencia visual, no el código final. -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400..800&amp;family=Source+Serif+4:wght@400;600&amp;family=IBM+Plex+Mono:wght@500;600&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#4c3ba0}a:hover{color:#3a2c80}
+input::placeholder{color:#8a93a0}
+</style>
+</head>
+<body>
+<div style="min-height: 900px; background: #f4f6f1; color: #17202b; font-family: 'Source Serif 4', Georgia, serif; display: flex; flex-direction: column">
+<header style="border-bottom: 1px solid #d3d9cf">
+<div style="max-width: 1240px; margin: 0 auto; padding: 18px 32px; display: flex; flex-wrap: wrap; gap: 16px 32px; align-items: center">
+<a href="#" style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 24px; color: #17202b; text-decoration: none">zBooks</a>
+<nav aria-label="Principal" style="display: flex; flex-wrap: wrap; gap: 28px; font-family: 'Bricolage Grotesque', sans-serif; font-size: 16px; font-weight: 600">
+<a href="#" style="color: #17202b; text-decoration: none">Cómo funciona</a>
+<a href="#" style="color: #17202b; text-decoration: none">Buscar un libro</a>
+</nav>
+<div style="flex: 1"></div>
+<a href="escritorio-login.html" style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 16px; font-weight: 700; padding: 10px 18px; border: 2px solid #17202b; border-radius: 8px; color: #17202b; text-decoration: none">Iniciar sesión</a>
+</div>
+</header>
+<main style="flex: 1; display: flex">
+<div style="flex: 1; max-width: 1240px; margin: 0 auto; padding: 64px 32px; display: flex; flex-wrap: wrap; gap: 72px; align-items: center">
+<section style="flex: 1 1 400px; max-width: 460px; display: flex; flex-direction: column; gap: 26px">
+<div style="display: flex; flex-direction: column; gap: 10px">
+<h1 style="margin: 0; font-family: 'Bricolage Grotesque', sans-serif; font-size: 48px; font-weight: 800; line-height: 1.02; letter-spacing: -1px">Crea tu cuenta</h1>
+<p style="margin: 0; font-size: 18px; line-height: 1.55; color: #4a5563">Registra tus libros, déjalos en libertad y sigue cada parada de su viaje.</p>
+</div>
+<form style="display: flex; flex-direction: column; gap: 18px">
+<div style="display: flex; flex-direction: column; gap: 6px">
+<label for="d-username" style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 15px; font-weight: 600">Nombre de usuario</label>
+<input id="d-username" type="text" value="zStrikke" autocomplete="username" style="height: 50px; box-sizing: border-box; padding: 0 14px; border: 2px solid #17202b; border-radius: 8px; background: #ffffff; font-family: 'Bricolage Grotesque', sans-serif; font-size: 17px; color: #17202b">
+<p style="margin: 0; font-size: 14px; color: #4a5563">Así te verán los demás. De 3 a 20 letras, números o _.</p>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 16px">
+<div style="flex: 1 1 200px; display: flex; flex-direction: column; gap: 6px">
+<label for="d-email" style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 15px; font-weight: 600">Email</label>
+<input id="d-email" type="email" placeholder="tu@email.com" autocomplete="email" style="height: 50px; box-sizing: border-box; padding: 0 14px; border: 2px solid #b9c1b4; border-radius: 8px; background: #ffffff; font-family: 'Bricolage Grotesque', sans-serif; font-size: 17px; color: #17202b">
+<p style="margin: 0; font-size: 14px; color: #4a5563">Nunca se muestra.</p>
+</div>
+<div style="flex: 1 1 200px; display: flex; flex-direction: column; gap: 6px">
+<label for="d-password" style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 15px; font-weight: 600">Contraseña</label>
+<input id="d-password" type="password" value="••••••••••" autocomplete="new-password" style="height: 50px; box-sizing: border-box; padding: 0 14px; border: 2px solid #b9c1b4; border-radius: 8px; background: #ffffff; font-size: 17px; color: #17202b">
+<p style="margin: 0; font-size: 14px; color: #4a5563">Al menos 8 caracteres.</p>
+</div>
+</div>
+<label for="d-privacidad" style="display: flex; gap: 12px; align-items: flex-start; font-size: 15px; line-height: 1.45">
+<input id="d-privacidad" type="checkbox" style="width: 22px; height: 22px; margin: 1px 0 0; accent-color: #4c3ba0; flex-shrink: 0">
+<span>He leído y acepto la <a href="#">política de privacidad</a>.</span>
+</label>
+<div style="display: flex; flex-wrap: wrap; gap: 16px 24px; align-items: center">
+<button type="submit" style="height: 52px; padding: 0 28px; border: 0; border-radius: 8px; background: #4c3ba0; color: #ffffff; font-family: 'Bricolage Grotesque', sans-serif; font-size: 17px; font-weight: 700">Crear cuenta</button>
+<p style="margin: 0; font-size: 15px">¿Ya tienes cuenta? <a href="escritorio-login.html" style="font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700">Inicia sesión</a></p>
+</div>
+</form>
+</section>
+<section aria-label="Así se ve el viaje de un libro" style="flex: 1 1 460px; display: flex; flex-direction: column; gap: 20px; align-items: center">
+<div style="position: relative; width: 100%; max-width: 540px; padding: 36px 36px 30px; box-sizing: border-box; background: #fbfaf3; border-radius: 6px; box-shadow: 0 30px 60px -32px rgba(23,32,43,0.45); transform: rotate(-1.5deg); display: flex; flex-direction: column; gap: 18px">
+<div style="display: flex; justify-content: space-between; align-items: baseline; gap: 16px; border-bottom: 2px solid #17202b; padding-bottom: 12px">
+<p style="margin: 0; font-family: 'Bricolage Grotesque', sans-serif; font-size: 20px; font-weight: 800">Tarjeta de viaje</p>
+<p style="margin: 0; font-family: 'IBM Plex Mono', monospace; font-size: 15px; font-weight: 600; letter-spacing: 1px">ZB-4K7Q-92XM</p>
+</div>
+<div style="display: flex; flex-direction: column">
+<div style="display: grid; grid-template-columns: 136px minmax(0, 1fr) 132px; gap: 12px; align-items: center; padding: 12px 0; border-bottom: 1px solid #d3d9cf">
+<p style="margin: 0; font-family: 'IBM Plex Mono', monospace; font-size: 14px">3 sep</p>
+<p style="margin: 0; font-size: 15px">Gràcia, Barcelona</p>
+<p style="margin: 0; justify-self: start; padding: 3px 10px; border: 2px solid #4c3ba0; border-radius: 4px; color: #4c3ba0; font-family: 'IBM Plex Mono', monospace; font-size: 13px; font-weight: 600; transform: rotate(-3deg)">REGISTRADO</p>
+</div>
+<div style="display: grid; grid-template-columns: 136px minmax(0, 1fr) 132px; gap: 12px; align-items: center; padding: 12px 0; border-bottom: 1px solid #d3d9cf">
+<p style="margin: 0; font-family: 'IBM Plex Mono', monospace; font-size: 14px">5 sep · tarde</p>
+<p style="margin: 0; font-size: 15px">Plaça del Sol · por un usuario</p>
+<p style="margin: 0; justify-self: start; padding: 3px 10px; border: 2px solid #1e7a6e; border-radius: 4px; color: #1e7a6e; font-family: 'IBM Plex Mono', monospace; font-size: 13px; font-weight: 600; transform: rotate(2deg)">LIBERADO</p>
+</div>
+<div style="display: grid; grid-template-columns: 136px minmax(0, 1fr) 132px; gap: 12px; align-items: center; padding: 12px 0; border-bottom: 1px solid #d3d9cf">
+<p style="margin: 0; font-family: 'IBM Plex Mono', monospace; font-size: 14px">19 sep · noche</p>
+<p style="margin: 0; font-size: 15px">Estació de Sants · por un invitado</p>
+<p style="margin: 0; justify-self: start; padding: 3px 10px; border: 2px solid #4c3ba0; border-radius: 4px; color: #4c3ba0; font-family: 'IBM Plex Mono', monospace; font-size: 13px; font-weight: 600; transform: rotate(-2deg)">CAPTURADO</p>
+</div>
+<div style="display: grid; grid-template-columns: 136px minmax(0, 1fr) 132px; gap: 12px; align-items: center; padding: 12px 0">
+<p style="margin: 0; font-family: 'IBM Plex Mono', monospace; font-size: 14px; color: #8a93a0">—</p>
+<p style="margin: 0; font-size: 15px; font-style: italic; color: #4a5563">¿Dónde será la próxima parada?</p>
+<p style="margin: 0; justify-self: start; padding: 3px 10px; border: 2px dashed #b9c1b4; border-radius: 4px; color: #6b7684; font-family: 'IBM Plex Mono', monospace; font-size: 13px; font-weight: 600">TU TURNO</p>
+</div>
+</div>
+</div>
+<p style="margin: 0; max-width: 460px; text-align: center; font-size: 15px; line-height: 1.5; color: #4a5563">Cada libro guarda su viaje con fecha y franja del día. Quién lo dejó, solo lo ven sus amigos.</p>
+</section>
+</div>
+</main>
+</div>
+</body>
+</html>
