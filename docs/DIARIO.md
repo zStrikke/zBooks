@@ -654,7 +654,7 @@ Tener listos los textos legales y el consentimiento antes de guardar el primer d
 - **Una vista por idioma** (`legal/es/…`), no textos traducidos frase a frase: un texto legal se redacta entero en cada idioma. Si falta el idioma activo, se muestra el español.
 - **La política tiene versión** (su fecha). Si cambia de forma relevante, se sube y se pedirá aceptarla de nuevo.
 - **Rutas en inglés** (`/privacy`, `/legal-notice`), como dice el ADR-0011.
-- **Edad mínima de 14 años**, la habitual en España para consentir el tratamiento de datos. Pendiente de confirmar con el PO.
+- **Edad mínima de 14 años**, la habitual en España para consentir el tratamiento de datos. Confirmada por el PO.
 - La casilla del formulario la pone la #10 con `PrivacyPolicy::rules()` y `PrivacyPolicy::recordAcceptance()`.
 
 ### Siguiente paso
