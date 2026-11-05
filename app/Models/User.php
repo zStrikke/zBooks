@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\ZoneKind;
 use App\Notifications\ResetPassword;
 use App\Notifications\VerifyEmail;
 use Database\Factories\UserFactory;
@@ -9,6 +10,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Hidden;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
@@ -49,6 +51,16 @@ class User extends Authenticatable implements MustVerifyEmail
         $segunda = preg_match('/[A-Z]/', $resto, $m) === 1 ? $m[0] : mb_substr($resto, 0, 1);
 
         return mb_strtoupper(mb_substr($this->username, 0, 1).$segunda);
+    }
+
+    /**
+     * Zona habitual (#18). Privada: solo la ve su dueño.
+     *
+     * @return HasOne<UserZone, $this>
+     */
+    public function homeZone(): HasOne
+    {
+        return $this->hasOne(UserZone::class)->where('kind', ZoneKind::Home);
     }
 
     /**

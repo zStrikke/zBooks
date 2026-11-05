@@ -4,6 +4,7 @@ use App\Http\Controllers\AccountController;
 use App\Http\Controllers\Auth\EmailVerificationNoticeController;
 use App\Http\Controllers\LegalController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ZoneController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -41,4 +42,9 @@ Route::middleware(['auth', 'verified'])->prefix('account')->name('account')->gro
     Route::get('/', [AccountController::class, 'show']);
     Route::patch('/profile', [AccountController::class, 'updateProfile'])->name('.profile.update');
     Route::delete('/avatar', [AccountController::class, 'destroyAvatar'])->name('.avatar.destroy');
+
+    // Mi zona (#18)
+    Route::put('/zone', [ZoneController::class, 'update'])->name('.zone.update');
+    Route::delete('/zone', [ZoneController::class, 'destroy'])->name('.zone.destroy');
+    Route::get('/zone/search', [ZoneController::class, 'search'])->middleware('throttle:30,1')->name('.zone.search');
 });

@@ -6,21 +6,27 @@
 */
 return [
     'accepted' => 'Tienes que aceptar la :attribute.',
+    'between' => [
+        'numeric' => 'El :attribute tiene que estar entre :min y :max.',
+    ],
     'confirmed' => 'Las dos contraseñas no coinciden.',
     'current_password' => 'La contraseña actual no es correcta.',
     'dimensions' => 'La imagen es demasiado grande: como mucho, 6000 × 6000 píxeles.',
     'email' => 'Escribe un email válido.',
+    'in' => 'El :attribute no es válido.',
     'image' => 'El :attribute tiene que ser una imagen.',
     'max' => [
         'file' => 'El :attribute no puede pesar más de :max KB.',
         'string' => 'El :attribute no puede tener más de :max caracteres.',
     ],
+    'integer' => 'El :attribute tiene que ser un número entero.',
     'mimes' => 'El :attribute tiene que ser JPG, PNG o WebP.',
     'min' => [
         'string' => 'El :attribute debe tener al menos :min caracteres.',
     ],
     'regex' => 'El :attribute solo puede tener letras sin acentos, números y _.',
     'required' => 'Falta el :attribute.',
+    'numeric' => 'El :attribute tiene que ser un número.',
     'string' => 'El :attribute debe ser un texto.',
     'uploaded' => 'No se ha podido subir el :attribute. Prueba con una imagen de menos de 2 MB.',
     'unique' => 'Ese :attribute ya está en uso.',
@@ -35,6 +41,9 @@ return [
     ],
 
     'custom' => [
+        'latitude' => [
+            'required' => 'Elige un punto en el mapa, busca una dirección o usa tu ubicación.',
+        ],
         'avatar' => [
             'max' => 'La foto no puede pesar más de 2 MB.',
         ],
@@ -56,6 +65,10 @@ return [
         'bio' => 'bio',
         'current_password' => 'contraseña actual',
         'email' => 'email',
+        'latitude' => 'latitud',
+        'longitude' => 'longitud',
+        'radius_km' => 'radio',
+        'source' => 'origen del punto',
         'password' => 'contraseña',
         'privacy_policy' => 'política de privacidad',
         'username' => 'nombre de usuario',

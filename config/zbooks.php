@@ -20,4 +20,22 @@ return [
         'me', 'moderator', 'null', 'privacy', 'register', 'root', 'settings',
         'soporte', 'support', 'system', 'u', 'user', 'zbooks', 'zbid',
     ],
+
+    /*
+    | Mapa de Mi zona (#18). Las teselas de OpenStreetMap valen para desarrollo
+    | y la demo; su política no admite tráfico de producción (ADR-0014).
+    */
+    'map' => [
+        'tiles' => env('MAP_TILES_URL', 'https://tile.openstreetmap.org/{z}/{x}/{y}.png'),
+        'attribution' => env('MAP_TILES_ATTRIBUTION', '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'),
+    ],
+
+    /*
+    | Buscador de direcciones (#18, App\Geo\Nominatim). Su política pide un
+    | User-Agent que identifique la aplicación.
+    */
+    'nominatim' => [
+        'url' => env('NOMINATIM_URL', 'https://nominatim.openstreetmap.org/search'),
+        'user_agent' => env('NOMINATIM_USER_AGENT', 'zBooks/0.2 (+https://github.com/zStrikke/zBooks)'),
+    ],
 ];
