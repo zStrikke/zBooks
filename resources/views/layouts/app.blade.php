@@ -21,7 +21,8 @@
 
     @include('partials.cabecera')
 
-    @if (session('status'))
+    {{-- Los avisos de Mi cuenta (#17) llegan como códigos y se muestran junto a su formulario --}}
+    @if (session('status') && ! in_array(session('status'), ['profile-updated', 'avatar-removed', 'password-updated'], true))
         <div role="status" class="border-b border-ruta/30 bg-ruta/10">
             <p class="mx-auto max-w-6xl px-4 py-3 font-display font-semibold text-ruta sm:px-6">{{ session('status') }}</p>
         </div>

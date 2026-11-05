@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AccountController;
 use App\Http\Controllers\Auth\EmailVerificationNoticeController;
 use App\Http\Controllers\LegalController;
 use App\Http\Controllers\ProfileController;
@@ -34,3 +35,10 @@ Route::middleware('guest')->group(function () {
 Route::get('/u/{username}', [ProfileController::class, 'show'])
     ->where('username', '[A-Za-z0-9_]{1,20}')
     ->name('profile.show');
+
+// Mi cuenta (#17). La contraseña va al PUT /user/password de Fortify.
+Route::middleware(['auth', 'verified'])->prefix('account')->name('account')->group(function () {
+    Route::get('/', [AccountController::class, 'show']);
+    Route::patch('/profile', [AccountController::class, 'updateProfile'])->name('.profile.update');
+    Route::delete('/avatar', [AccountController::class, 'destroyAvatar'])->name('.avatar.destroy');
+});

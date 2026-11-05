@@ -36,5 +36,7 @@ return [
         Features::registration(),
         Features::resetPasswords(),
         Features::emailVerification(),
+        // Cambio de contraseña desde Mi cuenta (#17): PUT /user/password
+        Features::updatePasswords(),
     ],
 ];
