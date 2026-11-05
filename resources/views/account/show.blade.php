@@ -103,50 +103,14 @@
                 @endif
             </section>
 
-            {{-- Vista previa: la ficha del perfil público, en móvil o en escritorio --}}
-            <section aria-labelledby="vista-titulo" x-data="{ pestana: 'movil' }"
-                     class="flex flex-col gap-3.5 self-start rounded-[14px] border border-linea bg-white p-5 lg:col-start-2 xl:sticky xl:top-6 xl:col-start-3 xl:row-span-3 xl:row-start-1">
+            {{-- Vista previa: la ficha del perfil público a tamaño real; cambia mientras se escribe (#80) --}}
+            <section aria-labelledby="vista-titulo"
+                     class="flex flex-col gap-3.5 self-start lg:col-start-2 xl:sticky xl:top-6 xl:col-start-3 xl:row-span-3 xl:row-start-1">
                 <div>
                     <h2 id="vista-titulo" class="text-xl font-extrabold">{{ __('How others see you') }}</h2>
                     <p class="text-sm text-tinta-suave">{{ __('It updates as you type.') }}</p>
                 </div>
-
-                <div role="tablist" aria-label="{{ __('Screen') }}" class="flex gap-1 rounded-lg bg-papel-hondo p-1"
-                     @keydown.right.prevent="pestana = 'escritorio'; $nextTick(() => $refs.escritorio.focus())"
-                     @keydown.left.prevent="pestana = 'movil'; $nextTick(() => $refs.movil.focus())">
-                    @foreach (['movil' => __('Mobile'), 'escritorio' => __('Desktop')] as $clave => $texto)
-                        <button type="button" role="tab" id="pestana-{{ $clave }}" x-ref="{{ $clave }}" aria-controls="panel-{{ $clave }}"
-                                @click="pestana = '{{ $clave }}'"
-                                :aria-selected="pestana === '{{ $clave }}'" aria-selected="{{ $clave === 'movil' ? 'true' : 'false' }}"
-                                :tabindex="pestana === '{{ $clave }}' ? 0 : -1" tabindex="{{ $clave === 'movil' ? 0 : -1 }}"
-                                :class="pestana === '{{ $clave }}' ? 'bg-white text-tinta shadow-sm' : 'text-tinta-suave'"
-                                class="h-9 flex-1 rounded-md text-sm font-bold">
-                            {{ $texto }}
-                        </button>
-                    @endforeach
-                </div>
-
-                {{-- Cada marco pinta la pantalla a tamaño real y la reduce con zoom --}}
-                <div id="panel-movil" role="tabpanel" aria-labelledby="pestana-movil" x-show="pestana === 'movil'"
-                     class="mx-auto w-fit rounded-[28px] border-2 border-tinta bg-papel px-2 pb-6 pt-5">
-                    <div class="w-90 px-5 [zoom:0.7]">
-                        <x-member-card :user="$user" size="movil" live />
-                    </div>
-                </div>
-
-                <div id="panel-escritorio" role="tabpanel" aria-labelledby="pestana-escritorio" x-show="pestana === 'escritorio'" x-cloak
-                     class="overflow-hidden rounded-[10px] border-2 border-tinta bg-papel">
-                    <div aria-hidden="true" class="flex h-4 items-center gap-1 border-b border-linea bg-papel-hondo pl-2">
-                        <i class="size-1.5 rounded-full bg-linea-fuerte"></i><i class="size-1.5 rounded-full bg-linea-fuerte"></i><i class="size-1.5 rounded-full bg-linea-fuerte"></i>
-                    </div>
-                    <div class="flex w-160 gap-8 p-8 [zoom:0.48]">
-                        <x-member-card :user="$user" size="escritorio" live class="w-85 shrink-0" />
-                        <div aria-hidden="true" class="flex flex-1 flex-col gap-4">
-                            <div class="h-6 w-24 rounded bg-linea"></div>
-                            <div class="flex-1 rounded-[14px] border-2 border-dashed border-linea-fuerte"></div>
-                        </div>
-                    </div>
-                </div>
+                <x-member-card :user="$user" live class="w-full max-w-100" />
             </section>
         </div>
 

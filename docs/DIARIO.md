@@ -908,3 +908,17 @@ Que un `git pull` no deje el entorno a medias. Al revisar la #77, la ficha de so
 
 ### Siguiente paso
 #18 (zona de referencia habitual), como sección Mi zona de la cuenta.
+
+---
+
+## [2026-11-05] #030 — Una sola vista previa de la ficha (#80)
+**Iteración:** 1 (v0.2.0)
+
+### Hecho
+- **«Así te ven» pasa a una sola vista previa:** la ficha a tamaño real, como sale en el perfil, sin pestañas, marcos ni `zoom`. Sigue cambiando mientras se escribe.
+- **Maqueta del lienzo y `docs/diseno`** actualizadas.
+
+### Decisiones
+- **Fuera las pestañas Móvil y Escritorio.** La ficha es una tarjeta de tamaño casi fijo: entre móvil y escritorio solo cambian un poco el avatar y el nombre, así que las dos pestañas se veían iguales. Además, la columna del blog de la pestaña Escritorio, sin texto, parecía un fallo. La vista previa sirve para ver que el nombre y la bio no quedan descuadrados, y para eso basta una.
+- **Si algún día la ficha cambia mucho entre pantallas,** las pestañas vuelven sin dificultad.
+- El arreglo de la altura de las pestañas (3ced523) llegó a la rama después de fusionar la #77 y nunca pasó a `master`; con este cambio ya no hace falta.

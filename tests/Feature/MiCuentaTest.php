@@ -31,8 +31,7 @@ describe('acceso', function () {
     it('muestra las secciones y la vista previa de la ficha', function () {
         $this->actingAs($this->user)->get('/account')
             ->assertOk()
-            ->assertSeeText(['Mi cuenta', 'Perfil', 'Así te ven', 'Móvil', 'Escritorio', 'Contraseña', 'Mi zona'])
-            ->assertSee('role="tablist"', false)
+            ->assertSeeText(['Mi cuenta', 'Perfil', 'Así te ven', 'Contraseña', 'Mi zona'])
             ->assertSee('Nº '.$this->user->memberNumber());
     });
 
