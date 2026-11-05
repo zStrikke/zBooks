@@ -790,3 +790,27 @@ Un solo patrón para las pantallas de cuenta, decidido con el PO al revisar la #
 
 ### Siguiente paso
 #12 (registro y verificación desde la API).
+
+---
+
+## [2026-11-05] #025 — Roles por migración (#71)
+**Iteración:** 1 (v0.2.0)
+
+### Objetivo de la sesión
+Que los roles existan en cualquier entorno sin acordarse de lanzar un seeder. Propuesta del PO.
+
+### Hecho
+- **Migración `create_base_roles`:** crea `member`, `moderator` y `admin` con `insertOrIgnore` y limpia la caché de spatie. Su `down()` los borra.
+- **Se quita `RoleSeeder`:** `DatabaseSeeder` solo crea los datos de desarrollo, y los tests ya no siembran roles, porque los trae la migración.
+- **Tests:**
+  - los roles de la base de datos son exactamente los del enum `Role`;
+  - la migración se deshace y se rehace sin duplicar.
+- **Guía del desarrollador:** cuándo usar migración y cuándo seeder.
+
+### Decisiones
+- **Datos de referencia por migración y datos de prueba por seeder.** La migración sale con el `migrate` del despliegue, queda en el historial y la tienen los tests sin hacer nada.
+- **Los valores van escritos en la migración, no leídos del enum:** una migración es una foto de su momento. Un rol nuevo, una migración nueva. El test de coincidencia avisa si se olvida.
+- **Roles en tablas (spatie) o columna `users.role`:** de momento seguimos con spatie. Se revisa en la v0.6.0 con un caso real de permisos (moderación y Filament); si solo usamos `hasRole`, se pasa a columna con enum.
+
+### Siguiente paso
+#12 (registro y verificación desde la API).

@@ -10,7 +10,6 @@ class AdminUserSeeder extends Seeder
 {
     /**
      * Crea el usuario admin de desarrollo. Nunca en producción.
-     * Necesita los roles: ejecutar antes RoleSeeder (lo hace DatabaseSeeder).
      */
     public function run(): void
     {

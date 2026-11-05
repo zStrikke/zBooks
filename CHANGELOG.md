@@ -20,6 +20,7 @@ Formato basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/) y 
 - Guía del desarrollador: comandos, flujo de issue a PR, archivos de referencia y casos frecuentes (#51).
 
 ### Changed
+- Los roles base se crean con una migración, no con un seeder: existen en todos los entornos tras `migrate`. Se quita `RoleSeeder` (#71).
 - Las pantallas de cuenta (registro y «Revisa tu correo») pasan de Livewire a Blade y Alpine, y envían a las rutas de Fortify. El límite de reenvío del email es el mismo para el registro, el aviso y Fortify, y sin página de error (#69).
 - `users.name` pasa a `users.username`, con índice único sobre `lower(username)` (#10).
 - Los tests fijan `APP_LOCALE=en` en `phpunit.xml` y ya no dependen del `.env` local (#60).
