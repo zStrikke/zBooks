@@ -861,3 +861,31 @@ Que cualquiera pueda ver el perfil de un miembro, con el diseño de la v0.2.0.
 
 ### Siguiente paso
 #18 (zona de referencia habitual).
+
+---
+
+## [2026-11-05] #028 — Mi cuenta (#17)
+**Iteración:** 1 (v0.2.0)
+
+### Objetivo de la sesión
+Que cada miembro pueda editar su perfil y su contraseña, y dejar montada la página de cuenta donde irá la zona (#18).
+
+### Hecho
+- **Refinamiento:** la #17 pasa de la v0.3.0 a la v0.2.0, porque crea la página donde va la #18. El idioma sale de la historia y llega con el selector (#53).
+- **Maqueta en el lienzo** (móvil y escritorio), exportada a `docs/diseno/v0.2.0`. A petición del PO, con una vista previa de la ficha de socio en pestañas Móvil y Escritorio.
+- **`/account`** (`AccountController`, `auth` + `verified`):
+  - **Perfil:** `App\Actions\Users\UpdateProfile` valida y guarda la bio (sin espacios sobrantes; vacía es `null`) y el avatar.
+  - **Avatar:** `App\Users\AvatarImage` lo recorta al cuadrado central, lo reduce a 256 px y lo guarda como WebP en el disco `public`, con un nombre aleatorio. Gira las fotos del móvil según el EXIF y borra el avatar anterior. «Quitar foto» lo borra y vuelven las iniciales.
+  - **Contraseña:** feature `updatePasswords` de Fortify (`PUT /user/password`) con `App\Actions\Fortify\UpdateUserPassword`. Pide la actual y aplica las reglas del registro.
+- **Ficha de socio como componente** (`<x-member-card>`): la usan el perfil público y la vista previa. Con `live`, la bio y el avatar salen de Alpine y cambian mientras se escribe; `size` fija el tamaño de móvil o de escritorio en cada pestaña.
+- **Avisos:** «✓ Perfil guardado» y «✓ Contraseña cambiada» junto a su formulario; los errores, con su bolsa (`updateProfile`, `updatePassword`), junto a cada campo.
+- **`make setup`** crea el enlace `public/storage`. 20 tests nuevos (153 en total).
+
+### Decisiones
+- **Avatar con GD y sin dependencias nuevas** (Intervention Image habría sido una más para tres operaciones). Volver a codificar la imagen descarta además los metadatos, como la ubicación del EXIF.
+- **`avatar` y `bio` siguen fuera de `$fillable`:** solo los escribe `UpdateProfile` con `forceFill`, después de validar. Así se cumple lo apuntado en la #027 sin abrir la asignación masiva.
+- **La vista previa pinta las dos pantallas a tamaño real y las reduce con `zoom`,** en lugar de simular el ancho con *container queries*: la ficha del perfil sigue igual.
+- **Los ids del SVG del sello son únicos por ficha:** con dos fichas en la página, el filtro de desgaste de la pestaña oculta no se aplicaría.
+
+### Siguiente paso
+#18 (zona de referencia habitual), como sección Mi zona de esta página.

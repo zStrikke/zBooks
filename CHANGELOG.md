@@ -5,6 +5,7 @@ Formato basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/) y 
 ## [Unreleased]
 
 ### Added
+- Mi cuenta (`/account`, con sesión y email verificado): cambiar o quitar el avatar (JPG, PNG o WebP hasta 2 MB, recortado cuadrado a 256 px y guardado como WebP), la bio (hasta 500 caracteres, con contador) y la contraseña (pide la actual). Vista previa de la ficha de socio, con pestañas Móvil y Escritorio, que cambia mientras se escribe. Enlace «Mi cuenta» en la cabecera; Mi zona queda reservada para la #18 (#17).
 - Perfil público en `/u/{username}`. Cualquier otra forma del username redirige (301) a la original. Muestra una ficha de socio (tapa de tela, número de socio, sello de alta y el username firmado) con avatar (iniciales si no hay), bio, fecha de alta, las cifras de libros registrados, liberados y capturados (0 hasta la v0.3.0) y el espacio reservado para el blog. Nunca el email ni la zona. La cabecera enlaza al perfil propio (#16).
 - Login en la web (`/login`) con email o nombre de usuario, sin distinguir mayúsculas, y «Mantener la sesión iniciada»; bloqueo tras 5 intentos fallidos en un minuto; logout que invalida la sesión. «Entrar» y «Salir» en la cabecera (#11).
 - «He olvidado mi contraseña» (`/forgot-password`) y nueva contraseña desde el enlace del email (`/reset-password/{token}`), con las mismas reglas que el registro. El email va en cola y en el idioma de la web, y la respuesta no revela si un email tiene cuenta (#11).
