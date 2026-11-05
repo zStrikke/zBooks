@@ -30,3 +30,4 @@ Un ADR documenta **una** decisión de arquitectura importante: el contexto, la d
 | [0011](0011-idiomas-web-y-api.md) | Idiomas: código y API en inglés, web en el idioma del usuario | Aceptado | 2026-11-01 |
 | [0012](0012-paquetes-autenticacion-permisos-geo.md) | Paquetes de la v0.2.0: Fortify, laravel-permission y laravel-magellan | Aceptado | 2026-11-01 |
 | [0013](0013-zonas-de-usuario.md) | Zonas de usuario: radio o área, con la precisión que elija cada persona | Aceptado | 2026-11-01 |
+| [0014](0014-mapas-teselas-y-geocodificacion.md) | Mapas: Leaflet, teselas de OpenStreetMap y Nominatim desde el servidor | Aceptado | 2026-11-05 |

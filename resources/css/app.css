@@ -6,6 +6,9 @@
 @import '@fontsource/ibm-plex-mono/500.css';
 @import '@fontsource/herr-von-muellerhoff';
 
+/* Mapa de Mi zona (#18) */
+@import 'leaflet/dist/leaflet.css';
+
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
 

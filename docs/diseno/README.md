@@ -16,7 +16,7 @@ Criterios comunes: **mobile-first** (el móvil se diseña primero), los colores 
 
 | Versión | Pantallas | Lienzo | Issues |
 |---|---|---|---|
-| [v0.2.0](v0.2.0/) | Registro, iniciar sesión, verificar email, perfil público y Mi cuenta (móvil y escritorio) | [Abrir el lienzo](https://claude.ai/artifact/QBqaDvURaFcYWre4CRTsUz) (privado: hay que compartirlo para que otros lo vean) | #10, #11, #16, #17 |
+| [v0.2.0](v0.2.0/) | Registro, iniciar sesión, verificar email, perfil público, Mi cuenta y Mi zona (móvil y escritorio) | [Abrir el lienzo](https://claude.ai/artifact/QBqaDvURaFcYWre4CRTsUz) (privado: hay que compartirlo para que otros lo vean) | #10, #11, #16, #17, #18 |
 
 ### v0.2.0
 
@@ -27,5 +27,6 @@ Criterios comunes: **mobile-first** (el móvil se diseña primero), los colores 
 | Verifica tu email | [captura](v0.2.0/capturas/movil-verificar-email.png) · [html](v0.2.0/html/movil-verificar-email.html) | [captura](v0.2.0/capturas/escritorio-verificar-email.png) · [html](v0.2.0/html/escritorio-verificar-email.html) | #10 |
 | Perfil público | [captura](v0.2.0/capturas/movil-perfil-publico.png) · [html](v0.2.0/html/movil-perfil-publico.html) | [captura](v0.2.0/capturas/escritorio-perfil-publico.png) · [html](v0.2.0/html/escritorio-perfil-publico.html) | #16 |
 | Mi cuenta | [captura](v0.2.0/capturas/movil-mi-cuenta.png) · [html](v0.2.0/html/movil-mi-cuenta.html) | [captura](v0.2.0/capturas/escritorio-mi-cuenta.png) · [html](v0.2.0/html/escritorio-mi-cuenta.html) | #17 |
+| Mi zona | [captura](v0.2.0/capturas/movil-mi-zona.png) · [html](v0.2.0/html/movil-mi-zona.html) · sin zona: [captura](v0.2.0/capturas/movil-mi-zona-vacia.png) · [html](v0.2.0/html/movil-mi-zona-vacia.html) | [captura](v0.2.0/capturas/escritorio-mi-zona.png) · [html](v0.2.0/html/escritorio-mi-zona.html) | #18 |
 
-**Ideas de cada pantalla en escritorio:** la tarjeta de viaje con sellos (registro), la etiqueta troquelada con el buscador de código (login), el matasellos (verificación), la ficha de socio (perfil; en el lienzo están las tres opciones que se valoraron) y su vista previa a tamaño real (Mi cuenta). Las cifras, lugares y textos entre corchetes son datos de ejemplo.
+**Ideas de cada pantalla en escritorio:** la tarjeta de viaje con sellos (registro), la etiqueta troquelada con el buscador de código (login), el matasellos (verificación), la ficha de socio (perfil; en el lienzo están las tres opciones que se valoraron) y su vista previa a tamaño real (Mi cuenta). En Mi zona, el mapa de las maquetas es un dibujo: la página usa las teselas de OpenStreetMap. Las cifras, lugares y textos entre corchetes son datos de ejemplo.
