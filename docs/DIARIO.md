@@ -989,3 +989,16 @@ Terminar la base multiidioma del ADR-0011: que ningún texto de la web esté esc
 
 ### Siguiente paso
 Cerrar la v0.2.0: CHANGELOG a `[0.2.0]`, etiqueta, release y retrospectiva.
+## [2026-11-05] #034 — Fotos de perfil con 403: el enlace `public/storage` (#89)
+**Iteración:** 1 (v0.2.0)
+
+### Qué pasaba
+El PO subía un avatar en Mi cuenta y la página se rompía. El fichero se guardaba bien en `storage/app/public/avatars`, pero `/storage/avatars/…` respondía 403: faltaba el enlace `public/storage`. Desde la #17 lo crea `make setup`, pero su entorno estaba montado antes, y `make post-pull` no lo miraba porque no depende de ningún fichero del pull.
+
+### Hecho
+- **`make post-pull` comprueba siempre el enlace** y, si falta, ejecuta `storage:link`. También cuando el pull no trae ningún fichero.
+- **Guía:** el caso, en «Arreglar errores».
+
+### Aprendido
+- El enlace apunta a la ruta **del contenedor** (`/var/www/html/storage/app/public`), que en el equipo no existe: en la máquina es un enlace «roto». Por eso el script comprueba que el enlace exista (`-L`), no que su destino exista (`-e`).
+- Los tests de avatar usan `Storage::fake()` y no podían verlo: el fallo estaba en el entorno, no en el código.

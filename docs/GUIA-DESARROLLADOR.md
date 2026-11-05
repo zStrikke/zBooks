@@ -137,6 +137,7 @@ Resumen
   ⚠ a mano · Variables de entorno: compara tu .env con .env.example y añade las variables nuevas
 ```
 
+- **Comprueba siempre el enlace `public/storage`** (aunque el pull no lo toque) y lo crea si falta: sin él, las fotos de perfil dan 403.
 - **Nunca ejecuta lo que borra datos o toca tus ficheros:** `make fresh` (seeders) y el `.env` salen como aviso ⚠ para que decidas tú.
 - **Si un comando falla,** se para, enseña sus últimas líneas y deja los siguientes como pendientes. Arréglalo y vuelve a lanzarlo: repetir lo que ya se hizo no hace daño.
 - `make post-pull ver=1` solo lista, sin ejecutar nada.
@@ -191,9 +192,10 @@ Ve de lo más barato a lo más drástico:
 3. **Descartar los cambios de un fichero:** `git restore <fichero>`. De todos: `git restore .` (irreversible para lo que no está en un commit).
 4. **Cachés de Laravel:** `make artisan c="optimize:clear"`.
 5. **Dependencias o front desactualizados** (tras un `git pull`): `make post-pull` lo pone al día; ver [Después de un `git pull`](#después-de-un-git-pull).
-6. **Base de datos:** `make migrate`; si sigue mal, `make fresh` (borra los datos de desarrollo).
-7. **Imagen de Docker** (tras cambios en `docker/`): `make build && make restart`.
-8. **Desde cero:** `docker compose down -v` (borra las bases de datos) y `make setup`.
+6. **Las fotos subidas no se ven (403 en `/storage/…`):** falta el enlace `public/storage`. `make post-pull` lo crea, o a mano: `make artisan c=storage:link`.
+7. **Base de datos:** `make migrate`; si sigue mal, `make fresh` (borra los datos de desarrollo).
+8. **Imagen de Docker** (tras cambios en `docker/`): `make build && make restart`.
+9. **Desde cero:** `docker compose down -v` (borra las bases de datos) y `make setup`.
 
 **Red de seguridad:** `git reflog` muestra todo lo que ha apuntado tu rama, incluso commits «perdidos» tras un reset. `git reset --hard <hash>` vuelve a cualquiera de esos puntos.
 
