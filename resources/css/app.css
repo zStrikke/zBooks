@@ -15,7 +15,8 @@
  * - sello:    violeta de los sellos de fecha de biblioteca (acción principal)
  * - etiqueta: amarillo de la etiqueta pegada en el libro
  * - ruta:     verde del recorrido en el mapa
- * - linea:    bordes y separadores
+ * - linea:    bordes y separadores (fuerte: campos de formulario)
+ * - error:    mensajes de validación
  */
 @theme {
     --color-papel: #f4f6f1;
@@ -27,6 +28,8 @@
     --color-etiqueta: #f5c842;
     --color-ruta: #1e7a6e;
     --color-linea: #d3d9cf;
+    --color-linea-fuerte: #b9c1b4;
+    --color-error: #b3261e;
 
     --font-display: 'Bricolage Grotesque Variable', ui-sans-serif, system-ui, sans-serif;
     --font-serif: 'Source Serif 4 Variable', ui-serif, Georgia, serif;
@@ -53,6 +56,17 @@
 
     :focus-visible {
         @apply outline-2 outline-offset-2 outline-sello;
+    }
+}
+
+/* Campos de formulario (#10): borde grueso que se oscurece al enfocar */
+@layer components {
+    .campo {
+        @apply h-12.5 rounded-lg border-2 border-linea-fuerte bg-white px-3.5 font-display text-[1.0625rem] text-tinta placeholder:text-[#8a93a0] focus:border-tinta focus:outline-none;
+    }
+
+    .campo-error {
+        @apply border-error focus:border-error;
     }
 }
 

@@ -89,6 +89,9 @@ return [
 
     'fallback_locale' => env('APP_FALLBACK_LOCALE', 'en'),
 
+    // Idioma de la web si el usuario no ha elegido otro (ADR-0011). La API usa siempre 'locale'.
+    'web_fallback_locale' => env('APP_WEB_FALLBACK_LOCALE', 'es'),
+
     'faker_locale' => env('APP_FAKER_LOCALE', 'es_ES'),
 
     /*

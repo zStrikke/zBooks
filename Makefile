@@ -3,7 +3,7 @@ DC = docker compose
 EXEC = $(DC) exec app
 
 .DEFAULT_GOAL := help
-.PHONY: help setup assets up down restart build logs shell artisan composer test lint format analyse insights check migrate fresh front psql analisis
+.PHONY: help setup assets up down restart build logs queue-restart shell artisan composer test lint format analyse insights check migrate fresh front psql analisis
 
 help: ## Muestra esta ayuda
 	@grep -E '^[a-zA-Z_-]+:.*?## ' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "  \033[36m%-10s\033[0m %s\n", $$1, $$2}'
@@ -34,6 +34,9 @@ build: ## Reconstruye la imagen de la app
 
 logs: ## Muestra los logs (make logs s=app)
 	$(DC) logs -f --tail=200 $(s)
+
+queue-restart: ## Reinicia el worker de la cola para que cargue el código nuevo
+	$(DC) restart queue
 
 shell: ## Abre una terminal dentro de la app
 	$(EXEC) bash

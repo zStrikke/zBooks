@@ -5,6 +5,10 @@ Formato basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/) y 
 ## [Unreleased]
 
 ### Added
+- Registro en la web (`/register`) con Fortify y pantallas propias en Livewire según las maquetas: username (3–20 letras, números o `_`, único sin distinguir mayúsculas y con nombres reservados), email, contraseña (`Password::defaults()`, con comprobación de filtraciones en producción) y aceptación de la privacidad. La cuenta nueva recibe el rol `member` y la sesión queda iniciada (#10).
+- Verificación del email: enlace firmado que caduca en 60 minutos, enviado en cola y en el idioma de la web; aviso «Revisa tu correo» (`/email/verify`) con reenvío limitado a uno por minuto; banda de aviso mientras no se verifique y confirmación al verificar. El middleware `verified` lleva al aviso desde las rutas que escriben (#10).
+- Servicio `queue` en Docker Compose, que procesa la cola (emails), y `make queue-restart` (#10).
+- Primeras traducciones al español (`lang/es.json` y `lang/es/validation.php`) y middleware `SetWebLocale`, que fija el español en la web; la API sigue en inglés (#10, adelanta parte de #43).
 - Roles base `member`, `moderator` y `admin` con spatie/laravel-permission, enum `App\Enums\Role`, `RoleSeeder` idempotente y un admin de desarrollo que nunca se crea en producción (`DEV_ADMIN_*` en `.env.example`) (#15, #65).
 - `make check` resume cada comprobación con ✓/✗, su tiempo y cómo arreglar lo que falla; el hook de pre-push muestra lo mismo (#63).
 - Aviso legal y política de privacidad (`/legal-notice`, `/privacy`), escritos en Markdown por idioma y enlazados desde el pie, con los datos del responsable en `config/legal.php`; consentimiento versionado en `users` y `App\Legal\PrivacyPolicy` para el registro (#48).
@@ -14,6 +18,7 @@ Formato basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/) y 
 - Guía del desarrollador: comandos, flujo de issue a PR, archivos de referencia y casos frecuentes (#51).
 
 ### Changed
+- `users.name` pasa a `users.username`, con índice único sobre `lower(username)` (#10).
 - Los tests fijan `APP_LOCALE=en` en `phpunit.xml` y ya no dependen del `.env` local (#60).
 - Diagrama ER: `user_zones` con modo radio o área y nueva tabla `areas`.
 

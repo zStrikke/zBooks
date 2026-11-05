@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\LegalController;
+use App\Livewire\Auth\Register;
+use App\Livewire\Auth\VerifyEmail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -16,3 +18,8 @@ Route::get('/zbid', function (Request $request) {
 // Textos legales (RGPD y LSSI, issue #48)
 Route::get('/legal-notice', [LegalController::class, 'notice'])->name('legal.notice');
 Route::get('/privacy', [LegalController::class, 'privacy'])->name('legal.privacy');
+
+// Cuentas (#10). Fortify pone el POST /register y el enlace de verificación;
+// las pantallas son nuestras (ADR-0012).
+Route::get('/register', Register::class)->middleware('guest')->name('register');
+Route::get('/email/verify', VerifyEmail::class)->middleware('auth')->name('verification.notice');

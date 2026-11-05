@@ -21,7 +21,7 @@ class AdminUserSeeder extends Seeder
         $admin = User::firstOrCreate(
             ['email' => config('zbooks.dev_admin.email')],
             [
-                'name' => config('zbooks.dev_admin.name'),
+                'username' => config('zbooks.dev_admin.username'),
                 'password' => config('zbooks.dev_admin.password'),
             ],
         );

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\SetWebLocale;
 use App\Http\ProblemDetails\ProblemDetailsRenderer;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
@@ -16,6 +17,12 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware): void {
         // Aplica el limitador «api» (AppServiceProvider) a todas las rutas de la API
         $middleware->throttleApi();
+
+        // La web en el idioma del usuario; la API, siempre en inglés (ADR-0011)
+        $middleware->web(append: SetWebLocale::class);
+
+        // Sin sesión, a crear la cuenta; con la #11 pasará a la pantalla de login
+        $middleware->redirectGuestsTo(fn () => route('register'));
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         $exceptions->shouldRenderJsonWhen(

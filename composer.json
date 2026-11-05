@@ -11,6 +11,7 @@
     "require": {
         "php": "^8.4",
         "dedoc/scramble": "^0.13",
+        "laravel/fortify": "*",
         "laravel/framework": "^13.17",
         "laravel/tinker": "^3.0",
         "livewire/livewire": "^4",
