@@ -60,7 +60,7 @@ insights: ## Puntúa el código con PHP Insights
 	$(EXEC) composer insights
 
 check: ## Estilo, análisis, PHP Insights y tests (lo mismo que la CI)
-	$(EXEC) composer check
+	@./scripts/check.sh
 
 migrate: ## Ejecuta las migraciones
 	$(EXEC) php artisan migrate

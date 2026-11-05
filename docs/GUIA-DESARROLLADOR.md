@@ -31,7 +31,7 @@ Se ejecutan desde la raíz del proyecto y corren dentro de Docker: no hace falta
 | `make insights` | Puntúa el código; falla por debajo de 90 en cualquier categoría |
 | `make test` | Todos los tests, contra PostGIS (base `zbooks_testing`) |
 | `make test c="--filter=health"` | Solo los tests cuyo nombre contiene «health» |
-| **`make check`** | **Todo lo anterior, en el orden de la CI.** Si pasa aquí, pasa en GitHub |
+| **`make check`** | **Todo lo anterior, en el orden de la CI.** Si pasa aquí, pasa en GitHub. Muestra una línea por paso (✓/✗), la salida solo de los que fallan y qué hacer para arreglarlos |
 
 La rutina: **`make format && make check`** antes de cada `git push`.
 
