@@ -3,7 +3,7 @@ DC = docker compose
 EXEC = $(DC) exec app
 
 .DEFAULT_GOAL := help
-.PHONY: help setup assets up down restart build logs queue-restart shell artisan composer test lint format analyse insights check tras-pull migrate fresh front psql analisis
+.PHONY: help setup assets up down restart build logs queue-restart shell artisan composer test lint format analyse insights check post-pull migrate fresh front psql analisis
 
 help: ## Muestra esta ayuda
 	@grep -E '^[a-zA-Z_-]+:.*?## ' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "  \033[36m%-10s\033[0m %s\n", $$1, $$2}'
@@ -66,8 +66,8 @@ insights: ## Puntúa el código con PHP Insights
 check: ## Estilo, análisis, PHP Insights y tests (lo mismo que la CI)
 	@./scripts/check.sh
 
-tras-pull: ## Qué cambió con el último git pull y qué ejecutar (make tras-pull desde=<commit>)
-	@./scripts/tras-pull.sh $(desde)
+post-pull: ## Qué cambió con el último git pull y qué ejecutar (make post-pull desde=<commit>)
+	@./scripts/post-pull.sh $(desde)
 
 migrate: ## Ejecuta las migraciones
 	$(EXEC) php artisan migrate

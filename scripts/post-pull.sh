@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 # Qué ha llegado con el último git pull y qué comando hace falta para que el
 # entorno siga funcionando. Solo informa: no ejecuta nada.
-# Uso: make tras-pull              (desde el último pull o merge: ORIG_HEAD)
-#      make tras-pull desde=v0.1.0 (desde cualquier commit, rama o etiqueta)
+# Uso: make post-pull              (desde el último pull o merge: ORIG_HEAD)
+#      make post-pull desde=v0.1.0 (desde cualquier commit, rama o etiqueta)
 
 set -u
 
@@ -15,7 +15,7 @@ fi
 DESDE="${1:-ORIG_HEAD}"
 
 if ! git rev-parse --verify --quiet "$DESDE" >/dev/null; then
-    echo "No encuentro «$DESDE». Haz antes un git pull, o indica desde dónde: make tras-pull desde=<commit>"
+    echo "No encuentro «$DESDE». Haz antes un git pull, o indica desde dónde: make post-pull desde=<commit>"
     exit 1
 fi
 

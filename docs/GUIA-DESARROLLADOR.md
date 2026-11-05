@@ -13,7 +13,7 @@ Se ejecutan desde la raíz del proyecto y corren dentro de Docker: no hace falta
 | Comando | Para qué |
 |---|---|
 | `make up` / `make down` | Arrancar o parar el entorno |
-| `make tras-pull` | Después de un `git pull`: qué ha cambiado y qué ejecutar para que el entorno siga funcionando ([ver abajo](#después-de-un-git-pull)) |
+| `make post-pull` | Después de un `git pull`: qué ha cambiado y qué ejecutar para que el entorno siga funcionando ([ver abajo](#después-de-un-git-pull)) |
 | `make front` | Vite en modo desarrollo: los cambios de CSS y JS se ven al momento |
 | `make shell` | Terminal dentro del contenedor de la app |
 | `make artisan c="route:list"` | Cualquier comando de Artisan |
@@ -51,7 +51,7 @@ La rutina: **`make format && make check`** antes de cada `git push`.
    ¿No existe? Créala con su plantilla (historia, técnica o bug).
         │
 2. RAMA, desde master actualizado
-   git switch master && git pull && make tras-pull
+   git switch master && git pull && make post-pull
    git switch -c feature/10-registro-web        (feature | fix | docs | chore)
         │
 3. CÓDIGO + TESTS
@@ -126,7 +126,7 @@ Si afecta a más de una issue o es difícil de deshacer, escribe un ADR con `doc
 
 Un pull puede traer cosas que el código no aplica solo: una dependencia nueva, una migración, una fuente o colores nuevos en el CSS. Si no ejecutas su comando, la página puede romperse o verse sin estilos aunque el código esté bien.
 
-**`make tras-pull`** lista los ficheros que han llegado desde el último pull o merge, agrupados, y el comando de cada grupo. Solo informa: no ejecuta nada. Para comparar con otro punto: `make tras-pull desde=v0.1.0` (cualquier commit, rama o etiqueta).
+**`make post-pull`** lista los ficheros que han llegado desde el último pull o merge, agrupados, y el comando de cada grupo. Solo informa: no ejecuta nada. Para comparar con otro punto: `make post-pull desde=v0.1.0` (cualquier commit, rama o etiqueta).
 
 | Si cambia… | Ejecuta | Por qué |
 |---|---|---|
@@ -176,7 +176,7 @@ Ve de lo más barato a lo más drástico:
 2. **Probar sin mis cambios:** `git stash`, comprueba si funciona y `git stash pop` para recuperarlos. Si sin ellos funciona, el problema está en tu código.
 3. **Descartar los cambios de un fichero:** `git restore <fichero>`. De todos: `git restore .` (irreversible para lo que no está en un commit).
 4. **Cachés de Laravel:** `make artisan c="optimize:clear"`.
-5. **Dependencias o front desactualizados** (tras un `git pull`): `make tras-pull` dice qué falta; ver [Después de un `git pull`](#después-de-un-git-pull).
+5. **Dependencias o front desactualizados** (tras un `git pull`): `make post-pull` dice qué falta; ver [Después de un `git pull`](#después-de-un-git-pull).
 6. **Base de datos:** `make migrate`; si sigue mal, `make fresh` (borra los datos de desarrollo).
 7. **Imagen de Docker** (tras cambios en `docker/`): `make build && make restart`.
 8. **Desde cero:** `docker compose down -v` (borra las bases de datos) y `make setup`.

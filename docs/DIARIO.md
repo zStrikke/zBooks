@@ -899,7 +899,7 @@ Que cada miembro pueda editar su perfil y su contraseña, y dejar montada la pá
 Que un `git pull` no deje el entorno a medias. Al revisar la #77, la ficha de socio se veía sin colores: el pull de la #16 traía una fuente nueva en `package.json` y colores nuevos en `app.css`, y faltaba `make assets`.
 
 ### Hecho
-- **`make tras-pull`** (`scripts/tras-pull.sh`): compara con `ORIG_HEAD`, que Git fija en cada pull o merge, o con el punto que se indique (`desde=`). Agrupa los ficheros que han llegado y da el comando de cada grupo. Solo informa.
+- **`make post-pull`** (`scripts/post-pull.sh`): compara con `ORIG_HEAD`, que Git fija en cada pull o merge, o con el punto que se indique (`desde=`). Agrupa los ficheros que han llegado y da el comando de cada grupo. Solo informa.
 - **Guía del desarrollador:** sección «Después de un `git pull`» con la tabla fichero → comando y el caso real de la ficha. El flujo de trabajo y «Arreglar errores» la enlazan.
 
 ### Decisiones
