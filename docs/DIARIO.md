@@ -850,12 +850,14 @@ Que cualquiera pueda ver el perfil de un miembro, con el diseño de la v0.2.0.
   - el patrón de la ruta es el de la regla `Username`: lo demás da 404.
 - **Columnas `avatar` y `bio`** (500 caracteres) en `users`. Se editan en la #17; mientras tanto, el avatar muestra las iniciales (`User::initials()`: zStrikke → ZS).
 - **Cifras con `App\Users\ProfileStats`:** hoy todas valen 0, que es su valor real porque aún no existen los libros. Las épicas #20 y #21 sustituyen cada cero por su consulta, y está apuntado en ellas.
-- **Vista responsive:** en móvil, una banda oscura a todo el ancho; en escritorio, el carné de socio y el blog al lado.
-- **La cabecera enlaza al perfil propio.** 10 tests nuevos (131 en total).
+- **Vista responsive:** la ficha de socio arriba en móvil; en escritorio, a la izquierda del blog.
+- **Ficha de socio (opción C del lienzo de diseño):** tapa de tela verde con filete dorado; «Nº de socio» (`User::memberNumber()`: el id con ceros, 42 → 000042), la bio entre comillas, el sello de alta medio estampado (lo corta el filete) y el username «firmado» con la fuente Herr Von Muellerhoff, alojada con Fontsource.
+- **La cabecera enlaza al perfil propio.** 12 tests nuevos (133 en total).
 
 ### Decisiones
 - **El perfil es público y no exige sesión.** Muestra cifras, nunca qué libros, ni el email ni la zona (ADR-0010).
 - **`avatar` y `bio` no se añaden a `$fillable` todavía:** se harán asignables con el formulario de la #17, que es quien los valida.
+- **Ficha de socio, elegida entre tres opciones de carné** (biblioteca, ficha de préstamo, carné antiguo de tela). El PO pidió el título «Ficha de socio», un sello en lugar de la línea de firma y una fuente de firma para el username. Solo con Tailwind y un SVG; la única dependencia nueva es la fuente.
 
 ### Siguiente paso
 #18 (zona de referencia habitual).

@@ -20,8 +20,10 @@ beforeEach(function () {
 it('muestra el perfil sin iniciar sesión', function () {
     $this->get('/u/zStrikke')
         ->assertOk()
+        ->assertSeeText('Ficha de socio')
         ->assertSeeText('zStrikke')
-        ->assertSeeText('Miembro desde noviembre 2026')
+        ->assertSeeText('Nº '.$this->user->memberNumber())
+        ->assertSeeText('desde nov. 2026')
         ->assertSeeText('Leo en el tren.')
         ->assertSeeText('libros registrados')
         ->assertSeeText('Aquí irá su blog');
@@ -46,6 +48,19 @@ it('muestra las iniciales si no hay avatar', function (string $username, string 
     ['anaGarcia', 'AG'],
     ['x9', 'X9'],
 ]);
+
+it('el número de socio es el id con ceros delante', function () {
+    expect((new User)->forceFill(['id' => 42])->memberNumber())->toBe('000042')
+        ->and((new User)->forceFill(['id' => 1234567])->memberNumber())->toBe('1234567');
+});
+
+it('la ficha lleva el sello de alta y la firma del miembro', function () {
+    $this->get('/u/zStrikke')
+        ->assertSeeText('Sello')
+        ->assertSee('SOCIO APROBADO', false)
+        ->assertSeeInOrder(['>NOV<', '>2026<'], false)
+        ->assertSee('font-firma', false);
+});
 
 it('no muestra el email', function () {
     // La zona aún no existe (#18): su test de privacidad irá con ella

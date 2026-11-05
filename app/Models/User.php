@@ -52,6 +52,14 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     /**
+     * Número de socio para la ficha del perfil: el id con ceros delante (42 → 000042).
+     */
+    public function memberNumber(): string
+    {
+        return str_pad((string) $this->id, 6, '0', STR_PAD_LEFT);
+    }
+
+    /**
      * Get the attributes that should be cast.
      *
      * @return array<string, string>

@@ -43,10 +43,11 @@
     "Log in": "Iniciar sesión",
     "Log in to see where your books are.": "Entra para ver dónde están tus libros.",
     "Member card": "Carné de socio",
-    "Member since :date": "Miembro desde :date",
+    "Member file": "Ficha de socio",
     "Never shown to anyone.": "Nunca se muestra a nadie.",
     "New password": "Contraseña nueva",
     "No account and found a book?": "¿No tienes cuenta y has encontrado un libro?",
+    "No. :number": "Nº :number",
     "Password": "Contraseña",
     "Plaça del Sol · by a user": "Plaça del Sol · por un usuario",
     "Postmark: sent, expires in :minutes min": "Matasellos: enviado, caduca en :minutes min",
@@ -63,6 +64,7 @@
     "Search book": "Buscar libro",
     "Send me the link": "Enviarme el enlace",
     "Show password": "Mostrar contraseña",
+    "Stamp": "Sello",
     "Statistics": "Estadísticas",
     "The link expires in :minutes minutes.": "El enlace caduca en :minutes minutos.",
     "Their blog will be here": "Aquí irá su blog",
@@ -94,5 +96,5 @@
     "search the code on its label": "busca el código de su etiqueta",
     "since :date": "desde :date",
     "you@email.com": "tu@email.com",
-    "zBooks member": "Socio de zBooks"
+    "zBooks · approved member · zBooks ·": "zBooks · socio aprobado · zBooks ·"
 }

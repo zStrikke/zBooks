@@ -2,32 +2,48 @@
 <x-layouts::app :title="$user->username" :description="__(':username on zBooks: books registered, released and caught.', ['username' => $user->username])">
     <div class="mx-auto flex max-w-6xl flex-wrap items-start gap-12 lg:px-6 lg:py-14">
         <aside aria-label="{{ __('Member card') }}" class="flex w-full flex-col gap-4 lg:max-w-100 lg:flex-1 lg:basis-85">
-            {{-- Móvil: banda oscura a todo el ancho. Escritorio: el carné de socio --}}
-            <div class="flex flex-col gap-4 bg-tinta px-5 pb-6 pt-7 text-papel lg:gap-5 lg:rounded-[14px] lg:p-8 lg:shadow-[0_30px_60px_-36px_rgba(23,32,43,0.6)]">
-                <div class="hidden items-center justify-between lg:flex">
-                    <p class="font-display text-[0.95rem] font-bold text-etiqueta">{{ __('zBooks member') }}</p>
-                    <p class="font-mono text-sm text-[#aab3bf]">{{ __('since :date', ['date' => $user->created_at->isoFormat('MMM YYYY')]) }}</p>
-                </div>
+            {{-- Ficha de socio: tapa de tela con filete dorado, sello de alta y firma (diseño elegido en #76) --}}
+            <div class="mx-5 mt-6 rounded-xl bg-tela p-2 shadow-[0_30px_60px_-32px_rgba(23,32,43,0.6)] lg:mx-0 lg:mt-0">
+                <div class="relative flex flex-col gap-4 overflow-hidden rounded-lg border-[1.5px] border-filete bg-[repeating-linear-gradient(45deg,rgba(255,255,255,0.025)_0_2px,transparent_2px_5px)] px-5 pb-4.5 pt-5 text-papel">
+                    <div class="flex flex-col items-center gap-0.5 border-b border-filete/60 pb-3">
+                        <p class="font-display text-[0.8125rem] font-bold uppercase tracking-[3px] text-filete">{{ __('Member file') }}</p>
+                        <p class="font-display text-[1.375rem] font-extrabold text-filete-claro">zBooks</p>
+                    </div>
 
-                <div class="flex items-center gap-4">
-                    @if ($user->avatar)
-                        <img src="{{ Storage::url($user->avatar) }}" alt="{{ __('Avatar of :username', ['username' => $user->username]) }}"
-                             class="h-19 w-19 shrink-0 rounded-full object-cover lg:h-22 lg:w-22">
-                    @else
-                        <div role="img" aria-label="{{ __('Avatar of :username', ['username' => $user->username]) }}"
-                             class="flex h-19 w-19 shrink-0 items-center justify-center rounded-full bg-etiqueta font-display text-3xl font-extrabold text-tinta lg:h-22 lg:w-22 lg:text-[2.125rem]">
-                            {{ $user->initials() }}
+                    <div class="flex items-center gap-4.5">
+                        @if ($user->avatar)
+                            <img src="{{ Storage::url($user->avatar) }}" alt="{{ __('Avatar of :username', ['username' => $user->username]) }}"
+                                 class="h-19 w-19 shrink-0 rounded-full object-cover outline-2 outline-offset-3 outline-filete lg:h-21 lg:w-21">
+                        @else
+                            <div role="img" aria-label="{{ __('Avatar of :username', ['username' => $user->username]) }}"
+                                 class="flex h-19 w-19 shrink-0 items-center justify-center rounded-full bg-etiqueta font-display text-3xl font-extrabold text-tinta outline-2 outline-offset-3 outline-filete lg:h-21 lg:w-21">
+                                {{ $user->initials() }}
+                            </div>
+                        @endif
+                        <div class="flex min-w-0 flex-col gap-1.5">
+                            <h1 class="break-all text-[1.75rem] font-extrabold leading-tight lg:text-[1.875rem]">{{ $user->username }}</h1>
+                            <p class="font-mono text-[0.8125rem] text-[#d8cfae]"><span class="whitespace-nowrap">{{ __('No. :number', ['number' => $user->memberNumber()]) }}</span> · <span class="whitespace-nowrap">{{ __('since :date', ['date' => $user->created_at->isoFormat('MMM YYYY')]) }}</span></p>
                         </div>
+                    </div>
+
+                    @if ($user->bio)
+                        <p class="whitespace-pre-line text-[0.9375rem] italic leading-normal text-[#e4e8ec]">«{{ $user->bio }}»</p>
                     @endif
-                    <div class="flex min-w-0 flex-col gap-1">
-                        <h1 class="break-all text-[1.75rem] font-extrabold leading-tight lg:text-4xl">{{ $user->username }}</h1>
-                        <p class="text-sm text-[#c9d0d8] lg:hidden">{{ __('Member since :date', ['date' => $user->created_at->isoFormat('MMMM YYYY')]) }}</p>
+
+                    {{-- Sello de alta medio estampado (lo corta el filete) y el username firmado --}}
+                    <div class="flex min-h-14.5 items-end justify-between border-t border-filete/60 pt-2.5">
+                        <p class="font-mono text-[0.6875rem] uppercase text-filete">{{ __('Stamp') }}</p>
+                        <svg aria-hidden="true" viewBox="0 0 100 100" class="absolute -bottom-10 left-17.5 size-26 -rotate-14 text-filete-claro opacity-75">
+                            <defs><path id="sello-aro" d="M50,50 m-37,0 a37,37 0 1,1 74,0 a37,37 0 1,1 -74,0"/></defs>
+                            <circle cx="50" cy="50" r="47" fill="none" stroke="currentColor" stroke-width="2.5"/>
+                            <circle cx="50" cy="50" r="29" fill="none" stroke="currentColor" stroke-width="1.2"/>
+                            <text font-family="IBM Plex Mono, monospace" font-size="9.5" font-weight="500" letter-spacing="1.6" fill="currentColor"><textPath href="#sello-aro">{{ mb_strtoupper(__('zBooks · approved member · zBooks ·')) }}</textPath></text>
+                            <text x="50" y="47" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" font-weight="500" fill="currentColor">{{ mb_strtoupper(rtrim($user->created_at->isoFormat('MMM'), '.')) }}</text>
+                            <text x="50" y="60" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="12" font-weight="500" fill="currentColor">{{ $user->created_at->year }}</text>
+                        </svg>
+                        <p aria-hidden="true" class="-mb-1.5 max-w-[60%] -rotate-4 truncate font-firma text-[2.75rem] leading-none">{{ $user->username }}</p>
                     </div>
                 </div>
-
-                @if ($user->bio)
-                    <p class="whitespace-pre-line text-base leading-normal text-[#e4e8ec]">{{ $user->bio }}</p>
-                @endif
             </div>
 
             <section aria-label="{{ __('Statistics') }}" class="grid grid-cols-3 gap-2.5 px-5 lg:px-0">
