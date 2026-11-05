@@ -126,16 +126,23 @@
                     @endforeach
                 </div>
 
-                {{-- Cada marco pinta la pantalla a tamaño real y la reduce con zoom --}}
-                <div id="panel-movil" role="tabpanel" aria-labelledby="pestana-movil" x-show="pestana === 'movil'"
-                     class="mx-auto w-fit rounded-[28px] border-2 border-tinta bg-papel px-2 pb-6 pt-5">
+                {{--
+                    Cada marco pinta la pantalla a tamaño real y la reduce con zoom.
+                    Los dos ocupan la misma celda y el oculto solo se hace invisible:
+                    así el panel mide lo que el más alto y no salta al cambiar de pestaña.
+                --}}
+                <div class="grid">
+                <div id="panel-movil" role="tabpanel" aria-labelledby="pestana-movil"
+                     :class="{ invisible: pestana !== 'movil' }"
+                     class="[grid-area:1/1] self-start justify-self-center rounded-[28px] border-2 border-tinta bg-papel px-2 pb-6 pt-5">
                     <div class="w-90 px-5 [zoom:0.7]">
                         <x-member-card :user="$user" size="movil" live />
                     </div>
                 </div>
 
-                <div id="panel-escritorio" role="tabpanel" aria-labelledby="pestana-escritorio" x-show="pestana === 'escritorio'" x-cloak
-                     class="overflow-hidden rounded-[10px] border-2 border-tinta bg-papel">
+                <div id="panel-escritorio" role="tabpanel" aria-labelledby="pestana-escritorio"
+                     :class="{ invisible: pestana !== 'escritorio' }"
+                     class="invisible [grid-area:1/1] self-start overflow-hidden rounded-[10px] border-2 border-tinta bg-papel">
                     <div aria-hidden="true" class="flex h-4 items-center gap-1 border-b border-linea bg-papel-hondo pl-2">
                         <i class="size-1.5 rounded-full bg-linea-fuerte"></i><i class="size-1.5 rounded-full bg-linea-fuerte"></i><i class="size-1.5 rounded-full bg-linea-fuerte"></i>
                     </div>
@@ -146,6 +153,7 @@
                             <div class="flex-1 rounded-[14px] border-2 border-dashed border-linea-fuerte"></div>
                         </div>
                     </div>
+                </div>
                 </div>
             </section>
         </div>
