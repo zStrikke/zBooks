@@ -111,7 +111,11 @@ return [
         ],
         // Las reglas de validación implementan una interfaz con parámetros que no siempre usan
         UnusedParameterSniff::class => [
-            'exclude' => ['app/Rules'],
+            'exclude' => [
+                'app/Rules',
+                // Recibe el usuario, pero sus cifras valen 0 hasta que existan los libros (#20, #21)
+                'app/Users/ProfileStats.php',
+            ],
         ],
         ForbiddenPrivateMethods::class => [
             'title' => 'The usage of private methods is not idiomatic in Laravel.',

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\EmailVerificationNoticeController;
 use App\Http\Controllers\LegalController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -28,3 +29,8 @@ Route::middleware('guest')->group(function () {
     Route::view('/forgot-password', 'auth.forgot-password')->name('password.request');
     Route::view('/reset-password/{token}', 'auth.reset-password')->name('password.reset');
 });
+
+// Perfil público (#16). El patrón es el de App\Rules\Username.
+Route::get('/u/{username}', [ProfileController::class, 'show'])
+    ->where('username', '[A-Za-z0-9_]{1,20}')
+    ->name('profile.show');

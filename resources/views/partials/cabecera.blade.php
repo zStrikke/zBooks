@@ -26,7 +26,7 @@
 
         <div class="hidden items-center gap-4 font-display text-[0.95rem] font-medium lg:flex">
             @auth
-                <span class="font-semibold">{{ auth()->user()->username }}</span>
+                <a href="{{ route('profile.show', auth()->user()->username) }}" class="font-semibold hover:text-sello">{{ auth()->user()->username }}</a>
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
                     <button type="submit" class="hover:text-sello">Salir</button>
@@ -59,7 +59,7 @@
             <span class="text-tinta-suave/60">Libros cerca (versión 0.5.0)</span>
             <span class="text-tinta-suave/60">Zonas (versión 0.5.0)</span>
             @auth
-                <span class="font-semibold">{{ auth()->user()->username }}</span>
+                <a href="{{ route('profile.show', auth()->user()->username) }}" class="font-semibold hover:text-sello">{{ auth()->user()->username }}</a>
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
                     <button type="submit">Salir</button>

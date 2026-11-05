@@ -835,3 +835,27 @@ Priorizar funcionalidades en la web sin perder la API. Propuesta del PO.
 
 ### Siguiente paso
 #16 (perfil público) → #18 (zona habitual).
+
+---
+
+## [2026-11-05] #027 — Perfil público (#16)
+**Iteración:** 1 (v0.2.0)
+
+### Objetivo de la sesión
+Que cualquiera pueda ver el perfil de un miembro, con el diseño de la v0.2.0.
+
+### Hecho
+- **`/u/{username}`** (`ProfileController`):
+  - busca sin distinguir mayúsculas y redirige con 301 a la forma original, para que cada perfil tenga una sola URL;
+  - el patrón de la ruta es el de la regla `Username`: lo demás da 404.
+- **Columnas `avatar` y `bio`** (500 caracteres) en `users`. Se editan en la #17; mientras tanto, el avatar muestra las iniciales (`User::initials()`: zStrikke → ZS).
+- **Cifras con `App\Users\ProfileStats`:** hoy todas valen 0, que es su valor real porque aún no existen los libros. Las épicas #20 y #21 sustituyen cada cero por su consulta, y está apuntado en ellas.
+- **Vista responsive:** en móvil, una banda oscura a todo el ancho; en escritorio, el carné de socio y el blog al lado.
+- **La cabecera enlaza al perfil propio.** 10 tests nuevos (131 en total).
+
+### Decisiones
+- **El perfil es público y no exige sesión.** Muestra cifras, nunca qué libros, ni el email ni la zona (ADR-0010).
+- **`avatar` y `bio` no se añaden a `$fillable` todavía:** se harán asignables con el formulario de la #17, que es quien los valida.
+
+### Siguiente paso
+#18 (zona de referencia habitual).

@@ -40,6 +40,18 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     /**
+     * Iniciales para el avatar por defecto (#16): la primera letra y la siguiente
+     * mayúscula (zStrikke → ZS) o, si no hay, las dos primeras (lector_1984 → LE).
+     */
+    public function initials(): string
+    {
+        $resto = mb_substr($this->username, 1);
+        $segunda = preg_match('/[A-Z]/', $resto, $m) === 1 ? $m[0] : mb_substr($resto, 0, 1);
+
+        return mb_strtoupper(mb_substr($this->username, 0, 1).$segunda);
+    }
+
+    /**
      * Get the attributes that should be cast.
      *
      * @return array<string, string>
