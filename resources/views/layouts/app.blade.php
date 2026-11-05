@@ -3,9 +3,9 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="{{ $description ?? 'Deja un libro en un lugar público y sigue su viaje por el mundo.' }}">
+    <meta name="description" content="{{ $description ?? __('Leave a book in a public place and follow its journey around the world.') }}">
 
-    <title>{{ isset($title) ? $title . ' | ' . config('app.name') : config('app.name') . ': libros que viajan' }}</title>
+    <title>{{ isset($title) ? $title . ' | ' . config('app.name') : config('app.name') . ': ' . __('books that travel') }}</title>
 
     <link rel="icon" href="{{ asset('favicon.svg') }}" type="image/svg+xml">
 
@@ -16,7 +16,7 @@
 <body class="flex min-h-screen flex-col">
     <a href="#contenido"
        class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded focus:bg-tinta focus:px-4 focus:py-2 focus:text-papel">
-        Saltar al contenido
+        {{ __('Skip to content') }}
     </a>
 
     @include('partials.cabecera')

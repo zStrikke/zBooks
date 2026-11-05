@@ -7,8 +7,8 @@ use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * Idioma de la web (ADR-0011). De momento, siempre el de reserva (español);
- * la #43 y la #53 añaden el perfil, la cookie y Accept-Language.
+ * Idioma de la web (ADR-0011). De momento, siempre el de reserva (español).
+ * La #53 añade el selector y usa users.locale, la cookie y Accept-Language.
  */
 class SetWebLocale
 {
