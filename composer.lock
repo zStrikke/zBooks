@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f1b6f1269dafa845275f8e11322a0204",
+    "content-hash": "8cb47f2340b96c516354647ee059f83f",
     "packages": [
         {
             "name": "bacon/bacon-qr-code",
@@ -197,6 +197,91 @@
             ],
             "time": "2026-09-06T14:11:38+00:00",
             "published-time": "2026-09-06T14:15:00+00:00"
+        },
+        {
+            "name": "clickbar/laravel-magellan",
+            "version": "2.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/clickbar/laravel-magellan.git",
+                "reference": "098e4252b10a1d5faf3c19c279acb6a243a2a3f4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/clickbar/laravel-magellan/zipball/098e4252b10a1d5faf3c19c279acb6a243a2a3f4",
+                "reference": "098e4252b10a1d5faf3c19c279acb6a243a2a3f4",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/console": "^11.0|^12.0|^13.0",
+                "illuminate/contracts": "^11.0|^12.0|^13.0",
+                "illuminate/database": "^11.0|^12.0|^13.0",
+                "illuminate/support": "^11.0|^12.0|^13.0",
+                "php": "^8.2",
+                "spatie/laravel-package-tools": "^1.14.0"
+            },
+            "require-dev": {
+                "larastan/larastan": "^3.1",
+                "laravel/pint": "1.29.0",
+                "nunomaduro/collision": "^v8.1",
+                "orchestra/testbench": "^9.0|^10.0|^11.0",
+                "pestphp/pest": "^3.7|^4.4",
+                "pestphp/pest-plugin-laravel": "^3.1|^4.1",
+                "phpstan/extension-installer": "^1.4",
+                "phpstan/phpstan-deprecation-rules": "^2.0",
+                "phpstan/phpstan-phpunit": "^2.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Clickbar\\Magellan\\": "src",
+                    "Clickbar\\Magellan\\Database\\Factories\\": "database/factories"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Adrian Hawlitschek",
+                    "email": "ah@clickbar.dev",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Tobias Kröll",
+                    "email": "tk@clickbar.dev",
+                    "role": "Developer"
+                }
+            ],
+            "description": "This package provides functionality for working with the postgis extension in Laravel.",
+            "homepage": "https://github.com/clickbar/laravel-magellan",
+            "support": {
+                "issues": "https://github.com/clickbar/laravel-magellan/issues",
+                "source": "https://github.com/clickbar/laravel-magellan/tree/2.3.0"
+            },
+            "time": "2026-10-23T09:01:27+00:00",
+            "extra": {
+                "laravel": {
+                    "aliases": {
+                        "WKBParser": "Clickbar\\Magellan\\Facades\\WKBParser",
+                        "WKTParser": "Clickbar\\Magellan\\Facades\\WKTParser",
+                        "WKBGenerator": "Clickbar\\Magellan\\Facades\\WKBGenerator",
+                        "WKTGenerator": "Clickbar\\Magellan\\Facades\\WKTGenerator",
+                        "GeojsonParser": "Clickbar\\Magellan\\Facades\\GeojsonParser",
+                        "GeojsonGenerator": "Clickbar\\Magellan\\Facades\\GeojsonGenerator"
+                    },
+                    "providers": [
+                        "Clickbar\\Magellan\\MagellanServiceProvider"
+                    ]
+                }
+            },
+            "keywords": [
+                "clickbar",
+                "laravel",
+                "magellan",
+                "postgis"
+            ]
         },
         {
             "name": "dasprid/enum",
