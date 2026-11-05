@@ -8,7 +8,7 @@ Una misma cuenta, dos formas de identificarse (ADR-0008): **sesión** en la web 
 sequenceDiagram
     autonumber
     actor U as Usuario
-    participant C as Web (Fortify + Livewire)<br/>o API /auth/register
+    participant C as Web (Fortify)<br/>o API /auth/register
     participant A as CreateNewUser<br/>(Action)
     participant DB as PostgreSQL
     participant Q as Cola
@@ -91,6 +91,6 @@ sequenceDiagram
 
 ## Notas
 
-- La web **no** usa Sanctum: Livewire en el mismo dominio funciona con la sesión estándar de Laravel.
+- La web **no** usa Sanctum: las pantallas, en el mismo dominio, funcionan con la sesión estándar de Laravel.
 - Desde su perfil, el usuario ve sus dispositivos conectados y puede revocar cualquier token.
 - Los tokens caducan (p. ej. 90 días sin uso) para limitar daños si se pierde un móvil.

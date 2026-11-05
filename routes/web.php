@@ -1,8 +1,7 @@
 <?php
 
+use App\Http\Controllers\Auth\EmailVerificationNoticeController;
 use App\Http\Controllers\LegalController;
-use App\Livewire\Auth\Register;
-use App\Livewire\Auth\VerifyEmail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -21,10 +20,10 @@ Route::get('/privacy', [LegalController::class, 'privacy'])->name('legal.privacy
 
 // Cuentas (#10, #11). Fortify pone los POST (registro, login, logout, contraseña)
 // y el enlace de verificación; las pantallas son nuestras (ADR-0012).
-Route::get('/register', Register::class)->middleware('guest')->name('register');
-Route::get('/email/verify', VerifyEmail::class)->middleware('auth')->name('verification.notice');
+Route::get('/email/verify', EmailVerificationNoticeController::class)->middleware('auth')->name('verification.notice');
 
 Route::middleware('guest')->group(function () {
+    Route::view('/register', 'auth.register')->name('register');
     Route::view('/login', 'auth.login')->name('login');
     Route::view('/forgot-password', 'auth.forgot-password')->name('password.request');
     Route::view('/reset-password/{token}', 'auth.reset-password')->name('password.reset');

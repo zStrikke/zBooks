@@ -1,20 +1,17 @@
 <?php
 
-use App\Livewire\Auth\VerifyEmail;
 use App\Models\User;
 use App\Notifications\VerifyEmail as VerifyEmailNotification;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\URL;
-use Livewire\Livewire;
 
 /*
-| Verificación del email (#10)
+| Verificación del email (#10). Aviso en Blade y reenvío por el POST de Fortify (#69).
 */
 
 beforeEach(function () {
     Notification::fake();
-    app()->setLocale('es');
 });
 
 function enlaceDeVerificacion(User $user, int $minutos = 60): string
@@ -40,42 +37,57 @@ it('el aviso muestra el email y cuánto dura el enlace', function () {
 });
 
 it('un usuario ya verificado no ve el aviso', function () {
-    $this->actingAs(User::factory()->create());
-
-    Livewire::test(VerifyEmail::class)->assertRedirect(route('home'));
+    $this->actingAs(User::factory()->create())
+        ->get('/email/verify')
+        ->assertRedirect(route('home'));
 });
 
-it('reenvía el email', function () {
+it('reenvía el email y vuelve al aviso con la confirmación', function () {
     $user = User::factory()->unverified()->create();
-    $this->actingAs($user);
 
-    Livewire::test(VerifyEmail::class)
-        ->call('resend')
-        ->assertSet('sent', true)
-        ->assertSet('wait', 60);
+    $this->actingAs($user)->from('/email/verify')
+        ->post('/email/verification-notification')
+        ->assertRedirect(route('verification.notice'));
 
     Notification::assertSentToTimes($user, VerifyEmailNotification::class, 1);
+
+    $this->get('/email/verify')
+        ->assertSeeText('Te hemos enviado un enlace nuevo.')
+        ->assertSeeText('Podrás reenviarlo en');
 });
 
-it('reenvía como mucho un email por minuto', function () {
+it('reenvía como mucho un email por minuto, sin página de error', function () {
     $user = User::factory()->unverified()->create();
     $this->actingAs($user);
 
-    $component = Livewire::test(VerifyEmail::class)->call('resend')->call('resend');
+    $this->post('/email/verification-notification');
+    $this->post('/email/verification-notification')->assertRedirect(route('verification.notice'));
     Notification::assertSentToTimes($user, VerifyEmailNotification::class, 1);
 
     $this->travel(61)->seconds();
-    $component->call('resend');
+    $this->post('/email/verification-notification');
     Notification::assertSentToTimes($user, VerifyEmailNotification::class, 2);
+});
+
+it('la cuenta atrás del aviso es el límite real del servidor', function () {
+    $user = User::factory()->unverified()->create();
+    $this->actingAs($user);
+
+    // Sin envíos recientes, el botón está activo
+    $this->get('/email/verify')->assertSee('wait: 0', false);
+
+    $this->post('/email/verification-notification');
+    $this->travel(20)->seconds();
+
+    $this->get('/email/verify')->assertSee('wait: 40', false)->assertSeeText('0:40');
 });
 
 it('justo después de registrarse hay que esperar un minuto para reenviar', function () {
     $user = User::factory()->unverified()->create();
     $this->actingAs($user)->withSession(['auth.just_registered' => true]);
 
-    Livewire::test(VerifyEmail::class)
-        ->assertSet('wait', 60)
-        ->call('resend');
+    $this->get('/email/verify')->assertSee('wait: 60', false);
+    $this->post('/email/verification-notification');
 
     Notification::assertNothingSent();
 });

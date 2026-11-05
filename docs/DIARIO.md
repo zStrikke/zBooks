@@ -761,3 +761,32 @@ Que un miembro pueda entrar, salir y recuperar su contraseña.
 
 ### Siguiente paso
 #12 (registro y verificación desde la API).
+
+---
+
+## [2026-11-05] #024 — Pantallas de cuenta en Blade y Alpine (#69)
+**Iteración:** 1 (v0.2.0)
+
+### Objetivo de la sesión
+Un solo patrón para las pantallas de cuenta, decidido con el PO al revisar la #68.
+
+### Hecho
+- **Registro:** vista Blade que envía al `POST /register` de Fortify. Se quita el componente Livewire `Register`, que duplicaba ese camino.
+- **«Revisa tu correo»:**
+  - vista Blade con un controlador pequeño (`EmailVerificationNoticeController`);
+  - el reenvío usa el `POST /email/verification-notification` de Fortify;
+  - la cuenta atrás corre en Alpine.
+- **`App\Auth\VerificationEmailThrottle`:** el límite de un email por minuto, en un solo sitio. Lo usan el limitador de Fortify, el registro (el primer email cuenta) y el aviso, que muestra los segundos que faltan. Si alguien se adelanta, vuelve al aviso en vez de ver una página 429.
+- **Tests por HTTP**, como el navegador: 115 en total. Un test comprueba que la cuenta atrás del aviso coincide con el límite real del servidor.
+- **ADR-0012 revisado:** las pantallas de cuenta en Blade y Alpine; Livewire, para lo que cambia sin recargar.
+
+### Decisiones
+- **Se pierde el aviso de «username en uso» al salir del campo:** sale al enviar. Era la única ventaja de Livewire aquí y no funcionaba (`wire:model.blur` en Livewire 4 no llama al servidor).
+
+### Aprendido
+- **`Livewire::test()` no es el navegador:** `set()` ejecuta los hooks aunque en la página real no se envíe nada. Los tests por HTTP se parecen más a lo que hace el usuario.
+- **Fuera del entorno `testing`, Laravel comprueba el token CSRF:** el test que simula producción tiene que quitar `PreventRequestForgery`, que en Laravel 13 sustituye a `ValidateCsrfToken`.
+- **El preset `security` de Pest prohíbe `md5()`:** para nombrar una clave, que no es criptografía, se usa `hash('md5', …)`.
+
+### Siguiente paso
+#12 (registro y verificación desde la API).
