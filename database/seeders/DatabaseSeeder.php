@@ -17,8 +17,9 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
-        // Los roles se crean en todos los entornos; el admin, solo fuera de producción.
-        $this->call([RoleSeeder::class, AdminUserSeeder::class]);
+        // Solo datos de desarrollo. Los roles los crea una migración (#71);
+        // el admin, solo fuera de producción.
+        $this->call(AdminUserSeeder::class);
 
         User::factory()->create([
             'username' => 'test_user',

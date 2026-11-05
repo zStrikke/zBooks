@@ -208,6 +208,15 @@ Haz los cambios en la misma rama, commit y push: el PR se actualiza solo. Contes
 **Necesito cambiar una tabla.**
 Crea una migración nueva: `make artisan c="make:migration add_locale_to_users_table"`. **Nunca edites una migración que ya está en `master`**: otros ya la han ejecutado. Actualiza el diagrama ER (`docs/diagramas/06-er.md`) en el mismo PR.
 
+**Necesito datos en la base de datos: ¿migración o seeder?**
+
+| Tipo de dato | Ejemplo | Dónde |
+|---|---|---|
+| **De referencia:** la aplicación no funciona sin ellos, en ningún entorno | Roles, catálogo inicial de `areas` | **Migración**, con `DB::table()->insertOrIgnore()` y los valores escritos en ella (no con modelos ni enums, que pueden cambiar). Un valor nuevo es una migración nueva |
+| **De desarrollo o de prueba** | El admin de desarrollo, usuarios y libros falsos | **Seeder** (`make fresh`). Nunca en producción |
+
+Si un enum de PHP refleja datos de referencia (como `App\Enums\Role`), un test comprueba que la base de datos y el enum coinciden.
+
 **Necesito un paquete nuevo.**
 `make composer c="require vendor/paquete"` (o `require --dev` si es solo para desarrollo). Sube `composer.json` y `composer.lock` juntos. Si es una pieza importante (autenticación, permisos, mapas), va con un ADR.
 

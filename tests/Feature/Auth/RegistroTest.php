@@ -4,7 +4,6 @@ use App\Enums\Role as RoleName;
 use App\Legal\PrivacyPolicy;
 use App\Models\User;
 use App\Notifications\VerifyEmail;
-use Database\Seeders\RoleSeeder;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Database\UniqueConstraintViolationException;
 use Illuminate\Foundation\Http\Middleware\PreventRequestForgery;
@@ -17,7 +16,6 @@ use Illuminate\Testing\TestResponse;
 */
 
 beforeEach(function () {
-    $this->seed(RoleSeeder::class);
     Notification::fake();
 });
 
