@@ -922,3 +922,31 @@ Que un `git pull` no deje el entorno a medias. Al revisar la #77, la ficha de so
 - **Fuera las pestañas Móvil y Escritorio.** La ficha es una tarjeta de tamaño casi fijo: entre móvil y escritorio solo cambian un poco el avatar y el nombre, así que las dos pestañas se veían iguales. Además, la columna del blog de la pestaña Escritorio, sin texto, parecía un fallo. La vista previa sirve para ver que el nombre y la bio no quedan descuadrados, y para eso basta una.
 - **Si algún día la ficha cambia mucho entre pantallas,** las pestañas vuelven sin dificultad.
 - El arreglo de la altura de las pestañas (3ced523) llegó a la rama después de fusionar la #77 y nunca pasó a `master`; con este cambio ya no hace falta.
+
+---
+
+## [2026-11-05] #031 — Mi zona (#18)
+**Iteración:** 1 (v0.2.0)
+
+### Objetivo de la sesión
+Que cada miembro pueda indicar dónde se mueve, con la precisión que elija, sin que zBooks guarde nunca su dirección.
+
+### Hecho
+- **Maqueta en el lienzo** (móvil sin zona, móvil y escritorio con zona), exportada a `docs/diseno/v0.2.0`. Sin zona, la sección empieza vacía: nadie guarda una zona sin querer.
+- **PostGIS por primera vez:** `clickbar/laravel-magellan` y la tabla `user_zones`:
+  - `location` es `geography(Point, 4326)` con índice espacial;
+  - un índice parcial deja **una sola zona `home`** por miembro;
+  - restricciones `CHECK` para `kind`, `source` y el modo radio (punto y radio de 1 a 50 km). `area_id`, `label` y `ends_at` llegan con la #54 y la #19.
+- **`App\Geo\ApproximateLocation`:** redondea el punto a una rejilla de 500 m, en metros y no en grados (un grado de longitud mide 111 km en el ecuador y unos 84 en Barcelona). El mismo cálculo está en `resources/js/zona.js`, para que el mapa enseñe ya el punto que se guardará.
+- **`App\Actions\Zones\SetHomeZone`:** valida, redondea y sustituye la zona anterior; también la quita.
+- **`App\Geo\Nominatim`:** el buscador de direcciones va por nuestro servidor, con User-Agent propio, una petición por segundo entre todos, caché de 7 días y 30 búsquedas por minuto por usuario.
+- **Pantalla:** Leaflet con import dinámico (solo se descarga en Mi cuenta), «Usar mi ubicación», clic en el mapa, buscador y radio con el círculo en el mapa.
+- **ADR-0014** (mapas, teselas y geocodificación), diagrama ER y `.env.example`. 27 tests nuevos (180 en total), entre ellos que la distancia real en PostGIS entre lo guardado y la casa es mayor que 0.
+
+### Decisiones
+- **Rejilla en vez de ruido aleatorio:** con ruido, guardar dos veces la misma casa daría puntos distintos y, promediándolos, se podría acercar uno a la casa real. La rejilla siempre da el mismo punto.
+- **Teselas de OpenStreetMap solo para desarrollo y la demo** (ADR-0014): cambiar de proveedor antes de la v1.0.0 es cambiar dos variables de entorno.
+- **Nominatim desde el servidor:** así se cumple su política de uso y el navegador del miembro no habla con terceros para buscar.
+
+### Siguiente paso
+#43 (web traducible) y cierre de la v0.2.0.
