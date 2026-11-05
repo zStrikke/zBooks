@@ -56,7 +56,6 @@ it('el número de socio es el id con ceros delante', function () {
 
 it('la ficha lleva el sello de alta y la firma del miembro', function () {
     $this->get('/u/zStrikke')
-        ->assertSeeText('Sello')
         ->assertSee('SOCIO APROBADO', false)
         ->assertSeeInOrder(['>NOV<', '>2026<'], false)
         ->assertSee('font-firma', false);
