@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Auth\VerificationEmailThrottle;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\RateLimiter;
@@ -30,9 +31,7 @@ class AppServiceProvider extends ServiceProvider
         RateLimiter::for('api', fn (Request $request) => Limit::perMinute(60)
             ->by($request->user()?->getAuthIdentifier() ?? $request->ip()));
 
-        // Verificación del email (#10): reenviar, 1 por minuto; abrir el enlace, 6 por minuto
-        RateLimiter::for('verification', fn (Request $request) => $request->isMethod('post')
-            ? Limit::perMinute(1)->by('send:'.($request->user()?->getAuthIdentifier() ?? $request->ip()))
-            : Limit::perMinute(6)->by('verify:'.($request->user()?->getAuthIdentifier() ?? $request->ip())));
+        // Verificación del email (#10, #69): reenviar, 1 por minuto; abrir el enlace, 6 por minuto
+        RateLimiter::for(VerificationEmailThrottle::LIMITER, VerificationEmailThrottle::forRequest(...));
     }
 }
