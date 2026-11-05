@@ -1002,3 +1002,16 @@ El PO subía un avatar en Mi cuenta y la página se rompía. El fichero se guard
 ### Aprendido
 - El enlace apunta a la ruta **del contenedor** (`/var/www/html/storage/app/public`), que en el equipo no existe: en la máquina es un enlace «roto». Por eso el script comprueba que el enlace exista (`-L`), no que su destino exista (`-e`).
 - Los tests de avatar usan `Storage::fake()` y no podían verlo: el fallo estaba en el entorno, no en el código.
+
+---
+
+## [2026-11-05] #035 — Portada: «Cómo funciona» como ciclo (#91)
+**Iteración:** 1 (v0.2.0)
+
+### Hecho
+- La ruta discontinua de «Cómo funciona» vuelve del paso 3 al 1 rodeando los pasos por debajo, con una punta de flecha que entra en el paso 1: quien encuentra el libro lo vuelve a liberar.
+- Menos guiones y más separados (4 px de trazo y 12 de hueco).
+
+### Aprendido
+- Un `<svg>` es un elemento «reemplazado»: con `position: absolute`, `left` + `right` o `top` + `bottom` no lo estiran; necesita `width` y `height` explícitos.
+- Con `preserveAspectRatio="none"` las coordenadas van en % del bloque, pero `vector-effect="non-scaling-stroke"` mantiene el grosor y los guiones en píxeles.

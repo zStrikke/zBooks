@@ -26,6 +26,7 @@ Formato basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/) y 
 - Guía del desarrollador: comandos, flujo de issue a PR, archivos de referencia y casos frecuentes (#51).
 
 ### Changed
+- Portada: «Cómo funciona» muestra el ciclo del libro con una línea que vuelve del último paso al primero, y la línea discontinua lleva menos guiones (#91).
 - La API v1 se aplaza a su propio hito (v0.11.0) para priorizar la web; la plantilla de PR y el ADR-0007 lo recogen (#74).
 - Los roles base se crean con una migración, no con un seeder: existen en todos los entornos tras `migrate`. Se quita `RoleSeeder` (#71).
 - Las pantallas de cuenta (registro y «Revisa tu correo») pasan de Livewire a Blade y Alpine, y envían a las rutas de Fortify. El límite de reenvío del email es el mismo para el registro, el aviso y Fortify, y sin página de error (#69).
