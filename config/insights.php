@@ -10,8 +10,11 @@ use NunoMaduro\PhpInsights\Domain\Insights\ForbiddenTraits;
 use NunoMaduro\PhpInsights\Domain\Metrics\Architecture\Classes;
 use PhpCsFixer\Fixer\Basic\BracesFixer;
 use PhpCsFixer\Fixer\ClassNotation\ClassDefinitionFixer;
+use PhpCsFixer\Fixer\Operator\NewWithBracesFixer;
+use SlevomatCodingStandard\Sniffs\Classes\ForbiddenPublicPropertySniff;
 use SlevomatCodingStandard\Sniffs\Commenting\DocCommentSpacingSniff;
 use SlevomatCodingStandard\Sniffs\Commenting\UselessFunctionDocCommentSniff;
+use SlevomatCodingStandard\Sniffs\Functions\UnusedParameterSniff;
 use SlevomatCodingStandard\Sniffs\Namespaces\AlphabeticallySortedUsesSniff;
 use SlevomatCodingStandard\Sniffs\TypeHints\DeclareStrictTypesSniff;
 use SlevomatCodingStandard\Sniffs\TypeHints\DisallowMixedTypeHintSniff;
@@ -96,9 +99,20 @@ return [
         'PHP_CodeSniffer\Standards\PEAR\Sniffs\WhiteSpace\ScopeClosingBraceSniff',
         // Pint junta las anotaciones del PHPDoc; esta regla pide separarlas
         DocCommentSpacingSniff::class,
+        // Pint (preset Laravel) quita los paréntesis de `new Clase`; estas reglas los piden
+        NewWithBracesFixer::class,
+        'PHP_CodeSniffer\Standards\PSR12\Sniffs\Classes\ClassInstantiationSniff',
     ],
 
     'config' => [
+        // Livewire enlaza el formulario con las propiedades públicas del componente
+        ForbiddenPublicPropertySniff::class => [
+            'exclude' => ['app/Livewire'],
+        ],
+        // Las reglas de validación implementan una interfaz con parámetros que no siempre usan
+        UnusedParameterSniff::class => [
+            'exclude' => ['app/Rules'],
+        ],
         ForbiddenPrivateMethods::class => [
             'title' => 'The usage of private methods is not idiomatic in Laravel.',
         ],

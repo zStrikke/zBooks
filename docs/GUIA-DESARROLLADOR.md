@@ -19,6 +19,7 @@ Se ejecutan desde la raíz del proyecto y corren dentro de Docker: no hace falta
 | `make composer c="require foo/bar"` | Cualquier comando de Composer |
 | `make migrate` / `make fresh` | Migraciones / recrear la base con datos de prueba |
 | `make logs s=app` | Logs de un servicio |
+| `make queue-restart` | Reinicia el worker de la cola (servicio `queue`) para que use el código nuevo. Los emails llegan a Mailpit: http://localhost:8025 |
 | `make psql` | Consola de PostgreSQL |
 
 ### Calidad: antes de cada push

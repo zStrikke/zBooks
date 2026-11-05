@@ -21,6 +21,23 @@
 
     @include('partials.cabecera')
 
+    @if (session('status'))
+        <div role="status" class="border-b border-ruta/30 bg-ruta/10">
+            <p class="mx-auto max-w-6xl px-4 py-3 font-display font-semibold text-ruta sm:px-6">{{ session('status') }}</p>
+        </div>
+    @endif
+
+    @auth
+        @unless (auth()->user()->hasVerifiedEmail() || request()->routeIs('verification.notice'))
+            <div class="border-b border-etiqueta/60 bg-etiqueta/25">
+                <p class="mx-auto max-w-6xl px-4 py-3 text-[0.95rem] sm:px-6">
+                    {{ __('Verify your email to register, release or catch books.') }}
+                    <a href="{{ route('verification.notice') }}" class="font-display font-bold text-sello hover:text-sello-oscuro">{{ __('Resend the email') }}</a>
+                </p>
+            </div>
+        @endunless
+    @endauth
+
     <main id="contenido" class="flex-1">
         {{ $slot }}
     </main>

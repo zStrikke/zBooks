@@ -8,15 +8,15 @@ Una misma cuenta, dos formas de identificarse (ADR-0008): **sesión** en la web 
 sequenceDiagram
     autonumber
     actor U as Usuario
-    participant C as Web (Breeze)<br/>o API /auth/register
-    participant A as CreateUser<br/>(Action)
+    participant C as Web (Fortify + Livewire)<br/>o API /auth/register
+    participant A as CreateNewUser<br/>(Action)
     participant DB as PostgreSQL
     participant Q as Cola
     participant MAIL as Email
 
     U->>C: username, email, contraseña
     C->>A: execute(datos validados)
-    A->>DB: INSERT users (email_verified_at = null)
+    A->>DB: INSERT users (email_verified_at = null),<br/>consentimiento y rol member
     A-->>C: usuario creado
     C->>Q: evento Registered
     Q->>MAIL: enlace firmado de verificación (caduca en 60 min)
@@ -26,7 +26,7 @@ sequenceDiagram
     C->>DB: UPDATE users SET email_verified_at = now()
     C-->>U: "Email verificado ✔"
 
-    Note over U,C: Sin verificar puede leer, pero las acciones<br/>que escriben (registrar, liberar, publicar…)<br/>devuelven 403 por el middleware `verified`.
+    Note over U,C: Sin verificar puede leer, pero las acciones<br/>que escriben (registrar, liberar, publicar…)<br/>pasan por el middleware `verified`: la web<br/>redirige al aviso y la API responde 403.
 ```
 
 ## Acceso desde la API (móvil)

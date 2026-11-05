@@ -25,8 +25,12 @@
         </form>
 
         <div class="hidden items-center gap-4 font-display text-[0.95rem] font-medium lg:flex">
-            <span class="cursor-not-allowed text-tinta-suave/60" title="Disponible en la versión 0.2.0">Entrar</span>
-            <span class="cursor-not-allowed rounded-md bg-sello/50 px-4 py-2 text-white" title="Disponible en la versión 0.2.0">Crear cuenta</span>
+            @auth
+                <span class="font-semibold">{{ auth()->user()->username }}</span>
+            @else
+                <span class="cursor-not-allowed text-tinta-suave/60" title="Disponible muy pronto">Entrar</span>
+                <a href="{{ route('register') }}" class="rounded-md bg-sello px-4 py-2 text-white hover:bg-sello-oscuro">Crear cuenta</a>
+            @endauth
         </div>
 
         <button type="button" @click="abierto = !abierto" :aria-expanded="abierto" aria-controls="menu-movil"
@@ -50,7 +54,12 @@
             <a href="{{ route('home') }}#como-funciona">Cómo funciona</a>
             <span class="text-tinta-suave/60">Libros cerca (versión 0.5.0)</span>
             <span class="text-tinta-suave/60">Zonas (versión 0.5.0)</span>
-            <span class="text-tinta-suave/60">Entrar y crear cuenta (versión 0.2.0)</span>
+            @auth
+                <span class="font-semibold">{{ auth()->user()->username }}</span>
+            @else
+                <a href="{{ route('register') }}" class="text-sello">Crear cuenta</a>
+                <span class="text-tinta-suave/60">Entrar (muy pronto)</span>
+            @endauth
         </nav>
     </div>
 </header>

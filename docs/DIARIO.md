@@ -694,3 +694,40 @@ Revisar los tres PR del PO, ya fusionados, y recoger los ajustes en la #65.
 
 ### Siguiente paso
 #10 (registro web): asignará `Role::Member` al registrarse.
+
+---
+
+## [2026-11-05] #022 — Registro en la web y verificación de email (#10)
+**Iteración:** 1 (v0.2.0)
+
+### Objetivo de la sesión
+Que un visitante pueda crear su cuenta en la web y verificar su email, con las pantallas del diseño.
+
+### Hecho
+- **Fortify sin vistas** (ADR-0012): pone el POST `/register` y el enlace de verificación. Las pantallas son componentes Livewire propios: `Register` y `VerifyEmail`.
+- **`CreateNewUser`**, la acción que también usará la API (#12):
+  - valida username, email, contraseña y privacidad;
+  - crea el usuario en una transacción, guarda la aceptación de la privacidad y le asigna `Role::Member`.
+- **Username:**
+  - `users.name` pasa a `users.username`, con un índice único sobre `lower(username)`;
+  - regla `App\Rules\Username`, con los nombres reservados en `config/zbooks.php`;
+  - avisa de que ya está cogido al salir del campo.
+- **Email de verificación:** en cola, en el idioma de la web y con un enlace firmado que caduca en 60 minutos.
+- **Reenvío:** uno por minuto, con cuenta atrás. El primer email cuenta desde el registro.
+- **Avisos:** una banda en todas las páginas mientras falte verificar, y un mensaje de confirmación al verificar.
+- **Servicio `queue`** en Docker Compose: sin él, los emails en cola nunca salían en desarrollo. Llegan a Mailpit.
+- **Español en la web:** primeras traducciones (`lang/es.json` y `lang/es/validation.php`) y el middleware `SetWebLocale`. Adelanta una parte de la #43.
+
+### Decisiones
+- **Textos fuente en inglés con `__()`** en las pantallas nuevas, como dice el ADR-0011. Las vistas existentes las pasa la #43.
+- **El formulario funciona sin JavaScript:** sin Livewire, se envía al POST de Fortify, que usa la misma acción.
+- **Email en minúsculas** al validar y al guardar: `A@x.com` y `a@x.com` son la misma cuenta.
+- **El idioma del email se fija al enviarlo:** el worker de la cola no conoce el de la petición.
+- **`/u/{username}` sin distinguir mayúsculas** queda para la #16, que crea el perfil. La regla y el índice ya lo permiten.
+
+### Aprendido
+- **`Livewire::test` no pasa por el middleware `web`:** los tests que comprueban textos en español fijan el idioma ellos mismos.
+- **Un email en cola no sabe el idioma de la petición:** hay que fijarlo con `->locale()` al enviarlo.
+
+### Siguiente paso
+#11 (login y logout).

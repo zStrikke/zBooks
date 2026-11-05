@@ -20,6 +20,17 @@ services:
         condition: service_healthy
     restart: unless-stopped
 
+  # Procesa la cola (emails de verificación…). Tras cambiar código: make queue-restart
+  queue:
+    image: zbooks-app:dev
+    command: php artisan queue:work --tries=3 --backoff=10
+    volumes:
+      - .:/var/www/html
+    depends_on:
+      app:
+        condition: service_started
+    restart: unless-stopped
+
   web:
     image: nginx:1.27-alpine
     ports:
