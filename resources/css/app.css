@@ -4,6 +4,7 @@
 @import '@fontsource-variable/bricolage-grotesque';
 @import '@fontsource-variable/source-serif-4';
 @import '@fontsource/ibm-plex-mono/500.css';
+@import '@fontsource/herr-von-muellerhoff';
 
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
@@ -17,6 +18,8 @@
  * - ruta:     verde del recorrido en el mapa
  * - linea:    bordes y separadores (fuerte: campos de formulario)
  * - error:    mensajes de validación
+ * - tela:     tapa de tela de la ficha de socio (perfil)
+ * - filete:   dorado del filete y del sello de la ficha
  */
 @theme {
     --color-papel: #f4f6f1;
@@ -30,10 +33,14 @@
     --color-linea: #d3d9cf;
     --color-linea-fuerte: #b9c1b4;
     --color-error: #b3261e;
+    --color-tela: #1f3a33;
+    --color-filete: #c9a64a;
+    --color-filete-claro: #e6c66a;
 
     --font-display: 'Bricolage Grotesque Variable', ui-sans-serif, system-ui, sans-serif;
     --font-serif: 'Source Serif 4 Variable', ui-serif, Georgia, serif;
     --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
+    --font-firma: 'Herr Von Muellerhoff', cursive;
     --font-sans: var(--font-display);
 }
 
