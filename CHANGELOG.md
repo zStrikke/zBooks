@@ -5,6 +5,8 @@ Formato basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/) y 
 ## [Unreleased]
 
 ### Added
+- Login en la web (`/login`) con email o nombre de usuario, sin distinguir mayúsculas, y «Mantener la sesión iniciada»; bloqueo tras 5 intentos fallidos en un minuto; logout que invalida la sesión. «Entrar» y «Salir» en la cabecera (#11).
+- «He olvidado mi contraseña» (`/forgot-password`) y nueva contraseña desde el enlace del email (`/reset-password/{token}`), con las mismas reglas que el registro. El email va en cola y en el idioma de la web, y la respuesta no revela si un email tiene cuenta (#11).
 - Registro en la web (`/register`) con Fortify y pantallas propias en Livewire según las maquetas: username (3–20 letras, números o `_`, único sin distinguir mayúsculas y con nombres reservados), email, contraseña (`Password::defaults()`, con comprobación de filtraciones en producción) y aceptación de la privacidad. La cuenta nueva recibe el rol `member` y la sesión queda iniciada (#10).
 - Verificación del email: enlace firmado que caduca en 60 minutos, enviado en cola y en el idioma de la web; aviso «Revisa tu correo» (`/email/verify`) con reenvío limitado a uno por minuto; banda de aviso mientras no se verifique y confirmación al verificar. El middleware `verified` lleva al aviso desde las rutas que escriben (#10).
 - Servicio `queue` en Docker Compose, que procesa la cola (emails), y `make queue-restart` (#10).

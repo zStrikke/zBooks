@@ -731,3 +731,33 @@ Que un visitante pueda crear su cuenta en la web y verificar su email, con las p
 
 ### Siguiente paso
 #11 (login y logout).
+
+---
+
+## [2026-11-05] #023 — Login, logout y recuperar la contraseña (#11)
+**Iteración:** 1 (v0.2.0)
+
+### Objetivo de la sesión
+Que un miembro pueda entrar, salir y recuperar su contraseña.
+
+### Hecho
+- **Login** con un solo campo, «Email o nombre de usuario». `AuthenticateUser` busca por email si lleva `@` y, si no, por `lower(username)`.
+- **Bloqueo** tras 5 intentos fallidos en un minuto, con el límite propio de Fortify. Se muestra como aviso en el formulario, no como una página de error.
+- **Logout:** invalida la sesión y renueva el token CSRF. «Entrar» y «Salir» en la cabecera, también en el menú móvil.
+- **Contraseña:**
+  - «He olvidado mi contraseña» envía el enlace en cola y en el idioma de la web;
+  - la nueva contraseña sigue las mismas reglas que en el registro;
+  - después del cambio, se vuelve al login.
+- **Visitantes:** quien no tiene sesión y pide una página protegida va al login y, al entrar, vuelve a esa página.
+- 18 tests nuevos (116 en total). Diagrama 09 con el acceso desde la web.
+
+### Decisiones
+- **Login, olvido y nueva contraseña son vistas Blade con formularios normales**, que envían a las rutas de Fortify. Livewire no aportaba nada en estas pantallas, y así se usa tal cual lo que Fortify ya tiene probado: límite de intentos, sesión nueva, cookie de recordar y, más adelante, el doble factor. El registro sí sigue en Livewire, porque comprueba el username al salir del campo.
+- **No revelar qué emails tienen cuenta:** con un email desconocido, «He olvidado mi contraseña» responde lo mismo que con uno registrado.
+- **«Mantener la sesión iniciada» viene marcado**, como en el diseño.
+
+### Aprendido
+- **`assertSessionHasErrors()` vacía la sesión:** si después se carga el formulario para ver el mensaje, ya no está. Hay que comprobar una cosa o la otra.
+
+### Siguiente paso
+#12 (registro y verificación desde la API).

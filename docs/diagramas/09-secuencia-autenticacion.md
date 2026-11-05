@@ -29,6 +29,36 @@ sequenceDiagram
     Note over U,C: Sin verificar puede leer, pero las acciones<br/>que escriben (registrar, liberar, publicar…)<br/>pasan por el middleware `verified`: la web<br/>redirige al aviso y la API responde 403.
 ```
 
+## Acceso desde la web
+
+```mermaid
+sequenceDiagram
+    autonumber
+    actor U as Usuario
+    participant W as /login (Fortify)
+    participant A as AuthenticateUser
+    participant DB as PostgreSQL
+
+    U->>W: email o username, contraseña, «mantener sesión»
+    W->>W: ¿5 intentos fallidos en 1 min (login + IP)?
+    alt bloqueado
+        W-->>U: «Demasiados intentos. Vuelve a probar en N s»
+    else
+        W->>A: credenciales
+        A->>DB: con @ → por email · sin @ → por lower(username)
+        alt correctas
+            W->>W: nueva sesión (+ cookie de recordar si se marcó)
+            W-->>U: redirige a la página que pedía o a la portada
+        else incorrectas
+            W-->>U: vuelve al formulario con el aviso
+        end
+    end
+
+    U->>W: POST /logout
+    W->>W: invalida la sesión y renueva el token CSRF
+    W-->>U: portada
+```
+
 ## Acceso desde la API (móvil)
 
 ```mermaid

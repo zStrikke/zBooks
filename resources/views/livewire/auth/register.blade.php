@@ -69,7 +69,7 @@
                     <span wire:loading wire:target="register">{{ __('Creating your account…') }}</span>
                 </button>
                 <p class="text-[0.95rem]">{{ __('Already have an account?') }}
-                    <span class="font-display font-bold text-tinta-suave/70" title="{{ __('Coming soon') }}">{{ __('Log in') }}</span>
+                    <a href="{{ route('login') }}" class="font-display font-bold text-sello hover:text-sello-oscuro">{{ __('Log in') }}</a>
                 </p>
             </div>
         </form>
