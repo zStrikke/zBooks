@@ -9,6 +9,7 @@ use Illuminate\Http\Client\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\RateLimiter;
+use Illuminate\Testing\TestResponse;
 
 /*
 | Mi zona (#18): zona habitual con punto redondeado y radio
@@ -20,7 +21,7 @@ beforeEach(function () {
     $this->casa = ['latitude' => 41.40312, 'longitude' => 2.15667];
 });
 
-function guardarZona(array $datos): Illuminate\Testing\TestResponse
+function guardarZona(array $datos): TestResponse
 {
     return test()->actingAs(test()->user)
         ->from('/account')
