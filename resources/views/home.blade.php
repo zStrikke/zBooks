@@ -52,10 +52,19 @@
         <div class="mx-auto max-w-6xl px-4 py-16 sm:px-6">
             <h2 class="font-display text-3xl font-bold tracking-tight">{{ __('How it works') }}</h2>
 
-            <ol class="relative mt-12 grid gap-12 md:grid-cols-3 md:gap-8">
-                {{-- Línea de la ruta que une los pasos (solo en escritorio) --}}
-                <svg class="pointer-events-none absolute left-0 top-6 hidden h-4 w-full md:block" preserveAspectRatio="none" viewBox="0 0 100 4" aria-hidden="true">
-                    <line x1="2" y1="2" x2="69" y2="2" stroke="#1e7a6e" stroke-width="0.6" stroke-dasharray="1.6 1.4" vector-effect="non-scaling-stroke" style="stroke-width:2px"/>
+            <ol class="relative mt-12 grid gap-12 md:grid-cols-3 md:gap-8 md:pb-6">
+                {{--
+                    La ruta (solo en escritorio): une los tres pasos y vuelve del último al
+                    primero por debajo, porque quien encuentra el libro lo vuelve a liberar (#91).
+                    Las coordenadas van en % del bloque; el trazo y los guiones, en píxeles.
+                --}}
+                <svg class="pointer-events-none absolute top-6 hidden h-full text-ruta md:block" style="left: -1.5rem; width: calc(100% + 1.5rem)" preserveAspectRatio="none" viewBox="0 0 100 100" aria-hidden="true">
+                    <path d="M5 0 H69.5" fill="none" stroke="currentColor" stroke-width="2" stroke-dasharray="4 12" stroke-linecap="round" vector-effect="non-scaling-stroke"/>
+                    <path d="M73.5 0 H97.5 Q99.5 0 99.5 8 V92 Q99.5 100 97.5 100 H2 Q0.3 100 0.3 92 V8 Q0.3 0 1.4 0" fill="none" stroke="currentColor" stroke-width="2" stroke-dasharray="4 12" stroke-linecap="round" vector-effect="non-scaling-stroke"/>
+                </svg>
+                {{-- Punta de la flecha de vuelta, entrando en el paso 1 por la izquierda --}}
+                <svg class="pointer-events-none absolute hidden text-ruta md:block" style="left: -0.75rem; top: 1rem" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true">
+                    <path d="M5 3l6 5-6 5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
 
                 @foreach ([
