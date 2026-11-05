@@ -15,6 +15,7 @@ setup: ## Primera instalación: .env, imagen, dependencias, base de datos y fron
 	$(EXEC) composer install
 	@grep -q '^APP_KEY=base64:' .env || $(EXEC) php artisan key:generate
 	$(EXEC) php artisan migrate
+	$(EXEC) php artisan storage:link
 	$(MAKE) assets
 	@echo "Listo: http://localhost"
 

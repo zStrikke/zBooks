@@ -27,6 +27,8 @@
         <div class="hidden items-center gap-4 font-display text-[0.95rem] font-medium lg:flex">
             @auth
                 <a href="{{ route('profile.show', auth()->user()->username) }}" class="font-semibold hover:text-sello">{{ auth()->user()->username }}</a>
+                <a href="{{ route('account') }}" @class(['hover:text-sello', 'underline decoration-2 underline-offset-6' => request()->routeIs('account')])
+                   @if (request()->routeIs('account')) aria-current="page" @endif>Mi cuenta</a>
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
                     <button type="submit" class="hover:text-sello">Salir</button>
@@ -60,6 +62,7 @@
             <span class="text-tinta-suave/60">Zonas (versión 0.5.0)</span>
             @auth
                 <a href="{{ route('profile.show', auth()->user()->username) }}" class="font-semibold hover:text-sello">{{ auth()->user()->username }}</a>
+                <a href="{{ route('account') }}">Mi cuenta</a>
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
                     <button type="submit">Salir</button>

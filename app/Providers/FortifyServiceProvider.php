@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Actions\Fortify\AuthenticateUser;
 use App\Actions\Fortify\CreateNewUser;
 use App\Actions\Fortify\ResetUserPassword;
+use App\Actions\Fortify\UpdateUserPassword;
 use App\Http\Responses\EmailVerificationNotificationSentResponse;
 use App\Http\Responses\FailedPasswordResetLinkRequestResponse;
 use App\Http\Responses\RegisterResponse;
@@ -35,5 +36,6 @@ class FortifyServiceProvider extends ServiceProvider
         Fortify::createUsersUsing(CreateNewUser::class);
         Fortify::authenticateUsing(new AuthenticateUser);
         Fortify::resetUserPasswordsUsing(ResetUserPassword::class);
+        Fortify::updateUserPasswordsUsing(UpdateUserPassword::class);
     }
 }

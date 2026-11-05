@@ -16,7 +16,7 @@ Criterios comunes: **mobile-first** (el móvil se diseña primero), los colores 
 
 | Versión | Pantallas | Lienzo | Issues |
 |---|---|---|---|
-| [v0.2.0](v0.2.0/) | Registro, iniciar sesión, verificar email y perfil público (móvil y escritorio) | [Abrir el lienzo](https://claude.ai/artifact/QBqaDvURaFcYWre4CRTsUz) (privado: hay que compartirlo para que otros lo vean) | #10, #11, #16 |
+| [v0.2.0](v0.2.0/) | Registro, iniciar sesión, verificar email, perfil público y Mi cuenta (móvil y escritorio) | [Abrir el lienzo](https://claude.ai/artifact/QBqaDvURaFcYWre4CRTsUz) (privado: hay que compartirlo para que otros lo vean) | #10, #11, #16, #17 |
 
 ### v0.2.0
 
@@ -26,5 +26,6 @@ Criterios comunes: **mobile-first** (el móvil se diseña primero), los colores 
 | Iniciar sesión | [captura](v0.2.0/capturas/movil-login.png) · [html](v0.2.0/html/movil-login.html) | [captura](v0.2.0/capturas/escritorio-login.png) · [html](v0.2.0/html/escritorio-login.html) | #11 |
 | Verifica tu email | [captura](v0.2.0/capturas/movil-verificar-email.png) · [html](v0.2.0/html/movil-verificar-email.html) | [captura](v0.2.0/capturas/escritorio-verificar-email.png) · [html](v0.2.0/html/escritorio-verificar-email.html) | #10 |
 | Perfil público | [captura](v0.2.0/capturas/movil-perfil-publico.png) · [html](v0.2.0/html/movil-perfil-publico.html) | [captura](v0.2.0/capturas/escritorio-perfil-publico.png) · [html](v0.2.0/html/escritorio-perfil-publico.html) | #16 |
+| Mi cuenta | [captura](v0.2.0/capturas/movil-mi-cuenta.png) · [html](v0.2.0/html/movil-mi-cuenta.html) | [captura](v0.2.0/capturas/escritorio-mi-cuenta.png) · [html](v0.2.0/html/escritorio-mi-cuenta.html) | #17 |
 
-**Ideas de cada pantalla en escritorio:** la tarjeta de viaje con sellos (registro), la etiqueta troquelada con el buscador de código (login), el matasellos (verificación) y el carné de socio (perfil). Las cifras, lugares y textos entre corchetes son datos de ejemplo.
+**Ideas de cada pantalla en escritorio:** la tarjeta de viaje con sellos (registro), la etiqueta troquelada con el buscador de código (login), el matasellos (verificación), la ficha de socio (perfil; en el lienzo están las tres opciones que se valoraron) y su vista previa con pestañas Móvil y Escritorio (Mi cuenta). Las cifras, lugares y textos entre corchetes son datos de ejemplo.
