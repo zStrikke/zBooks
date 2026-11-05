@@ -908,3 +908,14 @@ Que un `git pull` no deje el entorno a medias. Al revisar la #77, la ficha de so
 
 ### Siguiente paso
 #18 (zona de referencia habitual), como sección Mi zona de la cuenta.
+
+---
+
+## [2026-11-05] #030 — Vista previa de escritorio solo con la ficha (#80)
+**Iteración:** 1 (v0.2.0)
+
+### Hecho
+- La pestaña Escritorio de «Así te ven» deja de pintar la columna del blog (una caja gris y un recuadro discontinuo sin texto) y muestra la ficha centrada, con el ancho que tiene en el perfil de escritorio.
+
+### Decisiones
+- **El PO prefiere ver solo la ficha:** la vista previa sirve para comprobar que el nombre y la bio no quedan descuadrados, no para reproducir la página entera.

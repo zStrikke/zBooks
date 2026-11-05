@@ -139,12 +139,9 @@
                     <div aria-hidden="true" class="flex h-4 items-center gap-1 border-b border-linea bg-papel-hondo pl-2">
                         <i class="size-1.5 rounded-full bg-linea-fuerte"></i><i class="size-1.5 rounded-full bg-linea-fuerte"></i><i class="size-1.5 rounded-full bg-linea-fuerte"></i>
                     </div>
-                    <div class="flex w-160 gap-8 p-8 [zoom:0.48]">
-                        <x-member-card :user="$user" size="escritorio" live class="w-85 shrink-0" />
-                        <div aria-hidden="true" class="flex flex-1 flex-col gap-4">
-                            <div class="h-6 w-24 rounded bg-linea"></div>
-                            <div class="flex-1 rounded-[14px] border-2 border-dashed border-linea-fuerte"></div>
-                        </div>
+                    {{-- Solo la ficha, centrada y con el ancho que tiene en el perfil de escritorio (#80) --}}
+                    <div class="flex w-120 justify-center p-8 [zoom:0.62]">
+                        <x-member-card :user="$user" size="escritorio" live class="w-85" />
                     </div>
                 </div>
             </section>
