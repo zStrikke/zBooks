@@ -16,15 +16,18 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property ZoneMode $mode
  * @property ZoneSource $source
  * @property Point $location
- * @property int $radius_km
+ * @property int $radius_m
  */
 class UserZone extends Model
 {
-    public const DEFAULT_RADIUS_KM = 5;
+    /** Radio en metros: de 0,5 a 25 km, en pasos de 500 m (2,5 km por defecto) */
+    public const DEFAULT_RADIUS_M = 2500;
 
-    public const MIN_RADIUS_KM = 1;
+    public const MIN_RADIUS_M = 500;
 
-    public const MAX_RADIUS_KM = 50;
+    public const MAX_RADIUS_M = 25000;
+
+    public const RADIUS_STEP_M = 500;
 
     protected $guarded = ['id'];
 
@@ -46,7 +49,7 @@ class UserZone extends Model
             'mode' => ZoneMode::class,
             'source' => ZoneSource::class,
             'location' => Point::class,
-            'radius_km' => 'integer',
+            'radius_m' => 'integer',
         ];
     }
 }

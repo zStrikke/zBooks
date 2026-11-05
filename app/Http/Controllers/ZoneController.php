@@ -20,7 +20,7 @@ class ZoneController extends Controller
 
     public function update(Request $request, SetHomeZone $action): RedirectResponse
     {
-        $action->set($this->user($request), $request->only(['latitude', 'longitude', 'radius_km', 'source']));
+        $action->set($this->user($request), $request->only(['latitude', 'longitude', 'radius_m', 'source']));
 
         return redirect(route('account').'#zona')->with('status', self::UPDATED);
     }

@@ -14,7 +14,7 @@ use Illuminate\Validation\Rule;
 
 /**
  * Fija la zona habitual de un miembro (#18): un punto con radio. El punto se
- * redondea a ~500 m antes de guardarlo y la zona anterior se sustituye.
+ * redondea a ~250 m antes de guardarlo y la zona anterior se sustituye.
  * La usa la web y, más adelante, la API (#73).
  */
 class SetHomeZone
@@ -24,7 +24,7 @@ class SetHomeZone
      */
     public function set(User $user, array $input): UserZone
     {
-        /** @var array{latitude: numeric, longitude: numeric, radius_km: numeric, source: string} $data */
+        /** @var array{latitude: numeric, longitude: numeric, radius_m: numeric, source: string} $data */
         $data = Validator::make($input, self::rules())->validateWithBag('updateZone');
 
         [$lat, $lon] = ApproximateLocation::round((float) $data['latitude'], (float) $data['longitude']);
@@ -35,7 +35,7 @@ class SetHomeZone
                 'mode' => ZoneMode::Radius,
                 'source' => ZoneSource::from($data['source']),
                 'location' => Point::makeGeodetic($lat, $lon),
-                'radius_km' => (int) $data['radius_km'],
+                'radius_m' => (int) $data['radius_m'],
             ],
         );
     }
@@ -53,7 +53,10 @@ class SetHomeZone
         return [
             'latitude' => ['required', 'numeric', 'between:-90,90'],
             'longitude' => ['required', 'numeric', 'between:-180,180'],
-            'radius_km' => ['required', 'integer', 'between:'.UserZone::MIN_RADIUS_KM.','.UserZone::MAX_RADIUS_KM],
+            'radius_m' => [
+                'required', 'integer', 'between:'.UserZone::MIN_RADIUS_M.','.UserZone::MAX_RADIUS_M,
+                'multiple_of:'.UserZone::RADIUS_STEP_M,
+            ],
             'source' => ['required', Rule::in([ZoneSource::Geolocation->value, ZoneSource::Map->value])],
         ];
     }
