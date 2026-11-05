@@ -21,8 +21,8 @@ return Application::configure(basePath: dirname(__DIR__))
         // La web en el idioma del usuario; la API, siempre en inglés (ADR-0011)
         $middleware->web(append: SetWebLocale::class);
 
-        // Sin sesión, a crear la cuenta; con la #11 pasará a la pantalla de login
-        $middleware->redirectGuestsTo(fn () => route('register'));
+        // Sin sesión, a entrar; después vuelve a la página que pedía
+        $middleware->redirectGuestsTo(fn () => route('login'));
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         $exceptions->shouldRenderJsonWhen(

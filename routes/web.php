@@ -19,7 +19,13 @@ Route::get('/zbid', function (Request $request) {
 Route::get('/legal-notice', [LegalController::class, 'notice'])->name('legal.notice');
 Route::get('/privacy', [LegalController::class, 'privacy'])->name('legal.privacy');
 
-// Cuentas (#10). Fortify pone el POST /register y el enlace de verificación;
-// las pantallas son nuestras (ADR-0012).
+// Cuentas (#10, #11). Fortify pone los POST (registro, login, logout, contraseña)
+// y el enlace de verificación; las pantallas son nuestras (ADR-0012).
 Route::get('/register', Register::class)->middleware('guest')->name('register');
 Route::get('/email/verify', VerifyEmail::class)->middleware('auth')->name('verification.notice');
+
+Route::middleware('guest')->group(function () {
+    Route::view('/login', 'auth.login')->name('login');
+    Route::view('/forgot-password', 'auth.forgot-password')->name('password.request');
+    Route::view('/reset-password/{token}', 'auth.reset-password')->name('password.reset');
+});

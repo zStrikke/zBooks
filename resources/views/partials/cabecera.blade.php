@@ -27,8 +27,12 @@
         <div class="hidden items-center gap-4 font-display text-[0.95rem] font-medium lg:flex">
             @auth
                 <span class="font-semibold">{{ auth()->user()->username }}</span>
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <button type="submit" class="hover:text-sello">Salir</button>
+                </form>
             @else
-                <span class="cursor-not-allowed text-tinta-suave/60" title="Disponible muy pronto">Entrar</span>
+                <a href="{{ route('login') }}" class="hover:text-sello">Entrar</a>
                 <a href="{{ route('register') }}" class="rounded-md bg-sello px-4 py-2 text-white hover:bg-sello-oscuro">Crear cuenta</a>
             @endauth
         </div>
@@ -56,9 +60,13 @@
             <span class="text-tinta-suave/60">Zonas (versión 0.5.0)</span>
             @auth
                 <span class="font-semibold">{{ auth()->user()->username }}</span>
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <button type="submit">Salir</button>
+                </form>
             @else
+                <a href="{{ route('login') }}">Entrar</a>
                 <a href="{{ route('register') }}" class="text-sello">Crear cuenta</a>
-                <span class="text-tinta-suave/60">Entrar (muy pronto)</span>
             @endauth
         </nav>
     </div>
