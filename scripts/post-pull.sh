@@ -25,7 +25,7 @@ fi
 FICHEROS=$(git diff --name-only "$DESDE" HEAD)
 desde_corto=$(git rev-parse --short "$DESDE")
 
-if [ -z "$FICHEROS" ]; then
+if [ -z "$FICHEROS" ] && [ -L public/storage ]; then
     echo "${OK}✓${OFF} No ha cambiado nada desde $desde_corto: no hace falta hacer nada."
     exit 0
 fi
@@ -42,10 +42,32 @@ REGLAS=(
     "Variables de entorno;^\.env\.example$;compara tu .env con .env.example y añade las variables nuevas;aviso"
 )
 
-total=$(printf '%s\n' "$FICHEROS" | wc -l | tr -d ' ')
-echo "${BOLD}Desde $desde_corto han cambiado $total ficheros${OFF}"
+if [ -n "$FICHEROS" ]; then
+    total=$(printf '%s\n' "$FICHEROS" | wc -l | tr -d ' ')
+    echo "${BOLD}Desde $desde_corto han cambiado $total ficheros${OFF}"
+else
+    echo "${BOLD}Desde $desde_corto no ha cambiado ningún fichero${OFF}"
+fi
 
 ejecutados=(); fallido=''; avisos=(); pendientes=()
+
+# Comprobación fija, no depende del pull: sin el enlace public/storage las fotos
+# de perfil dan 403 (#89). make setup lo crea, pero los entornos anteriores no lo tienen.
+# -L y no -e: el enlace apunta a la ruta del contenedor (/var/www/html/…), que en tu equipo no existe
+if [ ! -L public/storage ]; then
+    echo
+    echo "${BOLD}Enlace public/storage${OFF} ${DIM}(no existe: las fotos subidas no se verían)${OFF}"
+    echo "    → make artisan c=storage:link"
+    if [ -z "$SOLO_VER" ]; then
+        if make artisan c=storage:link >/dev/null 2>&1; then
+            echo "    ${OK}✓${OFF} hecho"
+            ejecutados+=("make artisan c=storage:link")
+        else
+            echo "    ${KO}✗${OFF} ha fallado: prueba a mano con make artisan c=storage:link"
+            fallido="make artisan c=storage:link"
+        fi
+    fi
+fi
 for regla in "${REGLAS[@]}"; do
     IFS=';' read -r nombre patron comando modo <<< "$regla"
     coinciden=$(printf '%s\n' "$FICHEROS" | grep -E "$patron" || true)
