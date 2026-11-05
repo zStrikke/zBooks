@@ -953,3 +953,17 @@ Que cada miembro pueda indicar dónde se mueve, con la precisión que elija, sin
 
 ### Siguiente paso
 #43 (web traducible) y cierre de la v0.2.0.
+
+---
+
+## [2026-11-05] #032 — `make post-pull` ejecuta lo que hace falta (#86)
+**Iteración:** 1 (v0.2.0)
+
+### Hecho
+- **`make post-pull` pasa de listar a ejecutar:** recorre los grupos de ficheros que han llegado, ejecuta en orden los comandos seguros (imagen de Docker, Composer, front, migraciones, worker de la cola) y acaba con un resumen de lo hecho (✓), lo que falló (✗), lo pendiente y lo que toca hacer a mano (⚠).
+- **`ver=1`** para solo listar, como antes. Guía del desarrollador actualizada.
+
+### Decisiones
+- **El PO quería que lo ejecutara**, no solo que lo dijera: la gracia es no tener que pensar tras un pull.
+- **Lo que borra datos o toca ficheros personales sigue siendo a mano:** `make fresh` y el `.env`.
+- **Si un comando falla, para:** los siguientes pueden depender de él (las migraciones, de las dependencias).

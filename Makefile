@@ -66,8 +66,8 @@ insights: ## Puntúa el código con PHP Insights
 check: ## Estilo, análisis, PHP Insights y tests (lo mismo que la CI)
 	@./scripts/check.sh
 
-post-pull: ## Qué cambió con el último git pull y qué ejecutar (make post-pull desde=<commit>)
-	@./scripts/post-pull.sh $(desde)
+post-pull: ## Tras un git pull: ejecuta lo que haga falta y lo resume (desde=<commit>, ver=1 solo lista)
+	@DESDE="$(desde)" VER="$(ver)" ./scripts/post-pull.sh
 
 migrate: ## Ejecuta las migraciones
 	$(EXEC) php artisan migrate
