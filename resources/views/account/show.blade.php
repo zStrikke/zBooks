@@ -153,7 +153,7 @@
             </form>
         </section>
 
-        {{-- Mi zona (#18): el punto se redondea a ~500 m en el navegador (para enseñarlo) y en el servidor (para guardarlo) --}}
+        {{-- Mi zona (#18): el punto se redondea a ~250 m en el navegador (para enseñarlo) y en el servidor (para guardarlo) --}}
         <section id="zona" aria-labelledby="zona-titulo" @if ($errorZona->any() || in_array($estado, [ZoneController::UPDATED, ZoneController::REMOVED], true)) x-data x-init="$el.scrollIntoView()" @endif
                  class="flex scroll-mt-6 flex-col gap-4.5 rounded-[14px] border border-linea bg-white p-5 lg:col-start-2 lg:p-8">
             <div>
@@ -164,13 +164,14 @@
             <div x-data="zonaMapa(@js([
                     'lat' => $zona?->location->getLatitude(),
                     'lon' => $zona?->location->getLongitude(),
-                    'radio' => (int) old('radius_km', $zona->radius_km ?? UserZone::DEFAULT_RADIUS_KM),
+                    'radio' => ((int) old('radius_m', $zona->radius_m ?? UserZone::DEFAULT_RADIUS_M)) / 1000,
                     'source' => $zona?->source->value,
                     'centro' => [41.4036, 2.1744],
                     'zoom' => 12,
                     'teselas' => config('zbooks.map.tiles'),
                     'atribucion' => config('zbooks.map.attribution'),
                     'urlBusqueda' => route('account.zone.search'),
+                    'idioma' => app()->getLocale(),
                     'textos' => [
                         'sinGeolocalizacion' => __('Your browser cannot share your location. Search an address or tap the map.'),
                         'geolocalizacionDenegada' => __('We could not get your location. Check the permission, or search an address or tap the map.'),
@@ -185,20 +186,23 @@
                 </div>
 
                 <div class="flex flex-wrap items-start gap-3">
-                    <button type="button" @click="miUbicacion()"
-                            class="inline-flex h-12.5 items-center gap-2 rounded-lg border-2 border-tinta px-4 text-[0.95rem] font-bold hover:bg-papel">
-                        <svg class="size-4.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></svg>
-                        {{ __('Use my location') }}
+                    <button type="button" @click="miUbicacion()" :disabled="localizando" :aria-busy="localizando"
+                            class="inline-flex h-12.5 items-center gap-2 rounded-lg border-2 border-tinta px-4 text-[0.95rem] font-bold hover:bg-papel disabled:cursor-wait">
+                        <svg x-show="! localizando" class="size-4.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></svg>
+                        <x-radar x-show="localizando" x-cloak class="text-sello" />
+                        <span x-text="localizando ? @js(__('Locating you…')) : @js(__('Use my location'))">{{ __('Use my location') }}</span>
                     </button>
-                    <form role="search" @submit.prevent="buscar()" class="relative min-w-0 flex-1 basis-60">
+                    {{-- Busca mientras se escribe (con una pausa de medio segundo); Intro no envía nada --}}
+                    <form role="search" @submit.prevent class="relative min-w-0 flex-1 basis-60">
                         <label for="zona-buscar" class="sr-only">{{ __('Search an address') }}</label>
                         <div class="flex rounded-lg border-2 border-linea-fuerte bg-white focus-within:border-tinta">
                             <input id="zona-buscar" type="search" x-model="consulta" minlength="3" autocomplete="off"
                                    placeholder="{{ __('Search a street, square or neighbourhood') }}"
                                    class="h-11.5 min-w-0 flex-1 bg-transparent px-3.5 font-display focus:outline-none">
-                            <button type="submit" class="px-4 font-display font-bold text-sello hover:text-sello-oscuro" :disabled="buscando">
-                                <span x-show="! buscando">{{ __('Search') }}</span><span x-show="buscando" x-cloak>…</span>
-                            </button>
+                            <span class="flex w-11 items-center justify-center text-sello">
+                                <x-radar x-show="buscando" x-cloak />
+                                <svg x-show="! buscando" class="size-4.5 text-tinta-suave" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="6"/><path d="m20 20-4.5-4.5"/></svg>
+                            </span>
                         </div>
                         <ul x-show="resultados.length" x-cloak class="absolute inset-x-0 top-full z-[1000] mt-1 overflow-hidden rounded-lg border border-linea bg-white shadow-lg">
                             <template x-for="lugar in resultados" :key="lugar.name">
@@ -211,6 +215,10 @@
                     </form>
                 </div>
                 <p x-show="aviso" x-text="aviso" x-cloak role="status" class="text-sm font-semibold text-error"></p>
+                <p x-show="source === 'geolocation' && tienePunto && ! localizando" x-cloak role="status" class="flex items-center gap-2 text-sm text-ruta">
+                    <svg class="size-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 4.5-3.4 8.3-8 9-4.6-.7-8-4.5-8-9V6z"/></svg>
+                    {{ __('Approximate location: we keep a point about 250 m from where you are.') }}
+                </p>
 
                 <div x-ref="mapa" class="h-75 overflow-hidden rounded-[10px] border border-linea lg:h-85" aria-label="{{ __('Map of your zone') }}"></div>
 
@@ -221,16 +229,23 @@
                     <input type="hidden" name="longitude" :value="lon">
                     <input type="hidden" name="source" :value="source">
 
+                    <input type="hidden" name="radius_m" :value="radioMetros">
+
+                    @php
+                        $km = fn (int $metros): string => Number::format($metros / 1000, maxPrecision: 1, locale: app()->getLocale());
+                        $radioInicial = (int) old('radius_m', $zona->radius_m ?? UserZone::DEFAULT_RADIUS_M);
+                    @endphp
                     <div x-show="tienePunto" @style(['display: none' => ! $zona])>
                         <div class="flex items-baseline justify-between">
-                            <label for="radius_km" class="text-[0.95rem] font-semibold">{{ __('Radius') }}</label>
-                            <p class="font-mono text-[0.9375rem] font-medium text-sello"><span x-text="radio">{{ $zona->radius_km ?? UserZone::DEFAULT_RADIUS_KM }}</span> km</p>
+                            <label for="radio" class="text-[0.95rem] font-semibold">{{ __('Radius') }}</label>
+                            <p class="font-mono text-[0.9375rem] font-medium text-sello"><span x-text="radioTexto">{{ $km($radioInicial) }}</span> km</p>
                         </div>
-                        <input id="radius_km" name="radius_km" type="range" x-model.number="radio"
-                               min="{{ UserZone::MIN_RADIUS_KM }}" max="{{ UserZone::MAX_RADIUS_KM }}" step="1"
-                               value="{{ old('radius_km', $zona->radius_km ?? UserZone::DEFAULT_RADIUS_KM) }}"
+                        {{-- En kilómetros; el valor que se envía es radius_m --}}
+                        <input id="radio" type="range" x-model.number="radio"
+                               min="{{ UserZone::MIN_RADIUS_M / 1000 }}" max="{{ UserZone::MAX_RADIUS_M / 1000 }}" step="{{ UserZone::RADIUS_STEP_M / 1000 }}"
+                               value="{{ $radioInicial / 1000 }}"
                                class="mt-1 w-full accent-sello">
-                        <div class="flex justify-between font-mono text-xs text-tinta-suave" aria-hidden="true"><span>{{ UserZone::MIN_RADIUS_KM }} km</span><span>{{ UserZone::MAX_RADIUS_KM }} km</span></div>
+                        <div class="flex justify-between font-mono text-xs text-tinta-suave" aria-hidden="true"><span>{{ $km(UserZone::MIN_RADIUS_M) }} km</span><span>{{ $km(UserZone::MAX_RADIUS_M) }} km</span></div>
                     </div>
 
                     @if ($errorZona->any())
@@ -239,7 +254,7 @@
 
                     <div class="flex gap-2.5 rounded-lg bg-papel-hondo px-3.5 py-3 text-sm leading-normal">
                         <svg class="mt-0.5 size-4.5 shrink-0 text-ruta" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 4.5-3.4 8.3-8 9-4.6-.7-8-4.5-8-9V6z"/></svg>
-                        <span>{{ __('We save an approximate point, about 500 m from the one you choose, never your address. Nobody else sees your zone.') }}</span>
+                        <span>{{ __('We save an approximate point, about 250 m from the one you choose, never your address. Nobody else sees your zone.') }}</span>
                     </div>
 
                     <div x-show="tienePunto" @style(['display: none' => ! $zona]) class="flex flex-wrap items-center gap-4">
