@@ -13,7 +13,7 @@ Se ejecutan desde la raíz del proyecto y corren dentro de Docker: no hace falta
 | Comando | Para qué |
 |---|---|
 | `make up` / `make down` | Arrancar o parar el entorno |
-| `make post-pull` | Después de un `git pull`: qué ha cambiado y qué ejecutar para que el entorno siga funcionando ([ver abajo](#después-de-un-git-pull)) |
+| `make post-pull` | Después de un `git pull`: ejecuta lo que haga falta para que el entorno siga funcionando y te dice qué hizo ([ver abajo](#después-de-un-git-pull)) |
 | `make front` | Vite en modo desarrollo: los cambios de CSS y JS se ven al momento |
 | `make shell` | Terminal dentro del contenedor de la app |
 | `make artisan c="route:list"` | Cualquier comando de Artisan |
@@ -126,7 +126,21 @@ Si afecta a más de una issue o es difícil de deshacer, escribe un ADR con `doc
 
 Un pull puede traer cosas que el código no aplica solo: una dependencia nueva, una migración, una fuente o colores nuevos en el CSS. Si no ejecutas su comando, la página puede romperse o verse sin estilos aunque el código esté bien.
 
-**`make post-pull`** lista los ficheros que han llegado desde el último pull o merge, agrupados, y el comando de cada grupo. Solo informa: no ejecuta nada. Para comparar con otro punto: `make post-pull desde=v0.1.0` (cualquier commit, rama o etiqueta).
+**`make post-pull`** mira qué ficheros han llegado desde el último pull o merge, **ejecuta en orden los comandos que hacen falta** y acaba con un resumen:
+
+```
+Resumen
+  ✓ make composer c=install
+  ✓ make assets
+  ✓ make migrate
+  ✓ make queue-restart
+  ⚠ a mano · Variables de entorno: compara tu .env con .env.example y añade las variables nuevas
+```
+
+- **Nunca ejecuta lo que borra datos o toca tus ficheros:** `make fresh` (seeders) y el `.env` salen como aviso ⚠ para que decidas tú.
+- **Si un comando falla,** se para, enseña sus últimas líneas y deja los siguientes como pendientes. Arréglalo y vuelve a lanzarlo: repetir lo que ya se hizo no hace daño.
+- `make post-pull ver=1` solo lista, sin ejecutar nada.
+- `make post-pull desde=v0.1.0` compara con otro punto (cualquier commit, rama o etiqueta).
 
 | Si cambia… | Ejecuta | Por qué |
 |---|---|---|
@@ -139,7 +153,7 @@ Un pull puede traer cosas que el código no aplica solo: una dependencia nueva, 
 | `.env.example` | Copia a tu `.env` las variables nuevas | Tu `.env` no está en Git |
 | `app/` | `make queue-restart` | El worker de la cola carga el código al arrancar |
 
-Si los ejecutas todos, hazlo en el orden de la tabla. Si tras eso algo falla, sigue con [Arreglar errores](#arreglar-errores).
+`make post-pull` los ejecuta en el orden de la tabla. Si tras eso algo falla, sigue con [Arreglar errores](#arreglar-errores).
 
 Ejemplo: tras el pull que trajo la ficha de socio (#16), la página se veía sin colores hasta ejecutar `make assets`, porque `package.json` traía la fuente de la firma y `app.css` los colores nuevos.
 
@@ -176,7 +190,7 @@ Ve de lo más barato a lo más drástico:
 2. **Probar sin mis cambios:** `git stash`, comprueba si funciona y `git stash pop` para recuperarlos. Si sin ellos funciona, el problema está en tu código.
 3. **Descartar los cambios de un fichero:** `git restore <fichero>`. De todos: `git restore .` (irreversible para lo que no está en un commit).
 4. **Cachés de Laravel:** `make artisan c="optimize:clear"`.
-5. **Dependencias o front desactualizados** (tras un `git pull`): `make post-pull` dice qué falta; ver [Después de un `git pull`](#después-de-un-git-pull).
+5. **Dependencias o front desactualizados** (tras un `git pull`): `make post-pull` lo pone al día; ver [Después de un `git pull`](#después-de-un-git-pull).
 6. **Base de datos:** `make migrate`; si sigue mal, `make fresh` (borra los datos de desarrollo).
 7. **Imagen de Docker** (tras cambios en `docker/`): `make build && make restart`.
 8. **Desde cero:** `docker compose down -v` (borra las bases de datos) y `make setup`.
