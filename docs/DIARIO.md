@@ -967,3 +967,25 @@ Que cada miembro pueda indicar dónde se mueve, con la precisión que elija, sin
 - **El PO quería que lo ejecutara**, no solo que lo dijera: la gracia es no tener que pensar tras un pull.
 - **Lo que borra datos o toca ficheros personales sigue siendo a mano:** `make fresh` y el `.env`.
 - **Si un comando falla, para:** los siguientes pueden depender de él (las migraciones, de las dependencias).
+
+---
+
+## [2026-11-05] #033 — Web traducible (#43)
+**Iteración:** 1 (v0.2.0)
+
+### Objetivo de la sesión
+Terminar la base multiidioma del ADR-0011: que ningún texto de la web esté escrito a mano en español.
+
+### Hecho
+- **Últimas vistas a `__()`:** cabecera, pie, portada, búsqueda de ZBID y el `<title>`/descripción por defecto del layout. 42 textos nuevos en `lang/es.json`. La web se ve igual.
+- **«Entrar» de la cabecera usa la clave `Sign in`:** `Log in` ya era «Iniciar sesión» (título de la pantalla de login).
+- **`lang/es/pagination.php`** para cuando haya listados.
+- **Columna `users.locale`** (`es` por defecto): la usará el selector de la #53.
+- **`tests/Unit/TraduccionesTest.php`:** recorre `resources/views` y `app`, saca cada `__('…')` y falla con la lista de los que no están en `lang/es.json` (o en `lang/es/*.php` si es una clave de fichero). Un segundo test comprueba que el patrón sigue encontrando textos, para que el primero no pase sin comprobar nada. Probado quitando una clave: falla y dice en qué fichero está.
+
+### Decisiones
+- **Los textos legales se quedan en Markdown en español** (`resources/markdown/legal`): se traducen como documentos completos cuando llegue cada idioma (#53), no frase a frase.
+- **El middleware sigue fijando el español:** leer `users.locale`, la cookie y `Accept-Language` es trabajo de la #53, cuando haya un segundo idioma que elegir.
+
+### Siguiente paso
+Cerrar la v0.2.0: CHANGELOG a `[0.2.0]`, etiqueta, release y retrospectiva.
