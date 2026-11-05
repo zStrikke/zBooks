@@ -889,3 +889,22 @@ Que cada miembro pueda editar su perfil y su contraseña, y dejar montada la pá
 
 ### Siguiente paso
 #18 (zona de referencia habitual), como sección Mi zona de esta página.
+
+---
+
+## [2026-11-05] #029 — Qué ejecutar después de un `git pull` (#78)
+**Iteración:** 1 (v0.2.0)
+
+### Objetivo de la sesión
+Que un `git pull` no deje el entorno a medias. Al revisar la #77, la ficha de socio se veía sin colores: el pull de la #16 traía una fuente nueva en `package.json` y colores nuevos en `app.css`, y faltaba `make assets`.
+
+### Hecho
+- **`make tras-pull`** (`scripts/tras-pull.sh`): compara con `ORIG_HEAD`, que Git fija en cada pull o merge, o con el punto que se indique (`desde=`). Agrupa los ficheros que han llegado y da el comando de cada grupo. Solo informa.
+- **Guía del desarrollador:** sección «Después de un `git pull`» con la tabla fichero → comando y el caso real de la ficha. El flujo de trabajo y «Arreglar errores» la enlazan.
+
+### Decisiones
+- **Informa, no ejecuta:** algunos comandos son lentos (`make build`) o borran datos (`make fresh`). Quien hace el pull decide.
+- **Reglas en una lista dentro del script:** una regla nueva es una línea (qué ha cambiado ; expresión regular ; comando).
+
+### Siguiente paso
+#18 (zona de referencia habitual), como sección Mi zona de la cuenta.
