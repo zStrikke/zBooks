@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Enums\Role as RoleName;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\PermissionRegistrar;
@@ -16,9 +17,8 @@ class RoleSeeder extends Seeder
         // Spatie cachea roles y permisos; hay que limpiarla para ver los cambios.
         app()[PermissionRegistrar::class]->forgetCachedPermissions();
 
-        $roles = ['member', 'moderator', 'admin'];
-        foreach ($roles as $role) {
-            Role::firstOrCreate(['name' => $role]);
+        foreach (RoleName::cases() as $role) {
+            Role::firstOrCreate(['name' => $role->value]);
         }
     }
 }
