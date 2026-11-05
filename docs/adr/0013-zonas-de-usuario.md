@@ -20,10 +20,10 @@ Opción **3**. La zona tiene dos modos:
 
 | Modo | Cómo se indica | Qué se guarda |
 |---|---|---|
-| `radius` | Geolocalización del navegador o del móvil, o un punto en el mapa (su casa u otro cercano) | Punto **redondeado a ~500 m** + radio (5 km por defecto, de 1 a 50) |
+| `radius` | Geolocalización del navegador o del móvil, o un punto en el mapa (su casa u otro cercano) | Punto **redondeado a ~250 m** + radio (2,5 km por defecto, de 0,5 a 25, en pasos de 500 m) |
 | `area` | Un barrio o una ciudad del catálogo | Referencia al área; su contorno vive en `areas` |
 
-- **`user_zones`** guarda `kind` (`home` | `temporary`), `mode`, `source` (`geolocation` | `map` | `area`) y, según el modo, `location` + `radius_km` o `area_id`. Una restricción `CHECK` impide mezclarlos.
+- **`user_zones`** guarda `kind` (`home` | `temporary`), `mode`, `source` (`geolocation` | `map` | `area`) y, según el modo, `location` + `radius_m` o `area_id`. Una restricción `CHECK` impide mezclarlos.
 - **`areas`** es el catálogo de barrios, distritos y ciudades con su contorno (`geography(MultiPolygon, 4326)`) y su área superior.
   - **Barcelona** se precarga desde Open Data BCN (distritos y barrios oficiales), para la demo.
   - **Otras ciudades** se traen de OpenStreetMap con Nominatim (`polygon_geojson=1`) la primera vez que alguien las elige; se simplifican y se guardan. Con caché y respetando su política de uso.
@@ -46,7 +46,13 @@ Opción **3**. La zona tiene dos modos:
 
 **Seguimiento**
 - La zona temporal (#19, v0.3.0) usa los mismos dos modos.
-- Revisar el redondeo de 500 m cuando haya datos reales: en zonas rurales puede ser poco.
+- Revisar el redondeo de 250 m cuando haya datos reales: en zonas rurales puede ser poco.
+
+## Revisión 2026-11-05
+
+Al construir Mi zona (#18), el PO pidió dividir por dos las distancias: **redondeo de 250 m** (antes 500) y **radio de 0,5 a 25 km** con 2,5 km por defecto (antes 1 a 50 y 5). Una zona sirve para ver lo que hay cerca y decidir; 50 km es más que una ciudad entera. Ver libros de todas partes será otra pantalla, pensada para curiosear. El radio se guarda en metros (`radius_m`) para admitir medios kilómetros.
+
+El redondeo se mantiene aunque nadie más vea la zona: protege ante filtraciones de la base de datos, accesos internos (admins, logs, copias) y funciones futuras que muestren distancias, que permitirían triangular un punto exacto. Además, el RGPD pide guardar solo lo necesario.
 
 ## Referencias
 

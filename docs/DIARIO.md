@@ -936,16 +936,19 @@ Que cada miembro pueda indicar dónde se mueve, con la precisión que elija, sin
 - **PostGIS por primera vez:** `clickbar/laravel-magellan` y la tabla `user_zones`:
   - `location` es `geography(Point, 4326)` con índice espacial;
   - un índice parcial deja **una sola zona `home`** por miembro;
-  - restricciones `CHECK` para `kind`, `source` y el modo radio (punto y radio de 1 a 50 km). `area_id`, `label` y `ends_at` llegan con la #54 y la #19.
-- **`App\Geo\ApproximateLocation`:** redondea el punto a una rejilla de 500 m, en metros y no en grados (un grado de longitud mide 111 km en el ecuador y unos 84 en Barcelona). El mismo cálculo está en `resources/js/zona.js`, para que el mapa enseñe ya el punto que se guardará.
+  - restricciones `CHECK` para `kind`, `source` y el modo radio (punto y radio de 0,5 a 25 km en pasos de 500 m, guardado en metros). `area_id`, `label` y `ends_at` llegan con la #54 y la #19.
+- **`App\Geo\ApproximateLocation`:** redondea el punto a una rejilla de 250 m, en metros y no en grados (un grado de longitud mide 111 km en el ecuador y unos 84 en Barcelona). El mismo cálculo está en `resources/js/zona.js`, para que el mapa enseñe ya el punto que se guardará.
 - **`App\Actions\Zones\SetHomeZone`:** valida, redondea y sustituye la zona anterior; también la quita.
 - **`App\Geo\Nominatim`:** el buscador de direcciones va por nuestro servidor, con User-Agent propio, una petición por segundo entre todos, caché de 7 días y 30 búsquedas por minuto por usuario.
-- **Pantalla:** Leaflet con import dinámico (solo se descarga en Mi cuenta), «Usar mi ubicación», clic en el mapa, buscador y radio con el círculo en el mapa.
-- **ADR-0014** (mapas, teselas y geocodificación), diagrama ER y `.env.example`. 27 tests nuevos (180 en total), entre ellos que la distancia real en PostGIS entre lo guardado y la casa es mayor que 0.
+- **Pantalla:** Leaflet con import dinámico (solo se descarga en Mi cuenta), «Usar mi ubicación», clic en el mapa, buscador que busca mientras se escribe (pausa de medio segundo) y radio con el círculo en el mapa. Un indicador tipo radar (`<x-radar>`) avisa mientras el navegador localiza o el buscador espera; con la ubicación del navegador, un aviso justo debajo recuerda que se guarda un punto aproximado.
+- **ADR-0014** (mapas, teselas y geocodificación), diagrama ER y `.env.example`. 29 tests nuevos (182 en total), entre ellos que la distancia real en PostGIS entre lo guardado y la casa es mayor que 0.
 
 ### Decisiones
 - **Rejilla en vez de ruido aleatorio:** con ruido, guardar dos veces la misma casa daría puntos distintos y, promediándolos, se podría acercar uno a la casa real. La rejilla siempre da el mismo punto.
 - **Teselas de OpenStreetMap solo para desarrollo y la demo** (ADR-0014): cambiar de proveedor antes de la v1.0.0 es cambiar dos variables de entorno.
+- **Distancias divididas por dos** a petición del PO: redondeo de 250 m y radio de 0,5 a 25 km (2,5 por defecto). Una zona es para ver lo cercano; ver libros de todo el mundo será otra pantalla. Revisión anotada en el ADR-0013.
+- **El redondeo se queda aunque nadie más vea la zona:** protege ante filtraciones, accesos internos y funciones futuras que muestren distancias (triangulación). Anotado en el ADR-0013.
+- **Contornos de barrios y ciudades en el mapa, a la #54:** Nominatim los da (`polygon_geojson=1`), pero pintarlos mientras se guarda un círculo confundiría. Con el modo área, se pinta y se usa el mismo contorno.
 - **Nominatim desde el servidor:** así se cumple su política de uso y el navegador del miembro no habla con terceros para buscar.
 
 ### Siguiente paso

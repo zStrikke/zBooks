@@ -3,7 +3,7 @@
 namespace App\Geo;
 
 /**
- * Redondea un punto a una rejilla de ~500 m (RNF-04, ADR-0013): la zona de un
+ * Redondea un punto a una rejilla de ~250 m (RNF-04, ADR-0013): la zona de un
  * miembro nunca guarda su dirección exacta.
  *
  * La rejilla va en metros, no en grados: un grado de longitud mide 111 km en
@@ -12,7 +12,7 @@ namespace App\Geo;
  */
 class ApproximateLocation
 {
-    public const GRID_METERS = 500;
+    public const GRID_METERS = 250;
 
     private const METERS_PER_DEGREE = 111_320;
 

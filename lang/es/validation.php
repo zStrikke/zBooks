@@ -20,6 +20,7 @@ return [
         'string' => 'El :attribute no puede tener más de :max caracteres.',
     ],
     'integer' => 'El :attribute tiene que ser un número entero.',
+    'multiple_of' => 'El :attribute tiene que ir en pasos de :value.',
     'mimes' => 'El :attribute tiene que ser JPG, PNG o WebP.',
     'min' => [
         'string' => 'El :attribute debe tener al menos :min caracteres.',
@@ -67,7 +68,7 @@ return [
         'email' => 'email',
         'latitude' => 'latitud',
         'longitude' => 'longitud',
-        'radius_km' => 'radio',
+        'radius_m' => 'radio',
         'source' => 'origen del punto',
         'password' => 'contraseña',
         'privacy_policy' => 'política de privacidad',

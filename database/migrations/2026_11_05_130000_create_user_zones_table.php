@@ -20,9 +20,10 @@ return new class extends Migration
             $table->string('kind', 16);
             $table->string('mode', 16);
             $table->string('source', 16);
-            // Siempre redondeado a ~500 m (App\Geo\ApproximateLocation): nunca el punto exacto
+            // Siempre redondeado a ~250 m (App\Geo\ApproximateLocation): nunca el punto exacto
             $table->geography('location', 'point', 4326)->nullable();
-            $table->unsignedSmallInteger('radius_km')->nullable();
+            // En metros: de 500 m a 25 km, en pasos de 500 m
+            $table->unsignedInteger('radius_m')->nullable();
             $table->timestamps();
 
             $table->spatialIndex('location');
@@ -31,9 +32,9 @@ return new class extends Migration
         DB::statement("CREATE UNIQUE INDEX user_zones_one_home ON user_zones (user_id) WHERE kind = 'home'");
         DB::statement("ALTER TABLE user_zones ADD CONSTRAINT user_zones_kind CHECK (kind IN ('home', 'temporary'))");
         DB::statement("ALTER TABLE user_zones ADD CONSTRAINT user_zones_source CHECK (source IN ('geolocation', 'map', 'area'))");
-        // Modo radio: punto y radio de 1 a 50 km. El modo área se añade con su columna (#54)
+        // Modo radio: punto y radio de 0,5 a 25 km, en pasos de 500 m. El modo área se añade con su columna (#54)
         DB::statement("ALTER TABLE user_zones ADD CONSTRAINT user_zones_mode CHECK (
-            mode = 'radius' AND location IS NOT NULL AND radius_km BETWEEN 1 AND 50
+            mode = 'radius' AND location IS NOT NULL AND radius_m BETWEEN 500 AND 25000 AND radius_m % 500 = 0
         )");
     }
 

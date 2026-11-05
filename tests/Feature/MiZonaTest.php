@@ -25,40 +25,41 @@ function guardarZona(array $datos): TestResponse
 {
     return test()->actingAs(test()->user)
         ->from('/account')
-        ->put('/account/zone', [...test()->casa, 'radius_km' => 5, 'source' => 'map', ...$datos]);
+        ->put('/account/zone', [...test()->casa, 'radius_m' => 2500, 'source' => 'map', ...$datos]);
 }
 
 describe('guardar', function () {
-    it('guarda el punto redondeado a ~500 m, nunca el exacto', function () {
+    it('guarda el punto redondeado a ~250 m, nunca el exacto', function () {
         guardarZona([])->assertRedirect(route('account').'#zona')->assertSessionHasNoErrors();
 
         $zona = $this->user->homeZone;
         expect($zona->kind)->toBe(ZoneKind::Home)
             ->and($zona->source)->toBe(ZoneSource::Map)
-            ->and($zona->radius_km)->toBe(5)
+            ->and($zona->radius_m)->toBe(2500)
             ->and([$zona->location->getLatitude(), $zona->location->getLongitude()])->not->toBe([41.40312, 2.15667]);
 
         // Distancia real en PostGIS entre lo guardado y la casa: más de 0 y menos de media celda
         $metros = DB::scalar('SELECT ST_Distance(location, ST_MakePoint(?, ?)::geography) FROM user_zones', [2.15667, 41.40312]);
-        expect($metros)->toBeGreaterThan(0)->toBeLessThan(360);
+        expect($metros)->toBeGreaterThan(0)->toBeLessThan(180);
     });
 
     it('al mudarse, la zona nueva sustituye a la anterior', function () {
         guardarZona([]);
-        guardarZona(['latitude' => 40.41678, 'longitude' => -3.70379, 'radius_km' => 12, 'source' => 'geolocation']);
+        guardarZona(['latitude' => 40.41678, 'longitude' => -3.70379, 'radius_m' => 12000, 'source' => 'geolocation']);
 
         expect(UserZone::count())->toBe(1)
-            ->and($this->user->fresh()->homeZone->radius_km)->toBe(12)
+            ->and($this->user->fresh()->homeZone->radius_m)->toBe(12000)
             ->and(round($this->user->fresh()->homeZone->location->getLatitude()))->toBe(40.0);
     });
 
-    it('rechaza radios fuera de 1–50 km, coordenadas imposibles y orígenes desconocidos', function (array $datos, string $campo) {
+    it('rechaza radios fuera de 0,5–25 km o fuera de los pasos de 500 m, coordenadas imposibles y orígenes desconocidos', function (array $datos, string $campo) {
         guardarZona($datos)->assertSessionHasErrorsIn('updateZone', $campo);
 
         expect(UserZone::count())->toBe(0);
     })->with([
-        'radio 0' => [['radius_km' => 0], 'radius_km'],
-        'radio 51' => [['radius_km' => 51], 'radius_km'],
+        'radio 0' => [['radius_m' => 0], 'radius_m'],
+        'radio 25,5 km' => [['radius_m' => 25500], 'radius_m'],
+        'radio 1,2 km' => [['radius_m' => 1200], 'radius_m'],
         'latitud 91' => [['latitude' => 91], 'latitude'],
         'longitud 181' => [['longitude' => 181], 'longitude'],
         'sin punto' => [['latitude' => null, 'longitude' => null], 'latitude'],
@@ -74,9 +75,9 @@ describe('guardar', function () {
     });
 
     it('pide sesión y email verificado', function () {
-        $this->put('/account/zone', [...$this->casa, 'radius_km' => 5, 'source' => 'map'])->assertRedirect('/login');
+        $this->put('/account/zone', [...$this->casa, 'radius_m' => 2500, 'source' => 'map'])->assertRedirect('/login');
         $this->actingAs(User::factory()->unverified()->create())
-            ->put('/account/zone', [...$this->casa, 'radius_km' => 5, 'source' => 'map'])
+            ->put('/account/zone', [...$this->casa, 'radius_m' => 2500, 'source' => 'map'])
             ->assertRedirect(route('verification.notice'));
     });
 });
@@ -85,20 +86,21 @@ describe('base de datos', function () {
     it('no admite dos zonas habituales para el mismo miembro', function () {
         $fila = fn () => DB::table('user_zones')->insert([
             'user_id' => $this->user->id, 'kind' => 'home', 'mode' => 'radius', 'source' => 'map',
-            'location' => DB::raw('ST_MakePoint(2.15, 41.4)::geography'), 'radius_km' => 5,
+            'location' => DB::raw('ST_MakePoint(2.15, 41.4)::geography'), 'radius_m' => 2500,
         ]);
         $fila();
 
         expect($fila)->toThrow(QueryException::class);
     });
 
-    it('no admite un radio fuera de 1–50 km ni una zona de radio sin punto', function (array $columnas) {
+    it('no admite un radio fuera de 0,5–25 km o de los pasos de 500 m, ni una zona de radio sin punto', function (array $columnas) {
         expect(fn () => DB::table('user_zones')->insert([
             'user_id' => $this->user->id, 'kind' => 'home', 'mode' => 'radius', 'source' => 'map',
-            'location' => DB::raw('ST_MakePoint(2.15, 41.4)::geography'), 'radius_km' => 5, ...$columnas,
+            'location' => DB::raw('ST_MakePoint(2.15, 41.4)::geography'), 'radius_m' => 2500, ...$columnas,
         ]))->toThrow(QueryException::class);
     })->with([
-        'radio 60' => [['radius_km' => 60]],
+        'radio 30 km' => [['radius_m' => 30000]],
+        'radio 1,2 km' => [['radius_m' => 1200]],
         'sin punto' => [['location' => null]],
     ]);
 });
