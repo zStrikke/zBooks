@@ -46,6 +46,16 @@ Elegimos la **opción 1**: una API REST en **`/api/v1`**, construida junto a cad
 - Compartir reglas de validación entre web y API.
 - Revisar en cada retrospectiva si la API frena demasiado el avance.
 
+## Revisión 2026-11-05: la API se hace en su propio hito
+
+Tras la v0.1.0 y el registro y el login de la v0.2.0, el PO decide priorizar funcionalidades en la web. Es el seguimiento previsto arriba («revisar si la API frena demasiado el avance»).
+
+- **La decisión no cambia:** REST en `/api/v1`, Problem Details, Scramble y tests de contrato.
+- **Cambia cuándo:** ya no se construye junto a cada funcionalidad. Va en el hito **v0.11.0 · API v1**, antes de la v1.0.0.
+- **Sin código a medias:** no se dejan rutas vacías ni pseudocódigo, porque envejecen y aparecerían en `/docs/api` como si existieran. Se mantienen `/api/v1/health`, Problem Details y Scramble, que ya funcionan.
+- **Lo que hace barato añadirla después sigue en pie:** la lógica vive en acciones compartidas (`CreateNewUser`, `PrivacyPolicy`, `Role`…), y la API solo añadirá rutas, validación y respuestas.
+- **Las partes de API de cada historia se apuntan en issues del hito** (#73), no en la propia historia. La definición de terminado de los PR pide la web.
+
 ## Referencias
 
 - RF-47 a RF-51, RNF-10.

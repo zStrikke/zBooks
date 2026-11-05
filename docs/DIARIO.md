@@ -814,3 +814,24 @@ Que los roles existan en cualquier entorno sin acordarse de lanzar un seeder. Pr
 
 ### Siguiente paso
 #12 (registro y verificación desde la API).
+
+---
+
+## [2026-11-05] #026 — La API, a su propio hito (#74)
+**Iteración:** 1 (v0.2.0)
+
+### Objetivo de la sesión
+Priorizar funcionalidades en la web sin perder la API. Propuesta del PO.
+
+### Hecho
+- **Hito nuevo `v0.11.0 · API v1`**, con #12 (registro por API), #13 (tokens) y #14 (dispositivos).
+- **Las líneas de API de #16, #17, #18, #19, #37 y #54** pasan a una issue del hito (#73). En cada historia quedan tachadas, con el enlace.
+- **Plantilla de PR:** la definición de terminado pide la web; la API, en su hito.
+- **ADR-0007:** revisión con el cambio de calendario.
+- **Etiquetas:** las issues #65, #69 y #71 llevaban `auth` en vez de `área: auth`, y GitHub había creado esa etiqueta de más. Corregidas y borrada.
+
+### Decisiones
+- **Aplazar, no dejar esqueletos:** nada de rutas vacías ni pseudocódigo. Envejecen, aparecen en `/docs/api` como si existieran y habría que reescribirlas igual. Lo que abarata la API, la lógica en acciones compartidas, ya está hecho.
+
+### Siguiente paso
+#16 (perfil público) → #18 (zona habitual).
