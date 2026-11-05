@@ -13,6 +13,7 @@ Se ejecutan desde la raíz del proyecto y corren dentro de Docker: no hace falta
 | Comando | Para qué |
 |---|---|
 | `make up` / `make down` | Arrancar o parar el entorno |
+| `make post-pull` | Después de un `git pull`: qué ha cambiado y qué ejecutar para que el entorno siga funcionando ([ver abajo](#después-de-un-git-pull)) |
 | `make front` | Vite en modo desarrollo: los cambios de CSS y JS se ven al momento |
 | `make shell` | Terminal dentro del contenedor de la app |
 | `make artisan c="route:list"` | Cualquier comando de Artisan |
@@ -50,7 +51,7 @@ La rutina: **`make format && make check`** antes de cada `git push`.
    ¿No existe? Créala con su plantilla (historia, técnica o bug).
         │
 2. RAMA, desde master actualizado
-   git switch master && git pull
+   git switch master && git pull && make post-pull
    git switch -c feature/10-registro-web        (feature | fix | docs | chore)
         │
 3. CÓDIGO + TESTS
@@ -121,6 +122,27 @@ No lo metas en el mismo PR: crea una issue nueva (con su plantilla) y sigue con 
 **Tengo que tomar una decisión técnica (paquete, patrón, estructura).**
 Si afecta a más de una issue o es difícil de deshacer, escribe un ADR con `docs/adr/0000-plantilla.md` y enlázalo en el PR. Si dudas, coméntalo en la issue antes de programar.
 
+### Después de un `git pull`
+
+Un pull puede traer cosas que el código no aplica solo: una dependencia nueva, una migración, una fuente o colores nuevos en el CSS. Si no ejecutas su comando, la página puede romperse o verse sin estilos aunque el código esté bien.
+
+**`make post-pull`** lista los ficheros que han llegado desde el último pull o merge, agrupados, y el comando de cada grupo. Solo informa: no ejecuta nada. Para comparar con otro punto: `make post-pull desde=v0.1.0` (cualquier commit, rama o etiqueta).
+
+| Si cambia… | Ejecuta | Por qué |
+|---|---|---|
+| `docker/`, `docker-compose.yml` | `make build && make restart` | La imagen o los servicios son otros |
+| `composer.json` / `composer.lock` | `make composer c=install` | Paquetes de PHP nuevos o actualizados |
+| `package.json` / `package-lock.json` | `make assets` (y reinicia `make front` si lo usas) | Paquetes del front nuevos, como una fuente |
+| `resources/css/`, `resources/js/`, `vite.config.js` | `make assets`, o `make front` mientras desarrollas | El CSS y el JS compilados (`public/build`) son los de antes |
+| `database/migrations/` | `make migrate` | Tablas o columnas nuevas |
+| `database/seeders/`, `database/factories/` | `make fresh`, solo si quieres los datos de prueba nuevos | Borra los datos de desarrollo |
+| `.env.example` | Copia a tu `.env` las variables nuevas | Tu `.env` no está en Git |
+| `app/` | `make queue-restart` | El worker de la cola carga el código al arrancar |
+
+Si los ejecutas todos, hazlo en el orden de la tabla. Si tras eso algo falla, sigue con [Arreglar errores](#arreglar-errores).
+
+Ejemplo: tras el pull que trajo la ficha de socio (#16), la página se veía sin colores hasta ejecutar `make assets`, porque `package.json` traía la fuente de la firma y `app.css` los colores nuevos.
+
 ### Cambiar de tarea
 
 **Ha surgido algo prioritario. ¿Hago stash o subo mis cambios a la rama?**
@@ -154,7 +176,7 @@ Ve de lo más barato a lo más drástico:
 2. **Probar sin mis cambios:** `git stash`, comprueba si funciona y `git stash pop` para recuperarlos. Si sin ellos funciona, el problema está en tu código.
 3. **Descartar los cambios de un fichero:** `git restore <fichero>`. De todos: `git restore .` (irreversible para lo que no está en un commit).
 4. **Cachés de Laravel:** `make artisan c="optimize:clear"`.
-5. **Dependencias desactualizadas** (tras un `git pull`): `make composer c=install` y `make assets`.
+5. **Dependencias o front desactualizados** (tras un `git pull`): `make post-pull` dice qué falta; ver [Después de un `git pull`](#después-de-un-git-pull).
 6. **Base de datos:** `make migrate`; si sigue mal, `make fresh` (borra los datos de desarrollo).
 7. **Imagen de Docker** (tras cambios en `docker/`): `make build && make restart`.
 8. **Desde cero:** `docker compose down -v` (borra las bases de datos) y `make setup`.
