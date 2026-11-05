@@ -37,6 +37,7 @@ Formato basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/) y 
 - Symfony 8.1.11 y contratos 3.8.1 por avisos de seguridad; `composer audit` limpio (#60).
 
 ### Fixed
+- Las fotos de perfil daban 403 en los entornos montados antes de la #17: faltaba el enlace `public/storage`. `make post-pull` lo comprueba siempre y lo crea si falta (#89).
 - «Así te ven» (Mi cuenta) muestra una sola vista previa de la ficha, a tamaño real, en lugar de las pestañas Móvil y Escritorio: la ficha es casi igual en las dos y la columna del blog de la pestaña Escritorio parecía un fallo (#80).
 
 ## [0.1.0] - 2026-11-01
