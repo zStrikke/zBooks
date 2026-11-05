@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Enums\Role;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
@@ -9,14 +10,13 @@ class AdminUserSeeder extends Seeder
 {
     /**
      * Crea el usuario admin de desarrollo. Nunca en producción.
+     * Necesita los roles: ejecutar antes RoleSeeder (lo hace DatabaseSeeder).
      */
     public function run(): void
     {
         if (app()->isProduction()) {
             return;
         }
-
-        $this->call(RoleSeeder::class);
 
         $admin = User::firstOrCreate(
             ['email' => config('zbooks.dev_admin.email')],
@@ -26,6 +26,6 @@ class AdminUserSeeder extends Seeder
             ],
         );
 
-        $admin->assignRole('admin');
+        $admin->assignRole(Role::Admin);
     }
 }

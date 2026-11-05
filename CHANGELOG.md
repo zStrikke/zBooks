@@ -5,6 +5,8 @@ Formato basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/) y 
 ## [Unreleased]
 
 ### Added
+- Roles base `member`, `moderator` y `admin` con spatie/laravel-permission, enum `App\Enums\Role`, `RoleSeeder` idempotente y un admin de desarrollo que nunca se crea en producción (`DEV_ADMIN_*` en `.env.example`) (#15, #65).
+- `make check` resume cada comprobación con ✓/✗, su tiempo y cómo arreglar lo que falla; el hook de pre-push muestra lo mismo (#63).
 - Aviso legal y política de privacidad (`/legal-notice`, `/privacy`), escritos en Markdown por idioma y enlazados desde el pie, con los datos del responsable en `config/legal.php`; consentimiento versionado en `users` y `App\Legal\PrivacyPolicy` para el registro (#48).
 - Maquetas de la v0.2.0 (registro, login, verificación de email y perfil público, en móvil y escritorio) en `docs/diseno/`.
 - Ayuda sobre issues, tablero, etiquetas y flujos (#56).
@@ -12,7 +14,11 @@ Formato basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/) y 
 - Guía del desarrollador: comandos, flujo de issue a PR, archivos de referencia y casos frecuentes (#51).
 
 ### Changed
+- Los tests fijan `APP_LOCALE=en` en `phpunit.xml` y ya no dependen del `.env` local (#60).
 - Diagrama ER: `user_zones` con modo radio o área y nueva tabla `areas`.
+
+### Security
+- Symfony 8.1.11 y contratos 3.8.1 por avisos de seguridad; `composer audit` limpio (#60).
 
 ## [0.1.0] - 2026-11-01
 

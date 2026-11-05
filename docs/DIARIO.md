@@ -661,3 +661,36 @@ Tener listos los textos legales y el consentimiento antes de guardar el primer d
 ### Siguiente paso
 Revisión del PR → #10 (registro web), cuando la #15 del PO esté fusionada.
 
+
+---
+
+## [2026-11-05] #021 — Roles base (#15), make check y revisión del PO
+**Iteración:** 1 (v0.2.0)  ·  **Duración:** ~30 min (revisión y ajustes)
+
+### Objetivo de la sesión
+Revisar los tres PR del PO, ya fusionados, y recoger los ajustes en la #65.
+
+### Hecho
+- **Del PO:**
+  - #62 (#15): spatie/laravel-permission, roles `member`, `moderator` y `admin`, y un admin de desarrollo creado por seeder;
+  - #61 (#60): Symfony actualizado por avisos de seguridad, y `APP_LOCALE=en` fijado en `phpunit.xml`;
+  - #64 (#63): `make check` con un resumen ✓/✗ y pistas para arreglar cada fallo.
+- **Ajustes de la revisión (#65):**
+  - enum `App\Enums\Role`, usado en seeders y tests;
+  - `RoleSeeder` se llama una sola vez;
+  - `DEV_ADMIN_*` en `.env.example`;
+  - el test se mueve a `tests/Feature/Auth/RolesTest.php`;
+  - CHANGELOG y diario al día.
+- **Test de producción corregido:** pasaba sin probar nada, porque en producción `db:seed` no se ejecuta sin `--force`. Ahora siembra con `--force` y comprueba que se crean los roles pero no el admin. Se verificó que falla si se quita la protección.
+
+### Decisiones
+- **Los roles se crean en todos los entornos y el admin solo fuera de producción.** Por eso `AdminUserSeeder` ya no llama a `RoleSeeder`: lo hace `DatabaseSeeder`, delante.
+- **Los nombres de rol solo existen en el enum.** spatie acepta el enum directamente (`assignRole(Role::Member)`).
+
+### Aprendido
+- **Un test que no puede fallar no protege nada:** al escribirlo, hay que romper el código a propósito y ver que se pone en rojo.
+- **GitHub no deja aprobar una PR propia:** se fusiona sin aprobación. En equipo, mejor avisar antes de fusionar para que otro la revise.
+- **La checklist de la PR:** lo que no aplica se marca «N/A», no ✔.
+
+### Siguiente paso
+#10 (registro web): asignará `Role::Member` al registrarse.
