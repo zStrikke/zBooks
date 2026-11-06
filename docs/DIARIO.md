@@ -1030,3 +1030,23 @@ El PO subía un avatar en Mi cuenta y la página se rompía. El fichero se guard
 ### Decisiones
 - **El PO cierra el perfil:** zBooks no es una red para que desconocidos se busquen; lo que se comparte son los libros. Abrirlo a amigos llega con la #37.
 - **404 y no 403:** un 403 diría «existe, pero no puedes verlo».
+
+---
+
+## [2026-11-06] #037 — Menú de usuario en la cabecera (#95)
+**Iteración:** 1 (v0.2.0)
+
+### Hecho
+- **El avatar abre un menú** (`partials/menu-usuario.blade.php`, Alpine), igual en móvil y escritorio. Se cierra con Escape o al pulsar fuera:
+  - «Hola, {username}», libros liberados y capturados (`ProfileStats`, a 0 hasta la v0.3.0) y el estado de Mi zona («activa» o «sin zona», que lleva a la sección);
+  - Mi perfil y Mi cuenta;
+  - desactivados con su versión: Mis libros (v0.3.0), Mis capturas y Notificaciones (v0.4.0) y Amigos (v0.10.0);
+  - Cerrar sesión y Dar feedback (desactivado).
+- La cabecera deja los enlaces sueltos (username, Mi cuenta, Salir); sin sesión no cambia. 4 tests nuevos (193 en total).
+
+### Decisiones
+- **La zona no es un interruptor:** activar o desactivar la zona no existe como función. Se enseña si hay zona, con aspecto de interruptor, y el enlace lleva a Mi zona para cambiarla.
+- **«Capturados»** y no «cazados», como en el resto de la web.
+
+### Aprendido
+- Las capturas de las últimas PR salían con el CSS de hace un día: `node_modules` de mi entorno se había quedado sin Vite y `npm run build` fallaba sin que lo viera (lo silenciaba un filtro). La ruta de «Cómo funciona» (#91) se veía bien porque usaba estilos en línea; con el CSS reconstruido sigue igual. A partir de ahora, la salida del build se mira entera.
