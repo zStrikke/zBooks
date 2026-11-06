@@ -1040,9 +1040,10 @@ El PO subía un avatar en Mi cuenta y la página se rompía. El fichero se guard
 - **El avatar abre un menú** (`partials/menu-usuario.blade.php`, Alpine), igual en móvil y escritorio. Se cierra con Escape o al pulsar fuera:
   - «Hola, {username}», libros liberados y capturados (`ProfileStats`, a 0 hasta la v0.3.0) y el estado de Mi zona («activa» o «sin zona», que lleva a la sección);
   - Mi perfil y Mi cuenta;
-  - desactivados con su versión: Mis libros (v0.3.0), Mis capturas y Notificaciones (v0.4.0) y Amigos (v0.10.0);
+  - desactivados con su versión: Mis libros (v0.3.0), Mis capturas (v0.4.0) y Amigos (v0.10.0);
   - Cerrar sesión y Dar feedback (desactivado).
-- La cabecera deja los enlaces sueltos (username, Mi cuenta, Salir); sin sesión no cambia. 4 tests nuevos (193 en total).
+- **Campana de notificaciones** junto al avatar (`partials/notificaciones.blade.php`), a petición del PO: «Tus notificaciones» con los tipos que llegarán, desactivados con su versión: mensajes privados (sin versión aún), capturas de tus libros y libros liberados cerca (v0.5.0, épica #22), eventos (v0.9.0) y solicitudes de amistad (v0.10.0).
+- La cabecera deja los enlaces sueltos (username, Mi cuenta, Salir); sin sesión no cambia. 6 tests nuevos (195 en total).
 
 ### Decisiones
 - **La zona no es un interruptor:** activar o desactivar la zona no existe como función. Se enseña si hay zona, con aspecto de interruptor, y el enlace lleva a Mi zona para cambiarla.
