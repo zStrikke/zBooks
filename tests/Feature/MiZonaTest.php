@@ -106,11 +106,11 @@ describe('base de datos', function () {
 });
 
 describe('privacidad', function () {
-    it('la zona no aparece en el perfil público', function () {
+    it('la zona no aparece en el perfil, ni siquiera para el propio miembro', function () {
         guardarZona([]);
         $zona = $this->user->homeZone;
 
-        $this->get('/u/zStrikke')
+        $this->actingAs($this->user)->get('/u/zStrikke')
             ->assertOk()
             ->assertDontSee((string) $zona->location->getLatitude())
             ->assertDontSee((string) $zona->location->getLongitude())

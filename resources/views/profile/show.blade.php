@@ -1,4 +1,4 @@
-{{-- Perfil público (#16). Diseño: docs/diseno/v0.2.0. Cifras, nunca qué libros ni dónde vive (ADR-0010) --}}
+{{-- Perfil (#16): solo lo ven el miembro y sus amigos (#93). Diseño: docs/diseno/v0.2.0. Cifras, nunca qué libros ni dónde vive (ADR-0010) --}}
 <x-layouts::app :title="$user->username" :description="__(':username on zBooks: books registered, released and caught.', ['username' => $user->username])">
     <div class="mx-auto flex max-w-6xl flex-wrap items-start gap-12 lg:px-6 lg:py-14">
         <aside aria-label="{{ __('Member card') }}" class="flex w-full flex-col gap-4 lg:max-w-100 lg:flex-1 lg:basis-85">

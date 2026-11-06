@@ -1015,3 +1015,18 @@ El PO subía un avatar en Mi cuenta y la página se rompía. El fichero se guard
 ### Aprendido
 - Un `<svg>` es un elemento «reemplazado»: con `position: absolute`, `left` + `right` o `top` + `bottom` no lo estiran; necesita `width` y `height` explícitos.
 - Con `preserveAspectRatio="none"` las coordenadas van en % del bloque, pero `vector-effect="non-scaling-stroke"` mantiene el grosor y los guiones en píxeles.
+
+---
+
+## [2026-11-06] #036 — El perfil deja de ser público (#93)
+**Iteración:** 1 (v0.2.0)
+
+### Hecho
+- **`/u/{username}`** pide sesión y email verificado, y solo lo ve el propio miembro. La regla está en `App\Policies\UserPolicy::viewProfile`, preparada para que la #37 añada a los amigos.
+- **404 para todos los demás,** igual que el de un username que no existe. La comprobación va antes de la redirección al username canónico: si no, el 301 de `/u/zstrikke` confirmaría que `zStrikke` existe.
+- **Textos:** Mi cuenta deja de hablar de «perfil público». Revisión del ADR-0010.
+- `PerfilPublicoTest` pasa a `PerfilTest`, con los casos de quién lo ve (4 tests nuevos, 189 en total).
+
+### Decisiones
+- **El PO cierra el perfil:** zBooks no es una red para que desconocidos se busquen; lo que se comparte son los libros. Abrirlo a amigos llega con la #37.
+- **404 y no 403:** un 403 diría «existe, pero no puedes verlo».

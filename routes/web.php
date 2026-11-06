@@ -32,8 +32,10 @@ Route::middleware('guest')->group(function () {
     Route::view('/reset-password/{token}', 'auth.reset-password')->name('password.reset');
 });
 
-// Perfil público (#16). El patrón es el de App\Rules\Username.
+// Perfil (#16). No es público (#93): con sesión, y solo el propio miembro o sus amigos.
+// El patrón es el de App\Rules\Username.
 Route::get('/u/{username}', [ProfileController::class, 'show'])
+    ->middleware(['auth', 'verified'])
     ->where('username', '[A-Za-z0-9_]{1,20}')
     ->name('profile.show');
 

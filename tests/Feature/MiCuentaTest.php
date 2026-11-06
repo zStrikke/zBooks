@@ -48,7 +48,7 @@ describe('perfil', function () {
             ->assertSessionHasNoErrors();
 
         expect($this->user->fresh()->bio)->toBe('Leo en el tren.');
-        $this->get('/u/zStrikke')->assertSeeText('Leo en el tren.');
+        $this->actingAs($this->user)->get('/u/zStrikke')->assertSeeText('Leo en el tren.');
     });
 
     it('una bio vacía se guarda como null', function () {
@@ -131,7 +131,7 @@ describe('avatar', function () {
 
         expect($this->user->fresh()->avatar)->toBeNull();
         Storage::disk('public')->assertMissing($ruta);
-        $this->get('/u/zStrikke')->assertSee('role="img" aria-label="Avatar de zStrikke"', false);
+        $this->actingAs($this->user)->get('/u/zStrikke')->assertSee('role="img" aria-label="Avatar de zStrikke"', false);
     });
 });
 

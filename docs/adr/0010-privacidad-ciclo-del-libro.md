@@ -57,7 +57,13 @@ Combinamos la **2** y la **3**.
 - Bloquear a un usuario, más adelante: un bloqueado no podrá enviar solicitudes de amistad.
 - Valorar difuminar la ubicación en zonas sensibles, por ejemplo cerca de casa.
 
+## Revisión 2026-11-06
+
+**El perfil deja de ser público** (#93). `/u/{username}` pide sesión y email verificado, y solo lo ve el propio miembro. Con la #37 lo verán también sus amigos (amistad aceptada). Cualquier otro recibe un 404 igual que el de un username que no existe, así que tampoco sirve para averiguar quién está en zBooks. La regla vive en `App\Policies\UserPolicy::viewProfile`.
+
+El perfil sigue enseñando solo cifras: cerrarlo es una capa más, no sustituye a la regla de no mostrar qué libros ni dónde.
+
 ## Referencias
 
-- Issues #33 y #37 · Épicas #21 y #27 · Historia #16 (perfil público)
+- Issues #33 y #37 · Épicas #21 y #27 · Historia #16 (perfil) · #93 (perfil solo para el miembro y sus amigos)
 - [Revisión de la planificación](../notas/2026-10-31-revision-planificacion.md), punto 4

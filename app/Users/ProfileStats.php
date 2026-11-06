@@ -5,7 +5,7 @@ namespace App\Users;
 use App\Models\User;
 
 /**
- * Cifras del perfil público (#16). Solo números, nunca qué libros (ADR-0010).
+ * Cifras del perfil (#16). Solo números, nunca qué libros (ADR-0010).
  *
  * Las tablas de libros y de liberaciones llegan en la v0.3.0 (#20) y la v0.4.0 (#21):
  * hasta entonces todos los miembros tienen 0, que es su valor real. Cada épica
