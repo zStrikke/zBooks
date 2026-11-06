@@ -31,9 +31,10 @@
             @endguest
         </div>
 
-        {{-- Con sesión, el avatar abre el menú de usuario (#95), también en móvil --}}
+        {{-- Con sesión, la campana de notificaciones y el avatar con el menú de usuario (#95), también en móvil --}}
         @auth
-            <div class="ml-auto md:ml-0">
+            <div class="ml-auto flex items-center gap-1 md:ml-0">
+                @include('partials.notificaciones')
                 @include('partials.menu-usuario')
             </div>
         @endauth

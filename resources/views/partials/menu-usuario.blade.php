@@ -9,7 +9,6 @@
     $proximamente = [
         [__('My books'), '0.3.0', 'M4 19.5V5a2 2 0 0 1 2-2h12v18H6a2 2 0 0 1-2-1.5zM8 7h6'],
         [__('My catches'), '0.4.0', 'M11 5a6 6 0 1 0 0 12 6 6 0 0 0 0-12zM20 20l-4.5-4.5'],
-        [__('Notifications'), '0.4.0', 'M6 16V11a6 6 0 1 1 12 0v5l2 2H4zM10 20a2 2 0 0 0 4 0'],
         [__('Friends'), '0.10.0', 'M9 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM3 20a6 6 0 0 1 12 0M16 11a3 3 0 1 0 0-6M17 14a5 5 0 0 1 4 6'],
     ];
     $fila = 'flex w-full items-center gap-3 rounded-md px-3 py-2.5 text-left hover:bg-papel focus:bg-papel focus:outline-none';

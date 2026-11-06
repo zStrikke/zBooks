@@ -35,7 +35,7 @@ it('con sesión, el avatar abre el menú con saludo, cifras, zona y enlaces', fu
 
 it('lo que aún no existe sale desactivado, con su versión', function () {
     $this->actingAs($this->user)->get('/')
-        ->assertSeeInOrder(['Mis libros', 'v0.3.0', 'Mis capturas', 'v0.4.0', 'Notificaciones', 'v0.4.0', 'Amigos', 'v0.10.0']);
+        ->assertSeeInOrder(['Mis libros', 'v0.3.0', 'Mis capturas', 'v0.4.0', 'Amigos', 'v0.10.0']);
 });
 
 it('dice si la zona está activa', function () {
@@ -47,4 +47,21 @@ it('dice si la zona está activa', function () {
     ]);
 
     $this->actingAs($this->user)->get('/')->assertSeeText('activa')->assertDontSeeText('sin zona');
+});
+
+it('la campana abre las notificaciones, todas desactivadas hasta que lleguen', function () {
+    $this->actingAs($this->user)->get('/')
+        ->assertSee('aria-controls="menu-notificaciones"', false)
+        ->assertSeeInOrder([
+            'Tus notificaciones',
+            'Mensajes privados', 'pronto',
+            'Capturas de tus libros', 'v0.5.0',
+            'Libros liberados cerca', 'v0.5.0',
+            'Eventos', 'v0.9.0',
+            'Solicitudes de amistad', 'v0.10.0',
+        ]);
+});
+
+it('sin sesión no hay campana', function () {
+    $this->get('/')->assertDontSee('menu-notificaciones', false);
 });
