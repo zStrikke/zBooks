@@ -25,22 +25,21 @@
         </form>
 
         <div class="hidden items-center gap-4 font-display text-[0.95rem] font-medium lg:flex">
-            @auth
-                <a href="{{ route('profile.show', auth()->user()->username) }}" class="font-semibold hover:text-sello">{{ auth()->user()->username }}</a>
-                <a href="{{ route('account') }}" @class(['hover:text-sello', 'underline decoration-2 underline-offset-6' => request()->routeIs('account')])
-                   @if (request()->routeIs('account')) aria-current="page" @endif>{{ __('My account') }}</a>
-                <form method="POST" action="{{ route('logout') }}">
-                    @csrf
-                    <button type="submit" class="hover:text-sello">{{ __('Log out') }}</button>
-                </form>
-            @else
+            @guest
                 <a href="{{ route('login') }}" class="hover:text-sello">{{ __('Sign in') }}</a>
                 <a href="{{ route('register') }}" class="rounded-md bg-sello px-4 py-2 text-white hover:bg-sello-oscuro">{{ __('Create account') }}</a>
-            @endauth
+            @endguest
         </div>
 
+        {{-- Con sesión, el avatar abre el menú de usuario (#95), también en móvil --}}
+        @auth
+            <div class="ml-auto md:ml-0">
+                @include('partials.menu-usuario')
+            </div>
+        @endauth
+
         <button type="button" @click="abierto = !abierto" :aria-expanded="abierto" aria-controls="menu-movil"
-                class="ml-auto rounded-md p-2 md:ml-0 lg:hidden">
+                @class(['rounded-md p-2 lg:hidden', 'ml-auto md:ml-0' => auth()->guest()])>
             <span class="sr-only">{{ __('Open the menu') }}</span>
             <svg x-show="!abierto" class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
             <svg x-show="abierto" x-cloak class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
@@ -60,17 +59,10 @@
             <a href="{{ route('home') }}#como-funciona">{{ __('How it works') }}</a>
             <span class="text-tinta-suave/60">{{ __('Books nearby') }} ({{ __('version :version', ['version' => '0.5.0']) }})</span>
             <span class="text-tinta-suave/60">{{ __('Zones') }} ({{ __('version :version', ['version' => '0.5.0']) }})</span>
-            @auth
-                <a href="{{ route('profile.show', auth()->user()->username) }}" class="font-semibold hover:text-sello">{{ auth()->user()->username }}</a>
-                <a href="{{ route('account') }}">{{ __('My account') }}</a>
-                <form method="POST" action="{{ route('logout') }}">
-                    @csrf
-                    <button type="submit">{{ __('Log out') }}</button>
-                </form>
-            @else
+            @guest
                 <a href="{{ route('login') }}">{{ __('Sign in') }}</a>
                 <a href="{{ route('register') }}" class="text-sello">{{ __('Create account') }}</a>
-            @endauth
+            @endguest
         </nav>
     </div>
 </header>
