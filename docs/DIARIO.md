@@ -1064,3 +1064,19 @@ El PO subía un avatar en Mi cuenta y la página se rompía. El fichero se guard
 
 ### Decisiones
 - **`git archive` sobre `origin/master` recién traído** en vez de bajar el zip de GitHub: es lo mismo que hay en GitHub, no depende de que el repo sea público ni de un token, y no toca tu rama ni tus cambios sin guardar.
+
+---
+
+## [2026-11-06] #039 — Interruptor de Mi zona (#99)
+**Iteración:** 1 (v0.2.0)
+
+### Hecho
+- **El interruptor funciona:** en el menú de usuario y en Mi cuenta, apagarlo desactiva la zona sin borrarla (punto y radio se conservan) y encenderlo la reactiva. Sin zona guardada, lleva a elegirla («elígela»). Guardar una zona la vuelve a encender.
+- **`user_zones.is_active`** (por defecto `true`), `SetHomeZone::setActive()` y `PATCH /account/zone/active`. Es un formulario con un botón `role="switch"`: funciona sin JavaScript y vuelve a la página en la que estabas.
+- **`<x-interruptor-zona>`**, el mismo en los dos sitios. En Mi cuenta explica qué pasa cuando está apagada.
+- Revisión del ADR-0013 y diagrama ER. 4 tests nuevos (201 en total).
+
+### Decisiones
+- **Apagar no es borrar:** quien se va de viaje o quiere dejar de ver libros cerca un tiempo no tiene que volver a elegir punto y radio.
+- **Quien la usará:** «Libros cerca» y los avisos (v0.5.0) deben filtrar por `is_active`. Queda escrito en el ADR-0013 para entonces.
+- **El menú consulta la zona en cada carga** (`homeZone()->first()`), no la relación ya cargada: si no, en la misma petición podía enseñar el estado anterior.
