@@ -26,7 +26,7 @@ Formato basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/) y 
 - Guía del desarrollador: comandos, flujo de issue a PR, archivos de referencia y casos frecuentes (#51).
 
 ### Changed
-- Cabecera: con sesión, el avatar abre un menú de usuario (saludo, libros liberados y capturados, estado de Mi zona, Mi perfil, Mi cuenta, Cerrar sesión). Lo que aún no existe sale desactivado con su versión: Mis libros, Mis capturas, Amigos y Dar feedback. Al lado, una campana abre «Tus notificaciones» con los tipos que llegarán, desactivados: mensajes privados, capturas de tus libros, libros liberados cerca, eventos y solicitudes de amistad (#95).
+- Cabecera: con sesión, el avatar abre un menú de usuario (en escritorio, un desplegable; en móvil, un panel lateral desde la izquierda que también lleva la navegación y el buscador de ZBID) (saludo, libros liberados y capturados, estado de Mi zona, Mi perfil, Mi cuenta, Cerrar sesión). Lo que aún no existe sale desactivado con su versión: Mis libros, Mis capturas, Amigos y Dar feedback. Al lado, una campana abre «Tus notificaciones» con los tipos que llegarán, desactivados: mensajes privados, capturas de tus libros, libros liberados cerca, eventos y solicitudes de amistad (#95).
 - El perfil (`/u/{username}`) deja de ser público: pide sesión y solo lo ve el propio miembro (y sus amigos, cuando llegue la #37). Los demás reciben un 404, como si no existiera (#93).
 - Portada: «Cómo funciona» muestra el ciclo del libro con una línea que vuelve del último paso al primero, y la línea discontinua lleva menos guiones (#91).
 - La API v1 se aplaza a su propio hito (v0.11.0) para priorizar la web; la plantilla de PR y el ADR-0007 lo recogen (#74).

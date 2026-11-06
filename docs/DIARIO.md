@@ -1043,7 +1043,9 @@ El PO subía un avatar en Mi cuenta y la página se rompía. El fichero se guard
   - desactivados con su versión: Mis libros (v0.3.0), Mis capturas (v0.4.0) y Amigos (v0.10.0);
   - Cerrar sesión y Dar feedback (desactivado).
 - **Campana de notificaciones** junto al avatar (`partials/notificaciones.blade.php`), a petición del PO: «Tus notificaciones» con los tipos que llegarán, desactivados con su versión: mensajes privados (sin versión aún), capturas de tus libros y libros liberados cerca (v0.5.0, épica #22), eventos (v0.9.0) y solicitudes de amistad (v0.10.0).
-- La cabecera deja los enlaces sueltos (username, Mi cuenta, Salir); sin sesión no cambia. 6 tests nuevos (195 en total).
+- **Móvil, a petición del PO (se veía muy apretado):** el avatar pasa a la izquierda de la cabecera y abre un **panel lateral** con el menú de usuario, la navegación y el buscador de ZBID; abajo, Cerrar sesión y Dar feedback. A la derecha queda solo la campana. Sin sesión, la hamburguesa abre el mismo panel con Entrar y Crear cuenta. Se cierra con Escape, la ✕ o tocando fuera, y bloquea el scroll de la página mientras está abierto.
+- **Piezas compartidas** (`partials/usuario/{resumen,enlaces,salida}`) y `<x-avatar-mini>`: el desplegable de escritorio y el panel de móvil usan lo mismo.
+- La cabecera deja los enlaces sueltos (username, Mi cuenta, Salir). 8 tests nuevos (197 en total).
 
 ### Decisiones
 - **La zona no es un interruptor:** activar o desactivar la zona no existe como función. Se enseña si hay zona, con aspecto de interruptor, y el enlace lleva a Mi zona para cambiarla.
