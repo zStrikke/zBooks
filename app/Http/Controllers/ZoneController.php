@@ -18,11 +18,30 @@ class ZoneController extends Controller
 
     public const REMOVED = 'zone-removed';
 
+    public const ACTIVATED = 'zone-activated';
+
+    public const DEACTIVATED = 'zone-deactivated';
+
     public function update(Request $request, SetHomeZone $action): RedirectResponse
     {
         $action->set($this->user($request), $request->only(['latitude', 'longitude', 'radius_m', 'source']));
 
         return redirect(route('account').'#zona')->with('status', self::UPDATED);
+    }
+
+    /**
+     * Interruptor de Mi zona (#99), desde el menú de usuario o desde Mi cuenta.
+     * Vuelve a la página en la que estaba; sin zona, lleva a elegirla.
+     */
+    public function toggle(Request $request, SetHomeZone $action): RedirectResponse
+    {
+        $activa = $request->boolean('active');
+
+        if (! $action->setActive($this->user($request), $activa)) {
+            return redirect(route('account').'#zona');
+        }
+
+        return back()->with('status', $activa ? self::ACTIVATED : self::DEACTIVATED);
     }
 
     public function destroy(Request $request, SetHomeZone $action): RedirectResponse

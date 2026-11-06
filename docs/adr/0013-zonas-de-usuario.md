@@ -48,6 +48,10 @@ Opción **3**. La zona tiene dos modos:
 - La zona temporal (#19, v0.3.0) usa los mismos dos modos.
 - Revisar el redondeo de 250 m cuando haya datos reales: en zonas rurales puede ser poco.
 
+## Revisión 2026-11-06
+
+Una zona se puede **apagar sin borrarla** (#99): `is_active` en `user_zones`. Apagada, se conserva tal cual, pero «Libros cerca» y los avisos (v0.5.0) deben ignorarla. Guardar una zona la vuelve a encender.
+
 ## Revisión 2026-11-05
 
 Al construir Mi zona (#18), el PO pidió dividir por dos las distancias: **redondeo de 250 m** (antes 500) y **radio de 0,5 a 25 km** con 2,5 km por defecto (antes 1 a 50 y 5). Una zona sirve para ver lo que hay cerca y decidir; 50 km es más que una ciudad entera. Ver libros de todas partes será otra pantalla, pensada para curiosear. El radio se guarda en metros (`radius_m`) para admitir medios kilómetros.

@@ -36,8 +36,19 @@ class SetHomeZone
                 'source' => ZoneSource::from($data['source']),
                 'location' => Point::makeGeodetic($lat, $lon),
                 'radius_m' => (int) $data['radius_m'],
+                // Guardar una zona es querer usarla: se activa aunque estuviera apagada
+                'is_active' => true,
             ],
         );
+    }
+
+    /**
+     * El interruptor de Mi zona (#99): apaga o enciende la zona sin borrarla.
+     * Sin zona guardada no hace nada y devuelve false.
+     */
+    public function setActive(User $user, bool $active): bool
+    {
+        return $user->homeZone()->update(['is_active' => $active]) > 0;
     }
 
     public function remove(User $user): void
