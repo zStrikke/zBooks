@@ -65,3 +65,16 @@ it('la campana abre las notificaciones, todas desactivadas hasta que lleguen', f
 it('sin sesión no hay campana', function () {
     $this->get('/')->assertDontSee('menu-notificaciones', false);
 });
+
+it('en móvil, el panel lateral lleva el menú de usuario, la navegación y el buscador', function () {
+    $this->actingAs($this->user)->get('/')
+        ->assertSee('aria-controls="panel-movil"', false)
+        ->assertSee('id="panel-movil"', false)
+        ->assertSee('id="zbid-movil"', false);
+});
+
+it('sin sesión, el panel lateral lleva Entrar y Crear cuenta', function () {
+    $this->get('/')
+        ->assertSee('id="panel-movil"', false)
+        ->assertDontSee('Hola,', false);
+});
