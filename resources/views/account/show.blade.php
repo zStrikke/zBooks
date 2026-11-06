@@ -161,6 +161,17 @@
                 <p class="mt-1 text-[0.95rem] text-tinta-suave">{{ __('Where you move around, to see books nearby without revealing your home.') }}</p>
             </div>
 
+            @if ($zona)
+                {{-- Interruptor (#99): desactivada, la zona se conserva pero no se usa --}}
+                <div class="flex flex-col gap-1 rounded-lg border border-linea px-3.5 py-3">
+                    <x-interruptor-zona :zone="$zona" :label="__('Use my zone')" id="interruptor-zona-cuenta" class="font-display font-semibold" />
+                    <p class="text-sm text-tinta-suave">{{ $zona->is_active ? __('Books nearby and alerts use it.') : __('It is kept, but books nearby and alerts do not use it until you turn it back on.') }}</p>
+                    @if (in_array($estado, [ZoneController::ACTIVATED, ZoneController::DEACTIVATED], true))
+                        <p role="status" class="text-sm font-semibold text-ruta">✓ {{ $estado === ZoneController::ACTIVATED ? __('Zone turned on') : __('Zone turned off') }}</p>
+                    @endif
+                </div>
+            @endif
+
             <div x-data="zonaMapa(@js([
                     'lat' => $zona?->location->getLatitude(),
                     'lon' => $zona?->location->getLongitude(),

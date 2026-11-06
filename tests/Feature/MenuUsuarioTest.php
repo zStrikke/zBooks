@@ -38,15 +38,25 @@ it('lo que aún no existe sale desactivado, con su versión', function () {
         ->assertSeeInOrder(['Mis libros', 'v0.3.0', 'Mis capturas', 'v0.4.0', 'Amigos', 'v0.10.0']);
 });
 
-it('dice si la zona está activa', function () {
-    $this->actingAs($this->user)->get('/')->assertSeeText('sin zona');
+it('el interruptor de la zona: sin zona lleva a elegirla; con zona, enseña si está encendida', function () {
+    $this->actingAs($this->user)->get('/')
+        ->assertSeeText('elígela')
+        ->assertDontSee('role="switch"', false);
 
-    UserZone::create([
+    $zona = UserZone::create([
         'user_id' => $this->user->id, 'kind' => 'home', 'mode' => 'radius', 'source' => 'map',
         'location' => Point::makeGeodetic(41.4, 2.15), 'radius_m' => 2500,
     ]);
 
-    $this->actingAs($this->user)->get('/')->assertSeeText('activa')->assertDontSeeText('sin zona');
+    $this->actingAs($this->user)->get('/')
+        ->assertSee('role="switch" aria-checked="true"', false)
+        ->assertSeeText('activa');
+
+    $zona->update(['is_active' => false]);
+
+    $this->actingAs($this->user)->get('/')
+        ->assertSee('role="switch" aria-checked="false"', false)
+        ->assertSeeText('apagada');
 });
 
 it('la campana abre las notificaciones, todas desactivadas hasta que lleguen', function () {

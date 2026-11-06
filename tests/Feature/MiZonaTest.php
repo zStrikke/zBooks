@@ -82,6 +82,49 @@ describe('guardar', function () {
     });
 });
 
+describe('interruptor', function () {
+    it('apagarla la desactiva sin borrarla, y encenderla la reactiva tal como estaba', function () {
+        guardarZona([]);
+        $antes = $this->user->homeZone;
+
+        $this->actingAs($this->user)->from('/')->patch('/account/zone/active', ['active' => 0])->assertRedirect('/');
+        $apagada = $this->user->fresh()->homeZone;
+        expect($apagada->is_active)->toBeFalse()
+            ->and($apagada->radius_m)->toBe($antes->radius_m)
+            ->and($apagada->location->getLatitude())->toBe($antes->location->getLatitude());
+
+        $this->actingAs($this->user)->from('/account')->patch('/account/zone/active', ['active' => 1])->assertRedirect('/account');
+        expect($this->user->fresh()->homeZone->is_active)->toBeTrue();
+    });
+
+    it('sin zona no hace nada y lleva a elegirla', function () {
+        $this->actingAs($this->user)->from('/')->patch('/account/zone/active', ['active' => 1])
+            ->assertRedirect(route('account').'#zona');
+
+        expect(UserZone::count())->toBe(0);
+    });
+
+    it('guardar una zona la vuelve a encender', function () {
+        guardarZona([]);
+        $this->user->homeZone->update(['is_active' => false]);
+
+        guardarZona(['radius_m' => 5000]);
+
+        expect($this->user->fresh()->homeZone->is_active)->toBeTrue();
+    });
+
+    it('solo toca la zona del propio miembro y pide sesión', function () {
+        guardarZona([]);
+        $otro = User::factory()->create();
+
+        $this->actingAs($otro)->patch('/account/zone/active', ['active' => 0]);
+        expect($this->user->fresh()->homeZone->is_active)->toBeTrue();
+
+        auth()->logout();
+        $this->patch('/account/zone/active', ['active' => 0])->assertRedirect('/login');
+    });
+});
+
 describe('base de datos', function () {
     it('no admite dos zonas habituales para el mismo miembro', function () {
         $fila = fn () => DB::table('user_zones')->insert([

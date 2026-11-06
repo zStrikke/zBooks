@@ -48,5 +48,6 @@ Route::middleware(['auth', 'verified'])->prefix('account')->name('account')->gro
     // Mi zona (#18)
     Route::put('/zone', [ZoneController::class, 'update'])->name('.zone.update');
     Route::delete('/zone', [ZoneController::class, 'destroy'])->name('.zone.destroy');
+    Route::patch('/zone/active', [ZoneController::class, 'toggle'])->name('.zone.toggle');
     Route::get('/zone/search', [ZoneController::class, 'search'])->middleware('throttle:30,1')->name('.zone.search');
 });

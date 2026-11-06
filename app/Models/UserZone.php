@@ -17,6 +17,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property ZoneSource $source
  * @property Point $location
  * @property int $radius_m
+ * @property bool $is_active Desactivada: se conserva, pero no cuenta para «Libros cerca» ni para avisos (#99)
  */
 class UserZone extends Model
 {
@@ -50,6 +51,7 @@ class UserZone extends Model
             'source' => ZoneSource::class,
             'location' => Point::class,
             'radius_m' => 'integer',
+            'is_active' => 'boolean',
         ];
     }
 }
