@@ -25,7 +25,7 @@
                 <a href="#contrasena" class="shrink-0 rounded-full border-[1.5px] border-linea-fuerte px-3.5 py-2 hover:border-tinta lg:-ml-0.5 lg:rounded-none lg:border-0 lg:border-l-[3px] lg:border-transparent lg:px-4 lg:hover:border-sello">{{ __('Password') }}</a>
                 <a href="#zona" class="shrink-0 rounded-full border-[1.5px] border-linea-fuerte px-3.5 py-2 hover:border-tinta lg:-ml-0.5 lg:rounded-none lg:border-0 lg:border-l-[3px] lg:border-transparent lg:px-4 lg:hover:border-sello">{{ __('My zone') }}</a>
             </nav>
-            <a href="{{ route('profile.show', $user->username) }}" class="hidden font-display text-[0.95rem] font-semibold text-sello underline hover:text-sello-oscuro lg:block">{{ __('See my public profile') }}</a>
+            <a href="{{ route('profile.show', $user->username) }}" class="hidden font-display text-[0.95rem] font-semibold text-sello underline hover:text-sello-oscuro lg:block">{{ __('See my profile') }}</a>
         </div>
 
         {{-- Perfil + vista previa comparten el estado de Alpine: la ficha cambia mientras se escribe --}}
@@ -43,7 +43,7 @@
                 <div>
                     <h2 id="perfil-titulo" class="text-2xl font-extrabold">{{ __('Profile') }}</h2>
                     <p class="mt-1 text-[0.95rem] text-tinta-suave">
-                        {{ __('What anyone sees on') }} <a href="{{ route('profile.show', $user->username) }}" class="text-sello underline hover:text-sello-oscuro">{{ __('your public profile') }}</a>.
+                        {{ __('What you see on') }} <a href="{{ route('profile.show', $user->username) }}" class="text-sello underline hover:text-sello-oscuro">{{ __('your profile') }}</a>{{ __(', and your friends will see when they arrive.') }}
                     </p>
                 </div>
 

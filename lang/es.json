@@ -1,4 +1,5 @@
 {
+    ", and your friends will see when they arrive.": " y, cuando lleguen, verán tus amigos.",
     "19 Sep · night": "19 sep · noche",
     "3 Sep": "3 sep",
     "5 Sep · afternoon": "5 sep · tarde",
@@ -112,7 +113,7 @@
     "Search book": "Buscar libro",
     "Search by code arrives in version 0.4.0, together with catching books. Keep the code on the label: then you will be able to tell where you found the book.": "La búsqueda por código llegará en la versión 0.4.0, junto con la captura de libros. Guarda el código de la etiqueta: entonces podrás contar dónde encontraste el libro.",
     "See how it works": "Ver cómo funciona",
-    "See my public profile": "Ver mi perfil público",
+    "See my profile": "Ver mi perfil",
     "Send me the link": "Enviarme el enlace",
     "Set it free": "Déjalo en libertad",
     "Show password": "Mostrar contraseña",
@@ -140,7 +141,7 @@
     "We save an approximate point, about 250 m from the one you choose, never your address. Nobody else sees your zone.": "Guardamos un punto aproximado, a unos 250 m del que elijas, nunca tu dirección. Nadie más ve tu zona.",
     "Welcome back": "Hola de nuevo",
     "What a book's journey looks like": "Así se ve el viaje de un libro",
-    "What anyone sees on": "Lo que ve cualquiera en",
+    "What you see on": "Lo que ves en",
     "Where will the next stop be?": "¿Dónde será la próxima parada?",
     "Where you move around, to see books nearby without revealing your home.": "Dónde te mueves, para ver libros cerca sin revelar tu casa.",
     "Whoever picks it up types the code, tells where they found it and, when they finish it, sets it free again.": "Quien lo recoge escribe el código, cuenta dónde lo encontró y, cuando lo termine, vuelve a dejarlo libre.",
@@ -172,7 +173,7 @@
     "since :date": "desde :date",
     "version :version": "versión :version",
     "you@email.com": "tu@email.com",
-    "your public profile": "tu perfil público",
+    "your profile": "tu perfil",
     "zBooks is under construction": "zBooks está en construcción",
     "zBooks · approved member · zBooks ·": "zBooks · socio aprobado · zBooks ·"
 }
