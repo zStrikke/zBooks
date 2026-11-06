@@ -3,7 +3,7 @@ DC = docker compose
 EXEC = $(DC) exec app
 
 .DEFAULT_GOAL := help
-.PHONY: help setup assets up down restart build logs queue-restart shell artisan composer test lint format analyse insights check post-pull migrate fresh front psql analisis
+.PHONY: help setup assets up down restart build logs queue-restart shell artisan composer test lint format analyse insights check post-pull migrate fresh front psql analisis descargar-docs
 
 help: ## Muestra esta ayuda
 	@grep -E '^[a-zA-Z_-]+:.*?## ' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "  \033[36m%-10s\033[0m %s\n", $$1, $$2}'
@@ -83,3 +83,9 @@ psql: ## Abre psql en la base de datos
 
 analisis: ## Genera el PDF del análisis funcional (necesita pandoc y Playwright)
 	NODE_PATH=$$(npm root -g) node docs/analisis/herramientas/generar-pdf.mjs
+
+descargar-docs: ## Baja docs/ de master en GitHub a un zip (destino=<ruta.zip> para elegir dónde)
+	@git fetch --quiet origin +master:refs/remotes/origin/master
+	@destino="$(or $(destino),zbooks-docs-$$(date +%F).zip)"; \
+	git archive --format=zip --prefix=zbooks-docs/ -o "$$destino" origin/master:docs && \
+	echo "✓ $$destino ($$(git log -1 --format='%h, %cs' origin/master -- docs), $$(unzip -l "$$destino" | tail -1 | awk '{print $$2}') ficheros)"

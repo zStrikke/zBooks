@@ -13,6 +13,7 @@ Se ejecutan desde la raíz del proyecto y corren dentro de Docker: no hace falta
 | Comando | Para qué |
 |---|---|
 | `make up` / `make down` | Arrancar o parar el entorno |
+| `make descargar-docs` | Baja la carpeta `docs/` de `master` en GitHub a `zbooks-docs-AAAA-MM-DD.zip` (`destino=<ruta.zip>` para elegir dónde) |
 | `make post-pull` | Después de un `git pull`: ejecuta lo que haga falta para que el entorno siga funcionando y te dice qué hizo ([ver abajo](#después-de-un-git-pull)) |
 | `make front` | Vite en modo desarrollo: los cambios de CSS y JS se ven al momento |
 | `make shell` | Terminal dentro del contenedor de la app |

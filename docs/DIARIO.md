@@ -1053,3 +1053,14 @@ El PO subía un avatar en Mi cuenta y la página se rompía. El fichero se guard
 
 ### Aprendido
 - Las capturas de las últimas PR salían con el CSS de hace un día: `node_modules` de mi entorno se había quedado sin Vite y `npm run build` fallaba sin que lo viera (lo silenciaba un filtro). La ruta de «Cómo funciona» (#91) se veía bien porque usaba estilos en línea; con el CSS reconstruido sigue igual. A partir de ahora, la salida del build se mira entera.
+
+---
+
+## [2026-11-06] #038 — `make descargar-docs` (#97)
+**Iteración:** 1 (v0.2.0)
+
+### Hecho
+- **`make descargar-docs`:** trae `master` de GitHub y empaqueta `docs/` en `zbooks-docs-AAAA-MM-DD.zip` (o en `destino=`), dentro de una carpeta `zbooks-docs/`. Al terminar dice de qué commit sale y cuántos ficheros lleva. El zip está en `.gitignore`.
+
+### Decisiones
+- **`git archive` sobre `origin/master` recién traído** en vez de bajar el zip de GitHub: es lo mismo que hay en GitHub, no depende de que el repo sea público ni de un token, y no toca tu rama ni tus cambios sin guardar.

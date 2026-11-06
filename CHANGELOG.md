@@ -5,6 +5,7 @@ Formato basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/) y 
 ## [Unreleased]
 
 ### Added
+- `make descargar-docs`: baja la carpeta `docs/` de `master` en GitHub a un zip con la fecha (#97).
 - Web traducible: todos los textos de las vistas se escriben en inglés con `__()` y se traducen en `lang/es.json` (cabecera, pie, portada y búsqueda de ZBID incluidos); traducciones de paginación; columna `users.locale` (por defecto `es`) para el selector de idioma de la #53; un test falla si un texto no tiene traducción al español (#43).
 - Mi zona (sección de Mi cuenta): zona habitual con un punto y un radio de 0,5 a 25 km (2,5 por defecto). El punto se elige con la ubicación del navegador, tocando el mapa (Leaflet + OpenStreetMap) o con un buscador de direcciones que busca mientras se escribe (Nominatim, desde el servidor, con caché y como mucho una petición por segundo), con un indicador tipo radar mientras localiza o busca. Se guarda **redondeado a ~250 m**, nunca la dirección exacta, y no aparece en el perfil público. Una sola zona habitual por miembro, garantizada por la base de datos (#18).
 - Primera tabla con PostGIS: `user_zones` (`geography(Point, 4326)`, índice espacial) con `clickbar/laravel-magellan` (#18).
